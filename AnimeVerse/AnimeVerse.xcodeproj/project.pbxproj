@@ -1,0 +1,655 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A416E4C42DA988DB00558AEE /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = A416E4C32DA988DB00558AEE /* Apollo */; };
+		A4EFA2E52DA99ACB0018E4DE /* ApolloAPI in Frameworks */ = {isa = PBXBuildFile; productRef = A4EFA2E42DA99ACB0018E4DE /* ApolloAPI */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A416E4A62DA953E300558AEE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A416E48E2DA953E100558AEE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A416E4952DA953E100558AEE;
+			remoteInfo = AnimeVerse;
+		};
+		A416E4B02DA953E300558AEE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A416E48E2DA953E100558AEE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A416E4952DA953E100558AEE;
+			remoteInfo = AnimeVerse;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A416E4962DA953E100558AEE /* AnimeVerse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnimeVerse.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A416E4A52DA953E300558AEE /* AnimeVerseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AnimeVerseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A416E4AF2DA953E300558AEE /* AnimeVerseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AnimeVerseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		A416E4CB2DA98BE100558AEE /* Exceptions for "AnimeVerse" folder in "AnimeVerse" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				GraphQL/Queries/AllAnimes.graphql,
+			);
+			target = A416E4952DA953E100558AEE /* AnimeVerse */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		A416E4CC2DA98BE100558AEE /* Exceptions for "AnimeVerse" folder in "Compile Sources" phase from "AnimeVerse" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = A416E4922DA953E100558AEE /* Sources */;
+			membershipExceptions = (
+				GraphQL/Queries/AllAnimes.graphql,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		A416E4982DA953E100558AEE /* AnimeVerse */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A416E4CB2DA98BE100558AEE /* Exceptions for "AnimeVerse" folder in "AnimeVerse" target */,
+				A416E4CC2DA98BE100558AEE /* Exceptions for "AnimeVerse" folder in "Compile Sources" phase from "AnimeVerse" target */,
+			);
+			path = AnimeVerse;
+			sourceTree = "<group>";
+		};
+		A416E4A82DA953E300558AEE /* AnimeVerseTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AnimeVerseTests;
+			sourceTree = "<group>";
+		};
+		A416E4B22DA953E300558AEE /* AnimeVerseUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AnimeVerseUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A416E4932DA953E100558AEE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4EFA2E52DA99ACB0018E4DE /* ApolloAPI in Frameworks */,
+				A416E4C42DA988DB00558AEE /* Apollo in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A416E4A22DA953E300558AEE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A416E4AC2DA953E300558AEE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A416E48D2DA953E100558AEE = {
+			isa = PBXGroup;
+			children = (
+				A416E4982DA953E100558AEE /* AnimeVerse */,
+				A416E4A82DA953E300558AEE /* AnimeVerseTests */,
+				A416E4B22DA953E300558AEE /* AnimeVerseUITests */,
+				A416E4D02DA9908E00558AEE /* Frameworks */,
+				A416E4972DA953E100558AEE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A416E4972DA953E100558AEE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A416E4962DA953E100558AEE /* AnimeVerse.app */,
+				A416E4A52DA953E300558AEE /* AnimeVerseTests.xctest */,
+				A416E4AF2DA953E300558AEE /* AnimeVerseUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A416E4D02DA9908E00558AEE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A416E4952DA953E100558AEE /* AnimeVerse */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A416E4B92DA953E300558AEE /* Build configuration list for PBXNativeTarget "AnimeVerse" */;
+			buildPhases = (
+				A416E4C72DA98BA500558AEE /* Apollo Code Generation */,
+				A416E4922DA953E100558AEE /* Sources */,
+				A416E4932DA953E100558AEE /* Frameworks */,
+				A416E4942DA953E100558AEE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A416E4982DA953E100558AEE /* AnimeVerse */,
+			);
+			name = AnimeVerse;
+			packageProductDependencies = (
+				A416E4C32DA988DB00558AEE /* Apollo */,
+				A4EFA2E42DA99ACB0018E4DE /* ApolloAPI */,
+			);
+			productName = AnimeVerse;
+			productReference = A416E4962DA953E100558AEE /* AnimeVerse.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A416E4A42DA953E300558AEE /* AnimeVerseTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A416E4BC2DA953E300558AEE /* Build configuration list for PBXNativeTarget "AnimeVerseTests" */;
+			buildPhases = (
+				A416E4A12DA953E300558AEE /* Sources */,
+				A416E4A22DA953E300558AEE /* Frameworks */,
+				A416E4A32DA953E300558AEE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A416E4A72DA953E300558AEE /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A416E4A82DA953E300558AEE /* AnimeVerseTests */,
+			);
+			name = AnimeVerseTests;
+			packageProductDependencies = (
+			);
+			productName = AnimeVerseTests;
+			productReference = A416E4A52DA953E300558AEE /* AnimeVerseTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A416E4AE2DA953E300558AEE /* AnimeVerseUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A416E4BF2DA953E300558AEE /* Build configuration list for PBXNativeTarget "AnimeVerseUITests" */;
+			buildPhases = (
+				A416E4AB2DA953E300558AEE /* Sources */,
+				A416E4AC2DA953E300558AEE /* Frameworks */,
+				A416E4AD2DA953E300558AEE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A416E4B12DA953E300558AEE /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A416E4B22DA953E300558AEE /* AnimeVerseUITests */,
+			);
+			name = AnimeVerseUITests;
+			packageProductDependencies = (
+			);
+			productName = AnimeVerseUITests;
+			productReference = A416E4AF2DA953E300558AEE /* AnimeVerseUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A416E48E2DA953E100558AEE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1630;
+				LastUpgradeCheck = 1630;
+				TargetAttributes = {
+					A416E4952DA953E100558AEE = {
+						CreatedOnToolsVersion = 16.3;
+					};
+					A416E4A42DA953E300558AEE = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = A416E4952DA953E100558AEE;
+					};
+					A416E4AE2DA953E300558AEE = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = A416E4952DA953E100558AEE;
+					};
+				};
+			};
+			buildConfigurationList = A416E4912DA953E100558AEE /* Build configuration list for PBXProject "AnimeVerse" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A416E48D2DA953E100558AEE;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				A416E4C22DA988DB00558AEE /* XCRemoteSwiftPackageReference "apollo-ios" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = A416E4972DA953E100558AEE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A416E4952DA953E100558AEE /* AnimeVerse */,
+				A416E4A42DA953E300558AEE /* AnimeVerseTests */,
+				A416E4AE2DA953E300558AEE /* AnimeVerseUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A416E4942DA953E100558AEE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A416E4A32DA953E300558AEE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A416E4AD2DA953E300558AEE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A416E4C72DA98BA500558AEE /* Apollo Code Generation */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Apollo Code Generation";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Define paths and variables\nBUILD_ROOT=\"${BUILD_ROOT}\"\nSRCROOT=\"${SRCROOT}\"\nTARGET_NAME=\"${TARGET_NAME}\"\nSCHEMA=\"${SRCROOT}/schema.json\"\n\n# Check if the SourcePackages directory exists in the build root\nDERIVED_DATA_CANDIDATE=\"${BUILD_ROOT}\"\nwhile ! [ -d \"${DERIVED_DATA_CANDIDATE}/SourcePackages\" ]; do\n  if [ \"${DERIVED_DATA_CANDIDATE}\" = / ]; then\n    echo >&2 \"error: Unable to locate SourcePackages directory from BUILD_ROOT: '${BUILD_ROOT}'\"\n    exit 1\n  fi\n  DERIVED_DATA_CANDIDATE=\"$(dirname \"${DERIVED_DATA_CANDIDATE}\")\"\ndone\n\n# Check if the Apollo CLI script directory exists\nSCRIPT_PATH=\"${DERIVED_DATA_CANDIDATE}/SourcePackages/checkouts/apollo-ios/scripts\"\nif [ -f \"${SCRIPT_PATH}\" ]; then\n    echo >&2 \"error: Couldn't find the CLI script in your checked out SPM packages; make sure to add the framework to your project.\"\n    exit 1\nfi\n\n# Navigate to the target directory\ncd \"${SRCROOT}/${TARGET_NAME}\"\n\n# Run the code generation script with the specified parameters\n\"${SCRIPT_PATH}/run-bundled-codegen.sh\" codegen:generate \\\n  --target=swift \\\n  --includes=./**/*.graphql \\\n  --localSchemaFile=\"${SCHEMA}\" \\\n  ./GraphQL/API.swift\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A416E4922DA953E100558AEE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A416E4A12DA953E300558AEE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A416E4AB2DA953E300558AEE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A416E4A72DA953E300558AEE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A416E4952DA953E100558AEE /* AnimeVerse */;
+			targetProxy = A416E4A62DA953E300558AEE /* PBXContainerItemProxy */;
+		};
+		A416E4B12DA953E300558AEE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A416E4952DA953E100558AEE /* AnimeVerse */;
+			targetProxy = A416E4B02DA953E300558AEE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		A416E4B72DA953E300558AEE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = WQWCUMF3L5;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A416E4B82DA953E300558AEE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = WQWCUMF3L5;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A416E4BA2DA953E300558AEE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WQWCUMF3L5;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.luannluna.AnimeVerse;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A416E4BB2DA953E300558AEE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WQWCUMF3L5;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.luannluna.AnimeVerse;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A416E4BD2DA953E300558AEE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WQWCUMF3L5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.luannluna.AnimeVerseTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AnimeVerse.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AnimeVerse";
+			};
+			name = Debug;
+		};
+		A416E4BE2DA953E300558AEE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WQWCUMF3L5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.luannluna.AnimeVerseTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AnimeVerse.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AnimeVerse";
+			};
+			name = Release;
+		};
+		A416E4C02DA953E300558AEE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WQWCUMF3L5;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.luannluna.AnimeVerseUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = AnimeVerse;
+			};
+			name = Debug;
+		};
+		A416E4C12DA953E300558AEE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WQWCUMF3L5;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.luannluna.AnimeVerseUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = AnimeVerse;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A416E4912DA953E100558AEE /* Build configuration list for PBXProject "AnimeVerse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A416E4B72DA953E300558AEE /* Debug */,
+				A416E4B82DA953E300558AEE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A416E4B92DA953E300558AEE /* Build configuration list for PBXNativeTarget "AnimeVerse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A416E4BA2DA953E300558AEE /* Debug */,
+				A416E4BB2DA953E300558AEE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A416E4BC2DA953E300558AEE /* Build configuration list for PBXNativeTarget "AnimeVerseTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A416E4BD2DA953E300558AEE /* Debug */,
+				A416E4BE2DA953E300558AEE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A416E4BF2DA953E300558AEE /* Build configuration list for PBXNativeTarget "AnimeVerseUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A416E4C02DA953E300558AEE /* Debug */,
+				A416E4C12DA953E300558AEE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A416E4C22DA988DB00558AEE /* XCRemoteSwiftPackageReference "apollo-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apollographql/apollo-ios.git";
+			requirement = {
+				kind = exactVersion;
+				version = 0.53.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A416E4C32DA988DB00558AEE /* Apollo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A416E4C22DA988DB00558AEE /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = Apollo;
+		};
+		A4EFA2E42DA99ACB0018E4DE /* ApolloAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A416E4C22DA988DB00558AEE /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = ApolloAPI;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = A416E48E2DA953E100558AEE /* Project object */;
+}

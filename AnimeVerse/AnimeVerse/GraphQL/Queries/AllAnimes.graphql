@@ -1,0 +1,16 @@
+query AllAnimes($page: Int) {
+  Page(page: $page) {
+    media {
+      id
+      siteUrl
+      title {
+        english
+        native
+      }
+      description
+      coverImage {
+        large
+      }
+    }
+  }
+}
