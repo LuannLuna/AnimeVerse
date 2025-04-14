@@ -1,13 +1,17 @@
-query AllAnimes($page: Int) {
-  Page(page: $page) {
-    media {
+query AllAnimes($page: Int, $offSet: Int) {
+    Page(page: $page, perPage: $offSet) {
+    media(type: ANIME, sort: START_DATE_DESC) {
       id
-      siteUrl
       title {
+        romaji
         english
         native
       }
-      description
+      startDate {
+        year
+        month
+        day
+      }
       coverImage {
         large
       }
