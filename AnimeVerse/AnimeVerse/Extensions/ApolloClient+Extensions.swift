@@ -1,16 +1,23 @@
+@preconcurrency
 import Apollo
 import AnilistAPI
 import Foundation
 
 extension ApolloClient {
+    final class RequestHolder: @unchecked Sendable {
+        var request: Cancellable?
+    }
+
     public func fetch<Query: GraphQLQuery>(
         query: Query,
         cachePolicy: CachePolicy = .returnCacheDataElseFetch,
         contextIdentifier: UUID? = nil,
         queue: DispatchQueue = .main
     ) -> AsyncThrowingStream<GraphQLResult<Query.Data>, Error> {
-        AsyncThrowingStream { continuation in
-            let request = fetch(
+        let holder = RequestHolder()
+
+        return AsyncThrowingStream { continuation in
+            holder.request = fetch(
                 query: query,
                 cachePolicy: cachePolicy,
                 contextIdentifier: contextIdentifier,
@@ -26,7 +33,9 @@ extension ApolloClient {
                     continuation.finish(throwing: error)
                 }
             }
-            continuation.onTermination = { _ in request.cancel() }
+            continuation.onTermination = { @Sendable _ in
+                holder.request?.cancel()
+            }
         }
     }
 
@@ -86,18 +95,29 @@ extension GraphQLResult {
 
 private
 extension ApolloClient {
+    final class CancelStateHolder: @unchecked Sendable {
+        var state: ManagedBuffer<(isCancelled: Bool, task: Cancellable?), os_unfair_lock>
+
+        init() {
+            self.state = ManagedBuffer.create(minimumCapacity: .zero, makingHeaderWith: { _ in
+                (isCancelled: false, task: nil)
+            })
+        }
+    }
 
     func withTaskCancellationContinuation<T>(
         _ body: (CheckedContinuation<(Result<GraphQLResult<T>, Error>), Never>) -> Apollo.Cancellable
     ) async throws -> GraphQLResult<T> {
-        let cancelState = makeState()
+        let holder = CancelStateHolder()
+        holder.state = makeState()
+
         let result: (Result<GraphQLResult<T>, Error>) = await withTaskCancellationHandler {
             return await withCheckedContinuation { continuation in
                 let task = body(continuation)
-                activate(state: cancelState, task: task)
+                activate(state: holder.state, task: task)
             }
         } onCancel: {
-            cancel(state: cancelState)
+            cancel(state: holder.state)
         }
         switch result {
         case .success(let data):
@@ -140,3 +160,6 @@ extension ApolloClient {
         }
     }
 }
+
+extension ApolloClient: @unchecked @retroactive Sendable {}
+extension GraphQLResult: @unchecked @retroactive Sendable{}

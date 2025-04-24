@@ -7,23 +7,23 @@ public class AllAnimesQuery: GraphQLQuery {
   public static let operationName: String = "AllAnimes"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
     definition: .init(
-      #"query AllAnimes($page: Int, $offSet: Int) { Page(page: $page, perPage: $offSet) { __typename media(type: ANIME, sort: START_DATE_DESC) { __typename id title { __typename romaji english native } startDate { __typename year month day } coverImage { __typename large } } } }"#
+      #"query AllAnimes($page: Int, $perPage: Int) { Page(page: $page, perPage: $perPage) { __typename media(type: ANIME, sort: START_DATE_DESC) { __typename id title { __typename romaji english native } startDate { __typename year month day } coverImage { __typename large } } } }"#
     ))
 
   public var page: GraphQLNullable<Int>
-  public var offSet: GraphQLNullable<Int>
+  public var perPage: GraphQLNullable<Int>
 
   public init(
     page: GraphQLNullable<Int>,
-    offSet: GraphQLNullable<Int>
+    perPage: GraphQLNullable<Int>
   ) {
     self.page = page
-    self.offSet = offSet
+    self.perPage = perPage
   }
 
   public var __variables: Variables? { [
     "page": page,
-    "offSet": offSet
+    "perPage": perPage
   ] }
 
   public struct Data: AnilistAPI.SelectionSet {
@@ -34,7 +34,7 @@ public class AllAnimesQuery: GraphQLQuery {
     public static var __selections: [ApolloAPI.Selection] { [
       .field("Page", Page?.self, arguments: [
         "page": .variable("page"),
-        "perPage": .variable("offSet")
+        "perPage": .variable("perPage")
       ]),
     ] }
 

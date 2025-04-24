@@ -1,5 +1,5 @@
-query AllAnimes($page: Int, $offSet: Int) {
-    Page(page: $page, perPage: $offSet) {
+query AllAnimes($page: Int, $perPage: Int) {
+    Page(page: $page, perPage: $perPage) {
     media(type: ANIME, sort: START_DATE_DESC) {
       id
       title {
