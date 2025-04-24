@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A416E4C42DA988DB00558AEE /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = A416E4C32DA988DB00558AEE /* Apollo */; };
+		A451BBF42DBAAF0500F80F34 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = A451BBF32DBAAF0500F80F34 /* Kingfisher */; };
 		A47916A62DAD9E490013098F /* AnilistAPI in Frameworks */ = {isa = PBXBuildFile; productRef = A47916A52DAD9E490013098F /* AnilistAPI */; };
 		A4EFA2E52DA99ACB0018E4DE /* ApolloAPI in Frameworks */ = {isa = PBXBuildFile; productRef = A4EFA2E42DA99ACB0018E4DE /* ApolloAPI */; };
 /* End PBXBuildFile section */
@@ -82,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A451BBF42DBAAF0500F80F34 /* Kingfisher in Frameworks */,
 				A47916A62DAD9E490013098F /* AnilistAPI in Frameworks */,
 				A4EFA2E52DA99ACB0018E4DE /* ApolloAPI in Frameworks */,
 				A416E4C42DA988DB00558AEE /* Apollo in Frameworks */,
@@ -156,6 +158,7 @@
 				A416E4C32DA988DB00558AEE /* Apollo */,
 				A4EFA2E42DA99ACB0018E4DE /* ApolloAPI */,
 				A47916A52DAD9E490013098F /* AnilistAPI */,
+				A451BBF32DBAAF0500F80F34 /* Kingfisher */,
 			);
 			productName = AnimeVerse;
 			productReference = A416E4962DA953E100558AEE /* AnimeVerse.app */;
@@ -242,6 +245,7 @@
 			packageReferences = (
 				A416E4C22DA988DB00558AEE /* XCRemoteSwiftPackageReference "apollo-ios" */,
 				A47916A42DAD9E490013098F /* XCLocalSwiftPackageReference "AnilistAPI" */,
+				A451BBF22DBAAF0500F80F34 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A416E4972DA953E100558AEE /* Products */;
@@ -625,6 +629,14 @@
 				version = 1.19.0;
 			};
 		};
+		A451BBF22DBAAF0500F80F34 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.3.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -632,6 +644,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A416E4C22DA988DB00558AEE /* XCRemoteSwiftPackageReference "apollo-ios" */;
 			productName = Apollo;
+		};
+		A451BBF32DBAAF0500F80F34 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A451BBF22DBAAF0500F80F34 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 		A47916A52DAD9E490013098F /* AnilistAPI */ = {
 			isa = XCSwiftPackageProductDependency;
