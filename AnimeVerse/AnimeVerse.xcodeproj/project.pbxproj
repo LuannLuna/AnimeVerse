@@ -142,6 +142,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A416E4B92DA953E300558AEE /* Build configuration list for PBXNativeTarget "AnimeVerse" */;
 			buildPhases = (
+				A451BBF82DBABF7500F80F34 /* Codegen */,
 				A416E4922DA953E100558AEE /* Sources */,
 				A416E4932DA953E100558AEE /* Frameworks */,
 				A416E4942DA953E100558AEE /* Resources */,
@@ -282,6 +283,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A451BBF82DBABF7500F80F34 /* Codegen */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Codegen;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\n\n# Caminho para o diretório do projeto\nPROJECT_DIR=\"${SRCROOT}\"\n\n# Caminho para o executável do Apollo CLI\nAPOLLO_CLI=\"${PROJECT_DIR}/apollo-ios-cli\"\n\n# Verifica se o Apollo CLI existe\nif [ ! -f \"$APOLLO_CLI\" ]; then\n  echo \"Apollo CLI não encontrado em $APOLLO_CLI\"\n  exit 1\nfi\n\n# Gera o código usando o Apollo CLI\necho \"Gerando código GraphQL com Apollo CLI...\"\n\"$APOLLO_CLI\" generate\n\n# Limpa os caches do Swift Package Manager\necho \"Limpando caches do Swift Package Manager...\"\nrm -rf ~/Library/org.swift.swiftpm\nrm -rf ~/Library/Caches/org.swift.swiftpm\n\necho \"Script de pré-compilação concluído com sucesso.\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A416E4922DA953E100558AEE /* Sources */ = {
