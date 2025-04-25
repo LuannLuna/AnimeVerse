@@ -1,10 +1,3 @@
-//
-//  AnimeVerseApp.swift
-//  AnimeVerse
-//
-//  Created by Luann Luna on 11/04/25.
-//
-
 import SwiftUI
 import SwiftData
 

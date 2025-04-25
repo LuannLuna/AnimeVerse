@@ -1,10 +1,3 @@
-//
-//  Item.swift
-//  AnimeVerse
-//
-//  Created by Luann Luna on 11/04/25.
-//
-
 import Foundation
 import SwiftData
 

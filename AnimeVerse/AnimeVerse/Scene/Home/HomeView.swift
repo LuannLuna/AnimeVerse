@@ -1,10 +1,3 @@
-//
-//  HomeView.swift
-//  AnimeVerse
-//
-//  Created by Luann Luna on 23/04/25.
-//
-
 import SwiftUI
 
 struct HomeView: View {

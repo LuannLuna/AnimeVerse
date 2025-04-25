@@ -1,10 +1,3 @@
-//
-//  HomeViewModel.swift
-//  AnimeVerse
-//
-//  Created by Luann Luna on 23/04/25.
-//
-
 import Foundation
 import Combine
 
