@@ -76,7 +76,7 @@ extension AnimeDetails {
         self.popularity = data.popularity
         self.status = data.status?.rawValue
         self.coverImageURL = coverImageURL
-        self.bannerImageURL = data.bannerImage.flatMap { URL(string: $0) }
+        self.bannerImageURL = data.bannerImage?.asURL ?? coverImageURL
 
         self.characters = data.characters?.edges?.compactMap { edge in
             guard let node = edge?.node,
@@ -97,15 +97,14 @@ extension AnimeDetails {
                     id: actor.id,
                     name: name,
                     language: language,
-                    imageURL: actor.image?.large.flatMap { URL(string: $0) } ??
-                    actor.image?.medium.flatMap { URL(string: $0) }
+                    imageURL: actor.image?.large?.asURL ?? actor.image?.medium?.asURL
                 )
             }
 
             return Character(
                 id: node.id,
                 name: name,
-                imageURL: imageURL.flatMap { URL(string: $0) },
+                imageURL: imageURL?.asURL,
                 role: edge?.role?.rawValue ?? "Unknown",
                 voiceActors: voiceActors
             )

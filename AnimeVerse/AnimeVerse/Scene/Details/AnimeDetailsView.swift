@@ -17,110 +17,118 @@ struct AnimeDetailsView: View {
     
     var body: some View {
         ScrollView {
-            if let details = viewModel.animeDetails {
-                VStack(alignment: .leading, spacing: 16) {
-                    // Banner Image
-                    if let bannerURL = details.bannerImageURL {
-                        GeometryReader { _ in
-                            KFImage(bannerURL)
-                                .placeholder {
-                                    Rectangle()
-                                        .fill(Color.gray.opacity(0.3))
-                                }
-                                .fade(duration: 0.25)
-                                .cancelOnDisappear(true)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .clipped()
-                        }
-                        .frame(height: 200)
-                    }
-                    
-                    // Main Content
-                    VStack(alignment: .leading, spacing: 16) {
-                        // Title Section
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(details.titleRomaji)
-                                .font(.title)
-                                .bold()
-                            
-                            if let englishTitle = details.titleEnglish {
-                                Text(englishTitle)
-                                    .font(.title2)
-                                    .foregroundColor(.secondary)
+            content
+                .task {
+                    await viewModel.loadAnimeDetails()
+                }
+        }
+        .navigationTitle(viewModel.animeDetails?.titleEnglish ?? viewModel.animeDetails?.titleRomaji ?? "Anime Details")
+        .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    @ViewBuilder
+    private var content: some View {
+        if let details = viewModel.animeDetails {
+            VStack(alignment: .leading, spacing: 16) {
+                // Banner Image
+                if let bannerURL = details.bannerImageURL {
+                    GeometryReader { _ in
+                        KFImage(bannerURL)
+                            .placeholder {
+                                Rectangle()
+                                    .fill(Color.gray.opacity(0.3))
                             }
-                            
-                            Text(details.titleNative)
-                                .font(.title3)
+                            .fade(duration: 0.25)
+                            .cancelOnDisappear(true)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .clipped()
+                    }
+                    .frame(height: 200)
+                    .clipped()
+                }
+
+                // Main Content
+                VStack(alignment: .leading, spacing: 16) {
+                    // Title Section
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(details.titleRomaji)
+                            .font(.title)
+                            .bold()
+
+                        if let englishTitle = details.titleEnglish {
+                            Text(englishTitle)
+                                .font(.title2)
                                 .foregroundColor(.secondary)
                         }
-                        
-                        // Info Section
-                        VStack(alignment: .leading, spacing: 8) {
-                            if let description = details.description {
-                                HTMLText(description)
-                            }
-                            
-                            // Metadata
-                            HStack {
-                                if let episodes = details.episodes {
-                                    Label("\(episodes) episodes", systemImage: "play.tv")
-                                }
-                                
-                                if let duration = details.duration {
-                                    Label("\(duration) min", systemImage: "clock")
-                                }
-                            }
+
+                        Text(details.titleNative)
+                            .font(.title3)
                             .foregroundColor(.secondary)
-                            
-                            // Genres
-                            FlowLayout(spacing: 8) {
-                                ForEach(details.genres, id: \.self) { genre in
-                                    Text(genre)
-                                        .font(.caption)
-                                        .padding(.horizontal, 12)
-                                        .padding(.vertical, 6)
-                                        .background(Color.blue.opacity(0.1))
-                                        .cornerRadius(20)
-                                }
+                    }
+
+                    // Info Section
+                    VStack(alignment: .leading, spacing: 8) {
+                        if let description = details.description {
+                            HTMLText(description)
+                        }
+
+                        // Metadata
+                        HStack {
+                            if let episodes = details.episodes {
+                                Label("\(episodes) episodes", systemImage: "play.tv")
+                            }
+
+                            if let duration = details.duration {
+                                Label("\(duration) min", systemImage: "clock")
                             }
                         }
-                        
-                        // Characters Section
-                        if !details.characters.isEmpty {
-                            VStack(alignment: .leading, spacing: 12) {
-                                Text("Characters")
-                                    .font(.title2)
-                                    .bold()
-                                
-                                ScrollView(.horizontal, showsIndicators: false) {
-                                    LazyHStack(spacing: 16) {
-                                        ForEach(details.characters) { character in
-                                            CharacterCard(character: character)
-                                        }
-                                    }
-                                    .padding(.horizontal)
-                                }
+                        .foregroundColor(.secondary)
+
+                        // Genres
+                        FlowLayout(spacing: 8) {
+                            ForEach(details.genres, id: \.self) { genre in
+                                Text(genre)
+                                    .font(.caption)
+                                    .padding(.horizontal, 12)
+                                    .padding(.vertical, 6)
+                                    .background(Color.blue.opacity(0.1))
+                                    .cornerRadius(20)
                             }
                         }
                     }
-                    .padding()
+
+                    // Characters Section
+                    if !details.characters.isEmpty {
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("Characters")
+                                .font(.title2)
+                                .bold()
+
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                LazyHStack(spacing: 16) {
+                                    ForEach(details.characters) { character in
+                                        CharacterCard(character: character)
+                                    }
+                                }
+                                .padding(.horizontal)
+                            }
+                        }
+                    }
                 }
-            } else if viewModel.isLoading {
-                ProgressView()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-            } else if let error = viewModel.errorMessage {
-                VStack {
-                    Text("Error")
-                        .font(.title)
-                    Text(error)
-                        .foregroundColor(.secondary)
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .padding()
             }
-        }
-        .task {
-            await viewModel.loadAnimeDetails()
+        } else if viewModel.isLoading {
+            ProgressView()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        } else if let error = viewModel.errorMessage {
+            VStack {
+                Text("Error")
+                    .font(.title)
+                Text(error)
+                    .foregroundColor(.secondary)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
 }
