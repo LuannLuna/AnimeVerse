@@ -1,10 +1,3 @@
-//
-//  AnimeCardView.swift
-//  AnimeVerse
-//
-//  Created by Luann Luna on 24/04/25.
-//
-
 import SwiftUI
 import Kingfisher
 
@@ -14,6 +7,10 @@ struct AnimeCardView: View {
     var body: some View {
         VStack(alignment: .leading) {
             KFImage(anime.coverImageURL)
+                .placeholder {
+                    ProgressView()
+                }
+                .retry(maxCount: 3, interval: .seconds(2))
                 .resizable()
                 .scaledToFill()
                 .frame(width: 170, height: 200)
