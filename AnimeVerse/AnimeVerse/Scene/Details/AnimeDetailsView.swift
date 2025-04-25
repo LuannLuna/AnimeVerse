@@ -133,42 +133,6 @@ struct AnimeDetailsView: View {
     }
 }
 
-// MARK: - Supporting Views
-
-struct CharacterCard: View {
-    let character: AnimeDetails.Character
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            if let imageURL = character.imageURL {
-                KFImage(imageURL)
-                    .placeholder {
-                        Rectangle()
-                            .fill(Color.gray.opacity(0.3))
-                    }
-                    .fade(duration: 0.25)
-                    .cancelOnDisappear(true)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 120, height: 180)
-                    .clipShape(RoundedRectangle(cornerRadius: 8))
-            }
-            
-            VStack(alignment: .leading, spacing: 4) {
-                Text(character.name)
-                    .font(.caption)
-                    .bold()
-                    .lineLimit(2)
-                
-                Text(character.role)
-                    .font(.caption2)
-                    .foregroundColor(.secondary)
-            }
-            .frame(width: 120)
-        }
-    }
-}
-
 // MARK: - Flow Layout
 struct FlowLayout: Layout {
     var spacing: CGFloat = 8
