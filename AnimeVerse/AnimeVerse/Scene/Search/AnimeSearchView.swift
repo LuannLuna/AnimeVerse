@@ -52,7 +52,7 @@ struct AnimeSearchView: View {
 }
 
 private struct AnimeSearchCard: View {
-    let anime: AnimeDetails
+    let anime: AnimeSearchResult
     
     var body: some View {
         HStack(spacing: 16) {

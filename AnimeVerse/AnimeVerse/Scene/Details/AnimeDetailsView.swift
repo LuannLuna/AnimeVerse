@@ -2,7 +2,6 @@ import Kingfisher
 import SwiftData
 import SwiftUI
 
-
 struct AnimeDetailsView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var favorites: [FavoriteAnime]
@@ -48,7 +47,7 @@ struct AnimeDetailsView: View {
         if let details = viewModel.animeDetails {
             VStack(alignment: .leading, spacing: 16) {
                 // Banner Image
-                if let bannerURL = details.bannerImageURL {
+                if let bannerURL = details.bannerImageURL ?? details.coverImageURL {
                     GeometryReader { _ in
                         KFImage(bannerURL)
                             .placeholder {

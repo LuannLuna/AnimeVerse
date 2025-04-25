@@ -13,56 +13,12 @@ query FindAnime($search: String, $page: Int) {
         native
       }
       description(asHtml: false)
-      startDate {
-        year
-        month
-        day
-      }
-      endDate {
-        year
-        month
-        day
-      }
-      episodes
-      duration
       genres
-      averageScore
-      popularity
-      status
       coverImage {
         extraLarge
         large
         medium
         color
-      }
-      bannerImage
-      characters(page: 1, perPage: 20, sort: [ROLE, FAVOURITES]) {
-        edges {
-          role
-          node {
-            id
-            name {
-              full
-              userPreferred
-            }
-            image {
-              medium
-              large
-            }
-          }
-          voiceActors {
-            id
-            name {
-              full
-              userPreferred
-            }
-            languageV2
-            image {
-              medium
-              large
-            }
-          }
-        }
       }
     }
   }

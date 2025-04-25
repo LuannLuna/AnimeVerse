@@ -20,12 +20,14 @@ final class AnimeDetailsViewModel {
         errorMessage = nil
         
         do {
-            animeDetails = try await service.fetchAnimeDetails(id: animeId)
+            if let animeResult = try await service.fetchAnimeDetails(id: animeId) {
+                animeDetails = animeResult
+            }
             if animeDetails == nil {
                 errorMessage = "Failed to load anime details"
             }
         } catch {
-            errorMessage = error.localizedDescription
+            errorMessage = error.localizedDescription + "\n\n" + animeId.description
         }
     }
 }
