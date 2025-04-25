@@ -7,7 +7,7 @@ struct Anime: Identifiable, Equatable {
     let titleEnglish: String?
     let titleNative: String
     let startDate: DateComponents
-    let coverImageURL: URL
+    let coverImageURL: URL?
 }
 
 extension Anime {

@@ -1,7 +1,7 @@
 import Foundation
 import AnilistAPI
 
-struct AnimeDetails: Identifiable, Equatable {
+struct AnimeDetails: Identifiable, Equatable, Codable {
     let id: Int
     let titleRomaji: String
     let titleEnglish: String?
@@ -15,11 +15,11 @@ struct AnimeDetails: Identifiable, Equatable {
     let averageScore: Int?
     let popularity: Int?
     let status: String?
-    let coverImageURL: URL
+    let coverImageURL: URL?
     let bannerImageURL: URL?
     let characters: [Character]
     
-    struct Character: Identifiable, Equatable {
+    struct Character: Identifiable, Equatable, Codable {
         let id: Int
         let name: String
         let imageURL: URL?
@@ -27,7 +27,7 @@ struct AnimeDetails: Identifiable, Equatable {
         let voiceActors: [VoiceActor]
     }
     
-    struct VoiceActor: Identifiable, Equatable {
+    struct VoiceActor: Identifiable, Equatable, Codable {
         let id: Int
         let name: String
         let language: String

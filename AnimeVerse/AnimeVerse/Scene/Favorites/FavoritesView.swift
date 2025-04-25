@@ -7,7 +7,7 @@ struct FavoritesView: View {
     @Query(sort: \FavoriteAnime.addedDate, order: .reverse) private var favorites: [FavoriteAnime]
     @Environment(\.modelContext) private var modelContext
 
-    private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
+    private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 1)
 
     var body: some View {
         NavigationView {

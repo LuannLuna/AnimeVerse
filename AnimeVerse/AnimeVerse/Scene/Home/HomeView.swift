@@ -3,6 +3,7 @@ import SwiftUI
 struct HomeView: View {
     @Bindable var router: Router
     @State private var viewModel = HomeViewModel()
+    @State private var isSearchPresented = false
 
     var body: some View {
         NavigationView {
@@ -41,10 +42,20 @@ struct HomeView: View {
                         .padding()
                 }
             }
-            .searchable(
-                text: $viewModel.searchText,
-                placement: .navigationBarDrawer(displayMode: .always) ,
-                prompt: "Search"
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        isSearchPresented = true
+                    } label: {
+                        Image(systemName: "magnifyingglass")
+                    }
+                }
+            }
+            .sheet(
+                isPresented: $isSearchPresented,
+                content: {
+                        AnimeSearchView(router: router)
+                }
             )
             .navigationTitle("Animes")
         }

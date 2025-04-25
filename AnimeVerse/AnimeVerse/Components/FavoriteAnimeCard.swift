@@ -6,7 +6,7 @@ struct FavoriteAnimeCard: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            if let imageURL = anime.coverImageURL {
+            if let imageURL = anime.bannerImageURL ?? anime.coverImageURL {
                 KFImage(imageURL)
                     .placeholder {
                         Rectangle()
@@ -15,10 +15,11 @@ struct FavoriteAnimeCard: View {
                     .fade(duration: 0.25)
                     .cancelOnDisappear(true)
                     .resizable()
-                    .aspectRatio(2/3, contentMode: .fit)
+                    .aspectRatio(3, contentMode: .fit)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
+
             }
-            
+
             VStack(alignment: .leading, spacing: 4) {
                 Text(anime.titleRomaji)
                     .font(.caption)
@@ -38,14 +39,15 @@ struct FavoriteAnimeCard: View {
 
 #Preview("Favorite Anime Card") {
     ScrollView {
-        LazyVGrid(columns: Array(repeating: .init(.flexible()), count: 3), spacing: 16) {
+        LazyVGrid(columns: Array(repeating: .init(.flexible()), count: 1), spacing: 16) {
             // With all information
             FavoriteAnimeCard(anime: .init(
                 id: 1,
                 titleRomaji: "Demon Slayer",
                 titleEnglish: "Demon Slayer: Kimetsu no Yaiba",
                 titleNative: "鬼滅の刃",
-                coverImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx188889-9mNMLHCXJmUw.png")
+                coverImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx188889-9mNMLHCXJmUw.png"),
+                bannerImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/banner/178680-9HupCDo647QU.jpg")
             ))
             
             // Without English title
@@ -54,7 +56,8 @@ struct FavoriteAnimeCard: View {
                 titleRomaji: "進撃の巨人",
                 titleEnglish: nil,
                 titleNative: "進撃の巨人",
-                coverImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx188889-9mNMLHCXJmUw.png")
+                coverImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx188889-9mNMLHCXJmUw.png"),
+                bannerImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/banner/178680-9HupCDo647QU.jpg")
             ))
             
             // With long titles
@@ -63,7 +66,8 @@ struct FavoriteAnimeCard: View {
                 titleRomaji: "A Very Long Anime Title That Should Be Truncated Because It's Too Long",
                 titleEnglish: "An Even Longer English Title That Should Also Be Truncated",
                 titleNative: "超長いタイトル",
-                coverImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx188889-9mNMLHCXJmUw.png")
+                coverImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx188889-9mNMLHCXJmUw.png"),
+                bannerImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/banner/178680-9HupCDo647QU.jpg")
             ))
         }
         .padding()
