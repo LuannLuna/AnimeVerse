@@ -5,6 +5,7 @@ struct AnimeSearchView: View {
     @Bindable var router: Router
     @State private var viewModel = AnimeSearchViewModel()
     @State private var searchTask: Task<Void, Never>?
+    @Binding var isPresented: Bool
     
     var body: some View {
         NavigationView {
@@ -17,6 +18,7 @@ struct AnimeSearchView: View {
                             ForEach(viewModel.animes) { anime in
                                 AnimeSearchCard(anime: anime)
                                     .onTapGesture {
+                                        isPresented = false
                                         router.navigate(to: .details(animeId: anime.id), using: .push)
                                     }
                                     .task {
@@ -98,5 +100,5 @@ private struct AnimeSearchCard: View {
 }
 
 #Preview("Search View") {
-    AnimeSearchView(router: Router())
+    AnimeSearchView(router: Router(), isPresented: .constant(true))
 }

@@ -54,7 +54,7 @@ struct HomeView: View {
             .sheet(
                 isPresented: $isSearchPresented,
                 content: {
-                        AnimeSearchView(router: router)
+                    AnimeSearchView(router: router, isPresented: $isSearchPresented)
                 }
             )
             .navigationTitle("Animes")
