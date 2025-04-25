@@ -12,10 +12,9 @@ struct AnimeCardView: View {
                 }
                 .retry(maxCount: 3, interval: .seconds(2))
                 .resizable()
-                .scaledToFill()
-                .frame(width: 170, height: 200)
-                .clipped()
+                .aspectRatio(2/3, contentMode: .fit)
                 .cornerRadius(12)
+                .clipped()
 
             Text(anime.titleRomaji)
                 .font(.headline)

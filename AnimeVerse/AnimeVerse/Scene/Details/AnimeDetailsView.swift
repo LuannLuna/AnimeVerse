@@ -1,7 +1,11 @@
-import SwiftUI
 import Kingfisher
+import SwiftData
+import SwiftUI
+
 
 struct AnimeDetailsView: View {
+    @Environment(\.modelContext) private var modelContext
+    @Query private var favorites: [FavoriteAnime]
     @State private var viewModel: AnimeDetailsViewModel
     
     init(animeId: Int) {
@@ -17,6 +21,26 @@ struct AnimeDetailsView: View {
         }
         .navigationTitle(viewModel.animeDetails?.titleEnglish ?? viewModel.animeDetails?.titleRomaji ?? "Anime Details")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            if let details = viewModel.animeDetails {
+                let isFavorite = favorites.contains { $0.id == details.id }
+                Button {
+                    toggleFavorite(details: details)
+                } label: {
+                    Image(systemName: isFavorite ? "heart.fill" : "heart")
+                        .foregroundStyle(isFavorite ? .red : .primary)
+                }
+            }
+        }
+    }
+    
+    private func toggleFavorite(details: AnimeDetails) {
+        if let existingFavorite = favorites.first(where: { $0.id == details.id }) {
+            modelContext.delete(existingFavorite)
+        } else {
+            let favorite = FavoriteAnime(from: details)
+            modelContext.insert(favorite)
+        }
     }
     
     @ViewBuilder

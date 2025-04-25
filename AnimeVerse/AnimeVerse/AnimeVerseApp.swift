@@ -5,7 +5,7 @@ import SwiftData
 struct AnimeVerseApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            FavoriteAnime.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -18,7 +18,7 @@ struct AnimeVerseApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainApp()
         }
         .modelContainer(sharedModelContainer)
     }
