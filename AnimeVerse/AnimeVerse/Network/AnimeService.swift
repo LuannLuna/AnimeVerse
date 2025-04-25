@@ -26,30 +26,8 @@ final class AnimeService: AnimeServiceProtocol {
         guard let media = result.data?.page?.media else { return [] }
 
         return media.compactMap { mediaItem in
-            guard
-                let id = mediaItem?.id,
-                let romaji = mediaItem?.title?.romaji,
-                let native = mediaItem?.title?.native,
-                let coverURLString = mediaItem?.coverImage?.large,
-                let coverURL = URL(string: coverURLString)
-            else {
-                return nil
-            }
-
-            let dateComponents = DateComponents(
-                year: mediaItem?.startDate?.year,
-                month: mediaItem?.startDate?.month,
-                day: mediaItem?.startDate?.day
-            )
-
-            return Anime(
-                id: id,
-                titleRomaji: romaji,
-                titleEnglish: mediaItem?.title?.english,
-                titleNative: native,
-                startDate: dateComponents,
-                coverImageURL: coverURL
-            )
+            guard let mediaItem else { return nil }
+            return Anime(from: mediaItem)
         }
     }
 }

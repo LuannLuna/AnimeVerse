@@ -13,7 +13,6 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             VStack {
-                //SearchBar(text: $viewModel.searchText)
                 if viewModel.isLoading {
                     ProgressView("Carregando animes...")
                         .padding()
@@ -26,7 +25,11 @@ struct HomeView: View {
                         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
                             ForEach(viewModel.animes, id: \.id) { anime in
                                 AnimeCardView(anime: anime)
-                                    .clipped()
+                                    .onAppear {
+                                        Task {
+                                            await viewModel.loadNextPageIfNeeded(item: anime)
+                                        }
+                                    }
                             }
                         }
                         .padding()
@@ -34,6 +37,11 @@ struct HomeView: View {
                     }
                 }
             }
+            .searchable(
+                text: $viewModel.searchText,
+                placement: .navigationBarDrawer(displayMode: .always) ,
+                prompt: "Search"
+            )
             .navigationTitle("Animes")
         }
         .task {

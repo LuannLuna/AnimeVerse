@@ -11,15 +11,15 @@ import Combine
 @Observable
 class HomeViewModel {
     var animes: [Anime] = []
-    var filteredAnimes: [Anime] = []
     var isLoading: Bool = false
+    var isFetchingNextPage: Bool = false
     var errorMessage: String? = nil
     var searchText: String = "" {
         didSet {
 //            filterAnimes()
         }
     }
-    private var currentPpage: Int = .zero
+    private var currentPage: Int = 1
     private var perPage: Int = 100
 
     private let service = AnimeService()
@@ -29,9 +29,25 @@ class HomeViewModel {
         isLoading = true
         errorMessage = nil
         do {
-            async let animes = service.fetchAnimes(page: currentPpage, perPage: perPage)
-            self.animes = try await animes
-            perPage = try await animes.count
+            animes = try await service.fetchAnimes(page: currentPage, perPage: perPage)
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
+
+    func loadNextPageIfNeeded(item: Anime) async {
+        guard !isFetchingNextPage else { return }
+        guard let index = animes.firstIndex(where: { $0 == item }) else { return }
+        let thresholdIndex = animes.index(animes.endIndex, offsetBy: -10, limitedBy: animes.startIndex) ?? 0
+        guard index >= thresholdIndex else { return }
+
+        isFetchingNextPage = true
+        defer { isFetchingNextPage = false }
+        currentPage += 1
+
+        do {
+            let newAnimes = try await service.fetchAnimes(page: currentPage, perPage: perPage)
+            animes.append(contentsOf: newAnimes)
         } catch {
             errorMessage = error.localizedDescription
         }
