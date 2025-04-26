@@ -17,8 +17,16 @@ query GetMediaDetails($id: Int!, $type: MediaType!) {
     coverImage { ...CoverImageFields }
     bannerImage
     characters {
-      edges {
-        ...CharacterEdgeFields
+      edges { ...CharacterEdgeFields }
+    }
+    recommendations {
+      nodes {
+        mediaRecommendation {
+          id
+          type
+          title { ...TitleFields }
+          coverImage { ...CoverImageFields }
+        }
       }
     }
   }

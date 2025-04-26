@@ -7,7 +7,7 @@ public class GetMediaDetailsQuery: GraphQLQuery {
   public static let operationName: String = "GetMediaDetails"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
     definition: .init(
-      #"query GetMediaDetails($id: Int!, $type: MediaType!) { Media(id: $id, type: $type) { __typename id type title { __typename ...TitleFields } description(asHtml: true) startDate { __typename ...DateFields } endDate { __typename ...DateFields } episodes duration genres averageScore popularity status coverImage { __typename ...CoverImageFields } bannerImage characters { __typename edges { __typename ...CharacterEdgeFields } } } }"#,
+      #"query GetMediaDetails($id: Int!, $type: MediaType!) { Media(id: $id, type: $type) { __typename id type title { __typename ...TitleFields } description(asHtml: true) startDate { __typename ...DateFields } endDate { __typename ...DateFields } episodes duration genres averageScore popularity status coverImage { __typename ...CoverImageFields } bannerImage characters { __typename edges { __typename ...CharacterEdgeFields } } recommendations { __typename nodes { __typename mediaRecommendation { __typename id type title { __typename ...TitleFields } coverImage { __typename ...CoverImageFields } } } } } }"#,
       fragments: [CharacterEdgeFields.self, CharacterFields.self, CoverImageFields.self, DateFields.self, TitleFields.self]
     ))
 
@@ -67,6 +67,7 @@ public class GetMediaDetailsQuery: GraphQLQuery {
         .field("coverImage", CoverImage?.self),
         .field("bannerImage", String?.self),
         .field("characters", Characters?.self),
+        .field("recommendations", Recommendations?.self),
       ] }
 
       /// The id of the media
@@ -99,6 +100,8 @@ public class GetMediaDetailsQuery: GraphQLQuery {
       public var bannerImage: String? { __data["bannerImage"] }
       /// The characters in the media
       public var characters: Characters? { __data["characters"] }
+      /// User recommendations for similar media
+      public var recommendations: Recommendations? { __data["recommendations"] }
 
       /// Media.Title
       ///
@@ -258,6 +261,123 @@ public class GetMediaDetailsQuery: GraphQLQuery {
           public typealias Node = CharacterEdgeFields.Node
 
           public typealias VoiceActor = CharacterEdgeFields.VoiceActor
+        }
+      }
+
+      /// Media.Recommendations
+      ///
+      /// Parent Type: `RecommendationConnection`
+      public struct Recommendations: AnilistAPI.SelectionSet {
+        public let __data: DataDict
+        public init(_dataDict: DataDict) { __data = _dataDict }
+
+        public static var __parentType: any ApolloAPI.ParentType { AnilistAPI.Objects.RecommendationConnection }
+        public static var __selections: [ApolloAPI.Selection] { [
+          .field("__typename", String.self),
+          .field("nodes", [Node?]?.self),
+        ] }
+
+        public var nodes: [Node?]? { __data["nodes"] }
+
+        /// Media.Recommendations.Node
+        ///
+        /// Parent Type: `Recommendation`
+        public struct Node: AnilistAPI.SelectionSet {
+          public let __data: DataDict
+          public init(_dataDict: DataDict) { __data = _dataDict }
+
+          public static var __parentType: any ApolloAPI.ParentType { AnilistAPI.Objects.Recommendation }
+          public static var __selections: [ApolloAPI.Selection] { [
+            .field("__typename", String.self),
+            .field("mediaRecommendation", MediaRecommendation?.self),
+          ] }
+
+          /// The recommended media
+          public var mediaRecommendation: MediaRecommendation? { __data["mediaRecommendation"] }
+
+          /// Media.Recommendations.Node.MediaRecommendation
+          ///
+          /// Parent Type: `Media`
+          public struct MediaRecommendation: AnilistAPI.SelectionSet {
+            public let __data: DataDict
+            public init(_dataDict: DataDict) { __data = _dataDict }
+
+            public static var __parentType: any ApolloAPI.ParentType { AnilistAPI.Objects.Media }
+            public static var __selections: [ApolloAPI.Selection] { [
+              .field("__typename", String.self),
+              .field("id", Int.self),
+              .field("type", GraphQLEnum<AnilistAPI.MediaType>?.self),
+              .field("title", Title?.self),
+              .field("coverImage", CoverImage?.self),
+            ] }
+
+            /// The id of the media
+            public var id: Int { __data["id"] }
+            /// The type of the media; anime or manga
+            public var type: GraphQLEnum<AnilistAPI.MediaType>? { __data["type"] }
+            /// The official titles of the media in various languages
+            public var title: Title? { __data["title"] }
+            /// The cover images of the media
+            public var coverImage: CoverImage? { __data["coverImage"] }
+
+            /// Media.Recommendations.Node.MediaRecommendation.Title
+            ///
+            /// Parent Type: `MediaTitle`
+            public struct Title: AnilistAPI.SelectionSet {
+              public let __data: DataDict
+              public init(_dataDict: DataDict) { __data = _dataDict }
+
+              public static var __parentType: any ApolloAPI.ParentType { AnilistAPI.Objects.MediaTitle }
+              public static var __selections: [ApolloAPI.Selection] { [
+                .field("__typename", String.self),
+                .fragment(TitleFields.self),
+              ] }
+
+              /// The romanization of the native language title
+              public var romaji: String? { __data["romaji"] }
+              /// The official english title
+              public var english: String? { __data["english"] }
+              /// Official title in it's native language
+              public var native: String? { __data["native"] }
+
+              public struct Fragments: FragmentContainer {
+                public let __data: DataDict
+                public init(_dataDict: DataDict) { __data = _dataDict }
+
+                public var titleFields: TitleFields { _toFragment() }
+              }
+            }
+
+            /// Media.Recommendations.Node.MediaRecommendation.CoverImage
+            ///
+            /// Parent Type: `MediaCoverImage`
+            public struct CoverImage: AnilistAPI.SelectionSet {
+              public let __data: DataDict
+              public init(_dataDict: DataDict) { __data = _dataDict }
+
+              public static var __parentType: any ApolloAPI.ParentType { AnilistAPI.Objects.MediaCoverImage }
+              public static var __selections: [ApolloAPI.Selection] { [
+                .field("__typename", String.self),
+                .fragment(CoverImageFields.self),
+              ] }
+
+              /// The cover image url of the media at its largest size. If this size isn't available, large will be provided instead.
+              public var extraLarge: String? { __data["extraLarge"] }
+              /// The cover image url of the media at a large size
+              public var large: String? { __data["large"] }
+              /// The cover image url of the media at medium size
+              public var medium: String? { __data["medium"] }
+              /// Average #hex color of cover image
+              public var color: String? { __data["color"] }
+
+              public struct Fragments: FragmentContainer {
+                public let __data: DataDict
+                public init(_dataDict: DataDict) { __data = _dataDict }
+
+                public var coverImageFields: CoverImageFields { _toFragment() }
+              }
+            }
+          }
         }
       }
     }

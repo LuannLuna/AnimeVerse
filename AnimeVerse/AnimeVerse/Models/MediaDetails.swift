@@ -19,6 +19,7 @@ struct MediaDetails: Identifiable, Equatable, Codable, Hashable {
     let coverImageURL: URL?
     let bannerImageURL: URL?
     let characters: [Self.Character]
+    let recommendations: [Self.Recommendations]
 
     struct Character: Identifiable, Equatable, Codable, Hashable {
         let id: Int
@@ -33,6 +34,15 @@ struct MediaDetails: Identifiable, Equatable, Codable, Hashable {
         let name: String
         let language: String
         let imageURL: URL?
+    }
+
+    struct Recommendations: Identifiable, Equatable, Codable, Hashable {
+        let id: Int
+        let type: MediaType
+        let titleRomaji: String
+        let titleEnglish: String?
+        let titleNative: String
+        let coverImageURL: URL?
     }
 
     enum MediaType: String, Codable {
@@ -102,6 +112,20 @@ extension MediaDetails {
             }
         }
         self.characters = characters
+        var recommendations: [Recommendations] = []
+        data.recommendations?.nodes?.forEach { node in
+            guard let recommendation = node?.mediaRecommendation else { return }
+            let media = Recommendations(
+                id: recommendation.id,
+                type: .init(rawValue: recommendation.type?.rawValue ?? "") ?? .unknown,
+                titleRomaji: recommendation.title?.romaji ?? "",
+                titleEnglish: recommendation.title?.english,
+                titleNative: recommendation.title?.native ?? "",
+                coverImageURL: (recommendation.coverImage?.extraLarge ?? recommendation.coverImage?.large ?? recommendation.coverImage?.medium)?.asURL
+            )
+            recommendations.append(media)
+        }
+        self.recommendations = recommendations
     }
 
     init?(from data: FindMediaQuery.Data.Page.Medium) {
@@ -146,5 +170,6 @@ extension MediaDetails {
                 } ?? []
             )
         } ?? []
+        self.recommendations = []
     }
 }

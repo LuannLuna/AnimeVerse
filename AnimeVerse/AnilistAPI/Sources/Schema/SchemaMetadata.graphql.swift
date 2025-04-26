@@ -32,6 +32,8 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     case "Page": return AnilistAPI.Objects.Page
     case "PageInfo": return AnilistAPI.Objects.PageInfo
     case "Query": return AnilistAPI.Objects.Query
+    case "Recommendation": return AnilistAPI.Objects.Recommendation
+    case "RecommendationConnection": return AnilistAPI.Objects.RecommendationConnection
     case "Staff": return AnilistAPI.Objects.Staff
     case "StaffImage": return AnilistAPI.Objects.StaffImage
     case "StaffName": return AnilistAPI.Objects.StaffName
