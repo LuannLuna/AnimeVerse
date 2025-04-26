@@ -7,24 +7,28 @@ public class FindAnimeQuery: GraphQLQuery {
   public static let operationName: String = "FindAnime"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
     definition: .init(
-      #"query FindAnime($search: String, $page: Int) { Page(page: $page) { __typename pageInfo { __typename currentPage total hasNextPage } media(search: $search) { __typename id type title { __typename ...TitleFields } description(asHtml: false) startDate { __typename ...DateFields } endDate { __typename ...DateFields } episodes duration genres averageScore popularity status coverImage { __typename ...CoverImageFields } bannerImage characters { __typename edges { __typename ...CharacterEdgeFields } } } } }"#,
+      #"query FindAnime($search: String, $page: Int, $type: MediaType) { Page(page: $page) { __typename pageInfo { __typename currentPage total hasNextPage } media(search: $search, type: $type) { __typename id type title { __typename ...TitleFields } description(asHtml: false) startDate { __typename ...DateFields } endDate { __typename ...DateFields } episodes duration genres averageScore popularity status coverImage { __typename ...CoverImageFields } bannerImage characters { __typename edges { __typename ...CharacterEdgeFields } } } } }"#,
       fragments: [CharacterEdgeFields.self, CharacterFields.self, CoverImageFields.self, DateFields.self, TitleFields.self]
     ))
 
   public var search: GraphQLNullable<String>
   public var page: GraphQLNullable<Int>
+  public var type: GraphQLNullable<GraphQLEnum<MediaType>>
 
   public init(
     search: GraphQLNullable<String>,
-    page: GraphQLNullable<Int>
+    page: GraphQLNullable<Int>,
+    type: GraphQLNullable<GraphQLEnum<MediaType>>
   ) {
     self.search = search
     self.page = page
+    self.type = type
   }
 
   public var __variables: Variables? { [
     "search": search,
-    "page": page
+    "page": page,
+    "type": type
   ] }
 
   public struct Data: AnilistAPI.SelectionSet {
@@ -49,7 +53,10 @@ public class FindAnimeQuery: GraphQLQuery {
       public static var __selections: [ApolloAPI.Selection] { [
         .field("__typename", String.self),
         .field("pageInfo", PageInfo?.self),
-        .field("media", [Medium?]?.self, arguments: ["search": .variable("search")]),
+        .field("media", [Medium?]?.self, arguments: [
+          "search": .variable("search"),
+          "type": .variable("type")
+        ]),
       ] }
 
       /// The pagination information

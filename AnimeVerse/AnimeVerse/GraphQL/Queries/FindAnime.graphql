@@ -1,13 +1,13 @@
 #import "../AnimeFragments.graphql"
 
-query FindAnime($search: String, $page: Int) {
+query FindAnime($search: String, $page: Int, $type: MediaType) {
   Page(page: $page) {
     pageInfo {
       currentPage
       total
       hasNextPage
     }
-    media(search: $search) {
+    media(search: $search, type: $type) {
       id
       type
       title { ...TitleFields }

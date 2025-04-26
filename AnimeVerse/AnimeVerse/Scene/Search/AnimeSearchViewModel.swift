@@ -27,7 +27,7 @@ final class AnimeSearchViewModel {
         canLoadMore = true
         
         do {
-            animes = try await service.searchAnimes(term: searchText, page: currentPage)
+            animes = try await service.searchAnimes(term: searchText, page: currentPage, kind: .anime)
             canLoadMore = !animes.isEmpty
         } catch {
             self.error = error
@@ -43,7 +43,7 @@ final class AnimeSearchViewModel {
         currentPage += 1
         
         do {
-            let nextPage = try await service.searchAnimes(term: searchText, page: currentPage)
+            let nextPage = try await service.searchAnimes(term: searchText, page: currentPage, kind: .anime)
             canLoadMore = !nextPage.isEmpty
             animes.append(contentsOf: nextPage)
         } catch {
