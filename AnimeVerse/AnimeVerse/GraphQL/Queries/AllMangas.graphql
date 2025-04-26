@@ -8,6 +8,7 @@ query AllMangas($page: Int, $perPage: Int) {
         media(type: MANGA, sort: START_DATE_DESC) {
             id
             title { romaji english native }
+            description(asHtml: false)
             startDate { year month day }
             coverImage { large }
         }

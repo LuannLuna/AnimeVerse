@@ -7,7 +7,7 @@ public class AllMangasQuery: GraphQLQuery {
   public static let operationName: String = "AllMangas"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
     definition: .init(
-      #"query AllMangas($page: Int, $perPage: Int) { Page(page: $page, perPage: $perPage) { __typename pageInfo { __typename currentPage total hasNextPage } media(type: MANGA, sort: START_DATE_DESC) { __typename id title { __typename romaji english native } startDate { __typename year month day } coverImage { __typename large } } } }"#
+      #"query AllMangas($page: Int, $perPage: Int) { Page(page: $page, perPage: $perPage) { __typename pageInfo { __typename currentPage total hasNextPage } media(type: MANGA, sort: START_DATE_DESC) { __typename id title { __typename romaji english native } description(asHtml: false) startDate { __typename year month day } coverImage { __typename large } } } }"#
     ))
 
   public var page: GraphQLNullable<Int>
@@ -96,6 +96,7 @@ public class AllMangasQuery: GraphQLQuery {
           .field("__typename", String.self),
           .field("id", Int.self),
           .field("title", Title?.self),
+          .field("description", String?.self, arguments: ["asHtml": false]),
           .field("startDate", StartDate?.self),
           .field("coverImage", CoverImage?.self),
         ] }
@@ -104,6 +105,8 @@ public class AllMangasQuery: GraphQLQuery {
         public var id: Int { __data["id"] }
         /// The official titles of the media in various languages
         public var title: Title? { __data["title"] }
+        /// Short description of the media's story and characters
+        public var description: String? { __data["description"] }
         /// The first official release date of the media
         public var startDate: StartDate? { __data["startDate"] }
         /// The cover images of the media

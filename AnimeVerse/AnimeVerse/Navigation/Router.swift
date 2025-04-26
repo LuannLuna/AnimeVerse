@@ -13,7 +13,7 @@ class Router {
     var currentTab: AppRoute = .home
     var homeNavigationPath = NavigationPath()
     var favoriteNavigationPath = NavigationPath()
-    var profileNavigationPath = NavigationPath()
+    var mangaNavigationPath = NavigationPath()
     var presentedSheet: AppRoute?
     var presentedFullScreenCover: AppRoute?
 
@@ -21,7 +21,7 @@ class Router {
     func navigate(to route: AppRoute, using navigationType: NavigationType) {
         switch navigationType {
         case .tabBar:
-            if [.home, .favorites, .profile].contains(route) {
+            if [.home, .favorites, .manga].contains(route) {
                 currentTab = route
             }
 
@@ -33,8 +33,8 @@ class Router {
                     case .favorites:
                         favoriteNavigationPath.append(route)
 
-                    case .profile:
-                        profileNavigationPath.append(route)
+                    case .manga:
+                        mangaNavigationPath.append(route)
 
                     default:
                         break
@@ -75,9 +75,9 @@ class Router {
                     favoriteNavigationPath.removeLast()
                 }
 
-            case .profile:
-                if !profileNavigationPath.isEmpty {
-                    profileNavigationPath.removeLast()
+            case .manga:
+                if !mangaNavigationPath.isEmpty {
+                    mangaNavigationPath.removeLast()
                 }
                 
             default:
@@ -93,8 +93,8 @@ class Router {
             case .favorites:
                 favoriteNavigationPath = NavigationPath()
 
-            case .profile:
-                profileNavigationPath = NavigationPath()
+            case .manga:
+                mangaNavigationPath = NavigationPath()
             default:
                 break
         }

@@ -12,7 +12,7 @@ enum AppRoute: Hashable, Identifiable {
     // Tab Bar Routes
     case home
     case favorites
-    case profile
+    case manga
 
     // Other Routes
     case details(animeId: Int)
@@ -65,14 +65,14 @@ struct MainApp: View {
             .tabItem { Label("Favorites", systemImage: "heart") }
             .tag(AppRoute.favorites)
             
-            NavigationStack(path: $router.profileNavigationPath) {
-                Text("Profile")
+            NavigationStack(path: $router.mangaNavigationPath) {
+                MangaView(router: router)
                     .navigationDestination(for: AppRoute.self) { route in
                         destinationView(for: route)
                     }
             }
-            .tabItem { Label("Profile", systemImage: "person") }
-            .tag(AppRoute.profile)
+            .tabItem { Label("Manga", systemImage: "book") }
+            .tag(AppRoute.manga)
         }
         .environment(router)
         .sheet(item: $router.presentedSheet) { route in
@@ -101,8 +101,8 @@ struct MainApp: View {
             case .favorites:
                 FavoritesView(router: router)
 
-            case .profile:
-                Text("Profile")
+            case .manga:
+                MangaView(router: router)
 
             case let .details(animeId):
                 AnimeDetailsView(animeId: animeId)
