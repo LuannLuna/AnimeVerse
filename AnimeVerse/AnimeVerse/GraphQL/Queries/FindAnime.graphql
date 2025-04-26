@@ -1,6 +1,6 @@
 #import "../AnimeFragments.graphql"
 
-query FindAnime($search: String, $page: Int, $type: MediaType) {
+query FindMedia($search: String, $page: Int, $type: MediaType) {
   Page(page: $page) {
     pageInfo {
       currentPage

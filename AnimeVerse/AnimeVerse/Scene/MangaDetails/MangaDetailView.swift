@@ -2,13 +2,13 @@ import SwiftUI
 import Kingfisher
 
 struct MangaDetailView: View {
-    let anime: MediaDetails
+    let manga: MediaDetails
     
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
                 // Banner or Cover
-                if let bannerURL = anime.bannerImageURL ?? anime.coverImageURL {
+                if let bannerURL = manga.bannerImageURL ?? manga.coverImageURL {
                     GeometryReader { _ in
                         KFImage(bannerURL)
                             .resizable()
@@ -18,14 +18,14 @@ struct MangaDetailView: View {
                     .clipped()
                 }
                 // Title
-                Text(anime.titleEnglish ?? anime.titleRomaji)
+                Text(manga.titleEnglish ?? manga.titleRomaji)
                     .font(.title)
                     .bold()
                 // Genres
-                if !anime.genres.isEmpty {
+                if !manga.genres.isEmpty {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
-                            ForEach(anime.genres, id: \.self) { genre in
+                            ForEach(manga.genres, id: \.self) { genre in
                                 Text(genre)
                                     .font(.caption2)
                                     .padding(.horizontal, 8)
@@ -37,30 +37,30 @@ struct MangaDetailView: View {
                     }
                 }
                 // Description
-                if let desc = anime.description {
+                if let desc = manga.description {
                     Text(desc)
                         .font(.body)
                         .foregroundStyle(.secondary)
                 }
                 // Info
                 HStack(spacing: 16) {
-                    if let score = anime.averageScore {
+                    if let score = manga.averageScore {
                         Label("\(score)", systemImage: "star.fill")
                     }
-                    if let popularity = anime.popularity {
+                    if let popularity = manga.popularity {
                         Label("\(popularity)", systemImage: "person.3.fill")
                     }
-                    if let status = anime.status {
+                    if let status = manga.status {
                         Label(status.capitalized, systemImage: "checkmark.seal")
                     }
                 }
                 // Characters
-                if !anime.characters.isEmpty {
+                if !manga.characters.isEmpty {
                     Text("Characters")
                         .font(.headline)
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 12) {
-                            ForEach(anime.characters) { character in
+                            ForEach(manga.characters) { character in
                                 VStack(spacing: 8) {
                                     if let url = character.imageURL {
                                         KFImage(url)
@@ -91,14 +91,14 @@ struct MangaDetailView: View {
             .padding()
         }
 //        .navigationTitle(anime.titleRomaji)
-        .navigationTitle(anime.id.description)
+        .navigationTitle(manga.id.description)
         .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 #Preview {
     MangaDetailView(
-        anime: MediaDetails(
+        manga: MediaDetails(
             id: 1,
             type: .manga,
             titleRomaji: "Boruto",

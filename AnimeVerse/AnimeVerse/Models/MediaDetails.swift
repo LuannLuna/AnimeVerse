@@ -104,7 +104,7 @@ extension MediaDetails {
         self.characters = characters
     }
 
-    init?(from data: FindAnimeQuery.Data.Page.Medium) {
+    init?(from data: FindMediaQuery.Data.Page.Medium) {
         guard let title = data.title, let romaji = title.romaji else { return nil }
         self.id = data.id
         self.type =  MediaType(rawValue: data.type?.rawValue ?? "") ?? .unknown

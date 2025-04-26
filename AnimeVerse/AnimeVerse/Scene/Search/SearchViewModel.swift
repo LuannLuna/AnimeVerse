@@ -1,23 +1,23 @@
 import Foundation
 
 @Observable
-final class AnimeSearchViewModel {
-    private let service: AnimeSearchServiceProtocol
+final class SearchViewModel {
+    private let service: MediaSearchServiceProtocol
     private var currentPage = 1
     private var canLoadMore = true
     
     var searchText = ""
-    var animes: [MediaDetails] = []
+    var medias: [MediaDetails] = []
     var isLoading = false
     var error: Error?
     
-    init(service: AnimeSearchServiceProtocol = AnimeSearchService()) {
+    init(service: MediaSearchServiceProtocol = SearchService()) {
         self.service = service
     }
     
     func search() async {
         guard !searchText.isEmpty else {
-            animes = []
+            medias = []
             return
         }
         
@@ -27,8 +27,8 @@ final class AnimeSearchViewModel {
         canLoadMore = true
         
         do {
-            animes = try await service.searchAnimes(term: searchText, page: currentPage, kind: .anime)
-            canLoadMore = !animes.isEmpty
+            medias = try await service.searchMedia(term: searchText, page: currentPage, kind: .anime)
+            canLoadMore = !medias.isEmpty
         } catch {
             self.error = error
         }
@@ -43,9 +43,9 @@ final class AnimeSearchViewModel {
         currentPage += 1
         
         do {
-            let nextPage = try await service.searchAnimes(term: searchText, page: currentPage, kind: .anime)
+            let nextPage = try await service.searchMedia(term: searchText, page: currentPage, kind: .anime)
             canLoadMore = !nextPage.isEmpty
-            animes.append(contentsOf: nextPage)
+            medias.append(contentsOf: nextPage)
         } catch {
             self.error = error
             currentPage -= 1

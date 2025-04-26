@@ -1,33 +1,33 @@
 import SwiftUI
 import Kingfisher
 
-struct AnimeSearchView: View {
+struct SearchView: View {
     @Bindable var router: Router
-    @State private var viewModel = AnimeSearchViewModel()
+    @State private var viewModel = SearchViewModel()
     @State private var searchTask: Task<Void, Never>?
     @Binding var isPresented: Bool
     
     var body: some View {
         NavigationView {
             Group {
-                if viewModel.animes.isEmpty && !viewModel.isLoading {
+                if viewModel.medias.isEmpty && !viewModel.isLoading {
                     ContentUnavailableView.search
                 } else {
                     ScrollView {
                         LazyVStack(spacing: 16) {
-                            ForEach(viewModel.animes, id: \.id) { media in
+                            ForEach(viewModel.medias, id: \.id) { media in
                                 AnimeSearchCard(anime: media)
                                     .onTapGesture {
                                         isPresented = false
                                         switch media.type {
                                             case .manga:
-                                                router.navigate(to: .searchDetail(media: media), using: .push)
+                                                router.navigate(to: .mangaDetail(manga: media), using: .push)
                                             default:
                                                 router.navigate(to: .details(animeId: media.id), using: .push)
                                         }
                                     }
                                     .task {
-                                        if media.id == viewModel.animes.last?.id {
+                                        if media.id == viewModel.medias.last?.id {
                                             await viewModel.loadMore()
                                         }
                                     }
@@ -116,5 +116,5 @@ private struct AnimeSearchCard: View {
 }
 
 #Preview("Search View") {
-    AnimeSearchView(router: Router(), isPresented: .constant(true))
+    SearchView(router: Router(), isPresented: .constant(true))
 }

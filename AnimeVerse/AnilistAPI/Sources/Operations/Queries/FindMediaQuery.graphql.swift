@@ -3,11 +3,11 @@
 
 @_exported import ApolloAPI
 
-public class FindAnimeQuery: GraphQLQuery {
-  public static let operationName: String = "FindAnime"
+public class FindMediaQuery: GraphQLQuery {
+  public static let operationName: String = "FindMedia"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
     definition: .init(
-      #"query FindAnime($search: String, $page: Int, $type: MediaType) { Page(page: $page) { __typename pageInfo { __typename currentPage total hasNextPage } media(search: $search, type: $type) { __typename id type title { __typename ...TitleFields } description(asHtml: false) startDate { __typename ...DateFields } endDate { __typename ...DateFields } episodes duration genres averageScore popularity status coverImage { __typename ...CoverImageFields } bannerImage characters { __typename edges { __typename ...CharacterEdgeFields } } } } }"#,
+      #"query FindMedia($search: String, $page: Int, $type: MediaType) { Page(page: $page) { __typename pageInfo { __typename currentPage total hasNextPage } media(search: $search, type: $type) { __typename id type title { __typename ...TitleFields } description(asHtml: false) startDate { __typename ...DateFields } endDate { __typename ...DateFields } episodes duration genres averageScore popularity status coverImage { __typename ...CoverImageFields } bannerImage characters { __typename edges { __typename ...CharacterEdgeFields } } } } }"#,
       fragments: [CharacterEdgeFields.self, CharacterFields.self, CoverImageFields.self, DateFields.self, TitleFields.self]
     ))
 

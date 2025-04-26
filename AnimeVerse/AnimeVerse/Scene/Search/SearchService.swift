@@ -1,11 +1,11 @@
 import AnilistAPI
 import Foundation
 
-protocol AnimeSearchServiceProtocol {
-    func searchAnimes(term: String, page: Int, kind: MediaKind) async throws -> [MediaDetails]
+protocol MediaSearchServiceProtocol {
+    func searchMedia(term: String, page: Int, kind: MediaKind) async throws -> [MediaDetails]
 }
 
-final class AnimeSearchService: AnimeSearchServiceProtocol {
+final class SearchService: MediaSearchServiceProtocol {
     private let network: Network
     private let cache: CacheServiceProtocol
     
@@ -17,7 +17,7 @@ final class AnimeSearchService: AnimeSearchServiceProtocol {
         self.cache = cache
     }
     
-    func searchAnimes(term: String, page: Int, kind: MediaKind) async throws -> [MediaDetails] {
+    func searchMedia(term: String, page: Int, kind: MediaKind) async throws -> [MediaDetails] {
         let cacheKey = "search_\(term)_\(page)"
         
         // Try to get from cache first
@@ -26,14 +26,11 @@ final class AnimeSearchService: AnimeSearchServiceProtocol {
         }
         
         // If not in cache, fetch from network
-        let query = FindAnimeQuery(search: .init(stringLiteral: term), page: .some(page), type: .init(kind.anilistType))
+        let query = FindMediaQuery(search: .init(stringLiteral: term), page: .some(page), type: .init(kind.anilistType))
         let response = try await network.fetch(query: query)
         let results: [MediaDetails] = response.data?.page?.media?.compactMap { media in
-            if let media {
-                MediaDetails(from: media)
-            } else {
-                nil
-            }
+            guard let media else { return nil }
+            return MediaDetails(from: media)
         } ?? []
         
         // Cache the results
