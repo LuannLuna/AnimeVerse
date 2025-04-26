@@ -1,11 +1,30 @@
 import SwiftUI
 import Kingfisher
 
+import Observation
+
 struct MangaDetailView: View {
-    let manga: MediaDetails
+    @State private var viewModel: MangaDetailViewModel
+    
+    init(mangaId: Int) {
+        _viewModel = State(initialValue: MangaDetailViewModel(mangaId: mangaId))
+    }
     
     var body: some View {
-        ScrollView {
+        Group {
+            if viewModel.isLoading {
+                ProgressView("Loading manga...")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else if let error = viewModel.errorMessage {
+                VStack {
+                    Text("Error")
+                        .font(.title)
+                    Text(error)
+                        .foregroundColor(.secondary)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else if let manga = viewModel.mediaDetails {
+                ScrollView {
             VStack(alignment: .leading, spacing: 24) {
                 // Banner or Cover
                 if let bannerURL = manga.bannerImageURL ?? manga.coverImageURL {
@@ -38,8 +57,7 @@ struct MangaDetailView: View {
                 }
                 // Description
                 if let desc = manga.description {
-                    Text(desc)
-                        .font(.body)
+                    HTMLText(desc)
                         .foregroundStyle(.secondary)
                 }
                 // Info
@@ -89,33 +107,20 @@ struct MangaDetailView: View {
                 }
             }
             .padding()
+            }
+                .navigationTitle(viewModel.mediaDetails?.titleRomaji ?? "Manga Details")
+                .navigationBarTitleDisplayMode(.inline)
+            } else {
+                Text("No manga details available.")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
         }
-//        .navigationTitle(anime.titleRomaji)
-        .navigationTitle(manga.id.description)
-        .navigationBarTitleDisplayMode(.inline)
+        .task {
+            await viewModel.loadMangaDetails()
+        }
     }
 }
 
 #Preview {
-    MangaDetailView(
-        manga: MediaDetails(
-            id: 1,
-            type: .manga,
-            titleRomaji: "Boruto",
-            titleEnglish: "Boruto: Naruto Next Generations",
-            titleNative: "BORUTO-ボルト-",
-            description: "A spin-off of Boruto: Naruto Next Generations focusing on Boruto and his team.",
-            startDate: DateComponents(year: 2017, month: 4, day: 1),
-            endDate: DateComponents(year: 2021, month: 4, day: 1),
-            episodes: 1,
-            duration: 24,
-            genres: ["Action", "Comedy"],
-            averageScore: 55,
-            popularity: 289,
-            status: "FINISHED",
-            coverImageURL: nil,
-            bannerImageURL: nil,
-            characters: []
-        )
-    )
+    MangaDetailView(mangaId: 1)
 }

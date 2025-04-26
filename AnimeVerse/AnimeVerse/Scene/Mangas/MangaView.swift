@@ -38,6 +38,9 @@ struct MangaView: View {
                                             Task { await viewModel.loadMangas() }
                                         }
                                     }
+                                    .onTapGesture {
+                                        router.navigate(to: .mangaDetail(mangaId: manga.id), using: .push)
+                                    }
                             }
                             if viewModel.isLoading {
                                 ProgressView()

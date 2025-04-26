@@ -21,7 +21,7 @@ struct SearchView: View {
                                         isPresented = false
                                         switch media.type {
                                             case .manga:
-                                                router.navigate(to: .mangaDetail(manga: media), using: .push)
+                                                router.navigate(to: .mangaDetail(mangaId: media.id), using: .push)
                                             default:
                                                 router.navigate(to: .details(animeId: media.id), using: .push)
                                         }

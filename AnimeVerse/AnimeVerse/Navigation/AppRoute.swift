@@ -16,7 +16,7 @@ enum AppRoute: Hashable, Identifiable {
 
     // Other Routes
     case details(animeId: Int)
-    case mangaDetail(manga: MediaDetails)
+    case mangaDetail(mangaId: Int)
 }
 
 // MARK: - Navigation Types
@@ -107,8 +107,8 @@ struct MainApp: View {
             case let .details(animeId):
                 AnimeDetailsView(animeId: animeId)
 
-            case let .mangaDetail(manga):
-                MangaDetailView(manga: manga)
+            case let .mangaDetail(mangaId):
+                MangaDetailView(mangaId: mangaId)
         }
     }
 }
