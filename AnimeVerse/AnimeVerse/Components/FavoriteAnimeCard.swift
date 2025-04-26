@@ -41,34 +41,43 @@ struct FavoriteAnimeCard: View {
     ScrollView {
         LazyVGrid(columns: Array(repeating: .init(.flexible()), count: 1), spacing: 16) {
             // With all information
-            FavoriteAnimeCard(anime: .init(
-                id: 1,
-                titleRomaji: "Demon Slayer",
-                titleEnglish: "Demon Slayer: Kimetsu no Yaiba",
-                titleNative: "鬼滅の刃",
-                coverImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx188889-9mNMLHCXJmUw.png"),
-                bannerImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/banner/178680-9HupCDo647QU.jpg")
-            ))
+            FavoriteAnimeCard(
+                anime: .init(
+                    id: 1,
+                    titleRomaji: "Demon Slayer",
+                    titleEnglish: "Demon Slayer: Kimetsu no Yaiba",
+                    titleNative: "鬼滅の刃",
+                    coverImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx188889-9mNMLHCXJmUw.png"),
+                    bannerImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/banner/178680-9HupCDo647QU.jpg"),
+                    mediaType: .anime
+                )
+            )
             
             // Without English title
-            FavoriteAnimeCard(anime: .init(
-                id: 2,
-                titleRomaji: "進撃の巨人",
-                titleEnglish: nil,
-                titleNative: "進撃の巨人",
-                coverImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx188889-9mNMLHCXJmUw.png"),
-                bannerImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/banner/178680-9HupCDo647QU.jpg")
-            ))
+            FavoriteAnimeCard(
+                anime: .init(
+                    id: 2,
+                    titleRomaji: "進撃の巨人",
+                    titleEnglish: nil,
+                    titleNative: "進撃の巨人",
+                    coverImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx188889-9mNMLHCXJmUw.png"),
+                    bannerImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/banner/178680-9HupCDo647QU.jpg"),
+                    mediaType: .anime
+                )
+            )
             
             // With long titles
-            FavoriteAnimeCard(anime: .init(
-                id: 3,
-                titleRomaji: "A Very Long Anime Title That Should Be Truncated Because It's Too Long",
-                titleEnglish: "An Even Longer English Title That Should Also Be Truncated",
-                titleNative: "超長いタイトル",
-                coverImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx188889-9mNMLHCXJmUw.png"),
-                bannerImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/banner/178680-9HupCDo647QU.jpg")
-            ))
+            FavoriteAnimeCard(
+                anime: .init(
+                    id: 3,
+                    titleRomaji: "A Very Long Anime Title That Should Be Truncated Because It's Too Long",
+                    titleEnglish: "An Even Longer English Title That Should Also Be Truncated",
+                    titleNative: "超長いタイトル",
+                    coverImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx188889-9mNMLHCXJmUw.png"),
+                    bannerImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/banner/178680-9HupCDo647QU.jpg"),
+                    mediaType: .anime
+                )
+            )
         }
         .padding()
     }

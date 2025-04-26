@@ -3,7 +3,11 @@ import Kingfisher
 
 import Observation
 
+import SwiftData
+
 struct MangaDetailView: View {
+    @Environment(\.modelContext) private var modelContext
+    @Query private var favorites: [FavoriteAnime]
     @State private var viewModel: MangaDetailViewModel
     
     init(mangaId: Int) {
@@ -117,6 +121,28 @@ struct MangaDetailView: View {
         }
         .task {
             await viewModel.loadMangaDetails()
+        }
+        .navigationTitle(viewModel.mediaDetails?.titleEnglish ?? viewModel.mediaDetails?.titleRomaji ?? "Manga Details")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            if let details = viewModel.mediaDetails {
+                let isFavorite = favorites.contains { $0.id == details.id }
+                Button {
+                    toggleFavorite(details: details)
+                } label: {
+                    Image(systemName: isFavorite ? "heart.fill" : "heart")
+                        .foregroundStyle(isFavorite ? .red : .primary)
+                }
+            }
+        }
+    }
+    
+    private func toggleFavorite(details: MediaDetails) {
+        if let existingFavorite = favorites.first(where: { $0.id == details.id }) {
+            modelContext.delete(existingFavorite)
+        } else {
+            let favorite = FavoriteAnime(from: details)
+            modelContext.insert(favorite)
         }
     }
 }

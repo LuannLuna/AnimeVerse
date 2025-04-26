@@ -24,7 +24,12 @@ struct FavoritesView: View {
                             ForEach(favorites, id: \.id) { anime in
                                 FavoriteAnimeCard(anime: anime)
                                     .onTapGesture {
-                                        router.navigate(to: .details(animeId: anime.id), using: .push)
+                                        switch anime.mediaType {
+                                        case .anime:
+                                            router.navigate(to: .details(animeId: anime.id), using: .push)
+                                        case .manga:
+                                            router.navigate(to: .mangaDetail(mangaId: anime.id), using: .push)
+                                        }
                                     }
                             }
                         }
