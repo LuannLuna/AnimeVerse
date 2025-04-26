@@ -1,40 +1,40 @@
 #import "../AnimeFragments.graphql"
 
 query FindMedia($search: String, $page: Int, $type: MediaType) {
-  Page(page: $page) {
-    pageInfo {
-      currentPage
-      total
-      hasNextPage
-    }
-    media(search: $search, type: $type) {
-      id
-      type
-      title { ...TitleFields }
-      description(asHtml: false)
-      startDate { ...DateFields }
-      endDate { ...DateFields }
-      episodes
-      duration
-      genres
-      averageScore
-      popularity
-      status
-      coverImage { ...CoverImageFields }
-      bannerImage
-      characters {
-        edges { ...CharacterEdgeFields }
-      }
-      recommendations {
-        nodes {
-            mediaRecommendation {
-                id
-                type
-                title { ...TitleFields }
-                coverImage { ...CoverImageFields }
+    Page(page: $page) {
+        pageInfo {
+            currentPage
+            total
+            hasNextPage
+        }
+        media(search: $search, type: $type) {
+            id
+            type
+            title { ...TitleFields }
+            description(asHtml: false)
+            startDate { ...DateFields }
+            endDate { ...DateFields }
+            episodes
+            duration
+            genres
+            averageScore
+            popularity
+            status
+            coverImage { ...CoverImageFields }
+            bannerImage
+            characters {
+                edges { ...CharacterEdgeFields }
+            }
+            recommendations {
+                nodes {
+                    mediaRecommendation {
+                        id
+                        type
+                        title { ...TitleFields }
+                        coverImage { ...CoverImageFields }
+                    }
+                }
             }
         }
     }
-    }
-  }
 }
