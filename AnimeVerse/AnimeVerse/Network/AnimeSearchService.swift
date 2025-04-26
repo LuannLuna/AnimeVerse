@@ -2,7 +2,7 @@ import AnilistAPI
 import Foundation
 
 protocol AnimeSearchServiceProtocol {
-    func searchAnimes(term: String, page: Int) async throws -> [AnimeSearchFullResult]
+    func searchAnimes(term: String, page: Int) async throws -> [SearchFullResult]
 }
 
 final class AnimeSearchService: AnimeSearchServiceProtocol {
@@ -17,20 +17,20 @@ final class AnimeSearchService: AnimeSearchServiceProtocol {
         self.cache = cache
     }
     
-    func searchAnimes(term: String, page: Int) async throws -> [AnimeSearchFullResult] {
+    func searchAnimes(term: String, page: Int) async throws -> [SearchFullResult] {
         let cacheKey = "search_\(term)_\(page)"
         
         // Try to get from cache first
-        if let cached: [AnimeSearchFullResult] = try? cache.object(forKey: cacheKey) {
+        if let cached: [SearchFullResult] = try? cache.object(forKey: cacheKey) {
             return cached
         }
         
         // If not in cache, fetch from network
         let query = FindAnimeQuery(search: .init(stringLiteral: term), page: .some(page))
         let response = try await network.fetch(query: query)
-        let results: [AnimeSearchFullResult] = response.data?.page?.media?.compactMap { media in
+        let results: [SearchFullResult] = response.data?.page?.media?.compactMap { media in
             if let media {
-                AnimeSearchFullResult(from: media)
+                SearchFullResult(from: media)
             } else {
                 nil
             }

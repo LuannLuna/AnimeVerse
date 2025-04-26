@@ -16,7 +16,7 @@ enum AppRoute: Hashable, Identifiable {
 
     // Other Routes
     case details(animeId: Int)
-    case searchDetail(anime: AnimeSearchFullResult)
+    case searchDetail(anime: SearchFullResult)
 }
 
 // MARK: - Navigation Types
@@ -108,7 +108,7 @@ struct MainApp: View {
                 AnimeDetailsView(animeId: animeId)
 
             case let .searchDetail(anime):
-                AnimeSearchResultDetailView(anime: anime)
+                MangaDetailView(anime: anime)
         }
     }
 }

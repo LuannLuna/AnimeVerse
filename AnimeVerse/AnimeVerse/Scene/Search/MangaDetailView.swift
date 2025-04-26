@@ -1,8 +1,8 @@
 import SwiftUI
 import Kingfisher
 
-struct AnimeSearchResultDetailView: View {
-    let anime: AnimeSearchFullResult
+struct MangaDetailView: View {
+    let anime: SearchFullResult
     
     var body: some View {
         ScrollView {
@@ -97,22 +97,25 @@ struct AnimeSearchResultDetailView: View {
 }
 
 #Preview {
-    AnimeSearchResultDetailView(anime: AnimeSearchFullResult(
-        id: 1,
-        titleRomaji: "Boruto",
-        titleEnglish: "Boruto: Naruto Next Generations",
-        titleNative: "BORUTO-ボルト-",
-        description: "A spin-off of Boruto: Naruto Next Generations focusing on Boruto and his team.",
-        startDate: DateComponents(year: 2017, month: 4, day: 1),
-        endDate: DateComponents(year: 2021, month: 4, day: 1),
-        episodes: 1,
-        duration: 24,
-        genres: ["Action", "Comedy"],
-        averageScore: 55,
-        popularity: 289,
-        status: "FINISHED",
-        coverImageURL: nil,
-        bannerImageURL: nil,
-        characters: []
-    ))
+    MangaDetailView(
+        anime: SearchFullResult(
+            id: 1,
+            type: .manga,
+            titleRomaji: "Boruto",
+            titleEnglish: "Boruto: Naruto Next Generations",
+            titleNative: "BORUTO-ボルト-",
+            description: "A spin-off of Boruto: Naruto Next Generations focusing on Boruto and his team.",
+            startDate: DateComponents(year: 2017, month: 4, day: 1),
+            endDate: DateComponents(year: 2021, month: 4, day: 1),
+            episodes: 1,
+            duration: 24,
+            genres: ["Action", "Comedy"],
+            averageScore: 55,
+            popularity: 289,
+            status: "FINISHED",
+            coverImageURL: nil,
+            bannerImageURL: nil,
+            characters: []
+        )
+    )
 }

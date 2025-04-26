@@ -15,11 +15,16 @@ struct AnimeSearchView: View {
                 } else {
                     ScrollView {
                         LazyVStack(spacing: 16) {
-                            ForEach(viewModel.animes) { anime in
+                            ForEach(viewModel.animes, id: \.id) { anime in
                                 AnimeSearchCard(anime: anime)
                                     .onTapGesture {
                                         isPresented = false
-                                        router.navigate(to: .searchDetail(anime: anime), using: .push)
+                                        switch anime.type {
+                                            case .manga:
+                                                router.navigate(to: .searchDetail(anime: anime), using: .push)
+                                            default:
+                                                router.navigate(to: .details(animeId: anime.id), using: .push)
+                                        }
                                     }
                                     .task {
                                         if anime.id == viewModel.animes.last?.id {
@@ -52,7 +57,7 @@ struct AnimeSearchView: View {
 }
 
 private struct AnimeSearchCard: View {
-    let anime: AnimeSearchFullResult
+    let anime: SearchFullResult
     
     var body: some View {
         HStack(spacing: 16) {
@@ -67,6 +72,17 @@ private struct AnimeSearchCard: View {
                 .clipShape(RoundedRectangle(cornerRadius: 8))
             
             VStack(alignment: .leading, spacing: 8) {
+                HStack(spacing: 8) {
+                    Text(anime.type == .anime ? "Anime" : (anime.type == .manga ? "Manga" : "Other"))
+                        .font(.caption2)
+                        .bold()
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 2)
+                        .background(anime.type == .anime ? Color.blue.opacity(0.15) : Color.green.opacity(0.15))
+                        .foregroundColor(anime.type == .anime ? .blue : .green)
+                        .clipShape(Capsule())
+                    Spacer()
+                }
                 Text(anime.titleEnglish ?? anime.titleRomaji)
                     .font(.headline)
                     .lineLimit(2)

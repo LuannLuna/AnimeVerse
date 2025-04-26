@@ -1,8 +1,9 @@
 import AnilistAPI
 import Foundation
 
-struct AnimeSearchFullResult: Identifiable, Codable, Hashable {
+struct SearchFullResult: Identifiable, Codable, Hashable {
     let id: Int
+    let type: MediaType
     let titleRomaji: String
     let titleEnglish: String?
     let titleNative: String?
@@ -18,6 +19,16 @@ struct AnimeSearchFullResult: Identifiable, Codable, Hashable {
     let coverImageURL: URL?
     let bannerImageURL: URL?
     let characters: [Character]
+
+    enum MediaType: String, Codable {
+        /// Japanese Anime
+        case anime = "ANIME"
+        /// Asian comic
+        case manga = "MANGA"
+
+        case unknown = "Unknown"
+
+      }
 
     struct Character: Identifiable, Codable, Hashable {
         let id: Int
@@ -35,10 +46,11 @@ struct AnimeSearchFullResult: Identifiable, Codable, Hashable {
     }
 }
 
-extension AnimeSearchFullResult {
+extension SearchFullResult {
     init?(from data: FindAnimeQuery.Data.Page.Medium) {
         guard let title = data.title, let romaji = title.romaji else { return nil }
         self.id = data.id
+        self.type =  MediaType(rawValue: data.type?.rawValue ?? "") ?? .unknown
         self.titleRomaji = romaji
         self.titleEnglish = title.english
         self.titleNative = title.native
