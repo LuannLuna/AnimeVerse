@@ -16,6 +16,7 @@ enum AppRoute: Hashable, Identifiable {
 
     // Other Routes
     case details(animeId: Int)
+    case searchDetail(anime: AnimeSearchFullResult)
 }
 
 // MARK: - Navigation Types
@@ -54,7 +55,6 @@ struct MainApp: View {
             }
             .tabItem { Label("Home", systemImage: "house") }
             .tag(AppRoute.home)
-
 
             NavigationStack(path: $router.favoriteNavigationPath) {
                 FavoritesView(router: router)
@@ -104,8 +104,11 @@ struct MainApp: View {
             case .profile:
                 Text("Profile")
 
-            case .details(let animeId):
+            case let .details(animeId):
                 AnimeDetailsView(animeId: animeId)
+
+            case let .searchDetail(anime):
+                AnimeSearchResultDetailView(anime: anime)
         }
     }
 }

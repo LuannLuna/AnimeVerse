@@ -1,20 +1,15 @@
 query AllAnimes($page: Int, $perPage: Int) {
     Page(page: $page, perPage: $perPage) {
-    media(type: ANIME, sort: START_DATE_DESC) {
-      id
-      title {
-        romaji
-        english
-        native
-      }
-      startDate {
-        year
-        month
-        day
-      }
-      coverImage {
-        large
-      }
+        pageInfo {
+            currentPage
+            total
+            hasNextPage
+        }
+        media(type: ANIME, sort: START_DATE_DESC) {
+            id
+            title { romaji english native }
+            startDate { year month day }
+            coverImage { large }
+        }
     }
-  }
 }

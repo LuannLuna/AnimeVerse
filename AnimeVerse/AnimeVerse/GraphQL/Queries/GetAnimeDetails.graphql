@@ -1,61 +1,32 @@
 query GetAnimeDetails($id: Int!) {
   Media(id: $id, type: ANIME) {
     id
-    title {
-      romaji
-      english
-      native
-    }
+    type
+    title { romaji english native }
     description(asHtml: true)
-    startDate {
-      year
-      month
-      day
-    }
-    endDate {
-      year
-      month
-      day
-    }
+    startDate { year month day }
+    endDate { year month day }
     episodes
     duration
     genres
     averageScore
     popularity
     status
-    coverImage {
-      extraLarge
-      large
-      medium
-      color
-    }
+    coverImage { extraLarge large medium color }
     bannerImage
-
-    characters(page: 1, perPage: 20, sort: [ROLE, FAVOURITES]) {
+    characters {
       edges {
         role
         node {
           id
-          name {
-            full
-            userPreferred
-          }
-          image {
-            medium
-            large
-          }
+          name { full userPreferred }
+          image { medium large }
         }
         voiceActors {
           id
-          name {
-            full
-            userPreferred
-          }
+          name { full userPreferred }
           languageV2
-          image {
-            medium
-            large
-          }
+          image { medium large }
         }
       }
     }

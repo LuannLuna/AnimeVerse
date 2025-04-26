@@ -19,7 +19,7 @@ struct AnimeSearchView: View {
                                 AnimeSearchCard(anime: anime)
                                     .onTapGesture {
                                         isPresented = false
-                                        router.navigate(to: .details(animeId: anime.id), using: .push)
+                                        router.navigate(to: .searchDetail(anime: anime), using: .push)
                                     }
                                     .task {
                                         if anime.id == viewModel.animes.last?.id {
@@ -52,7 +52,7 @@ struct AnimeSearchView: View {
 }
 
 private struct AnimeSearchCard: View {
-    let anime: AnimeSearchResult
+    let anime: AnimeSearchFullResult
     
     var body: some View {
         HStack(spacing: 16) {

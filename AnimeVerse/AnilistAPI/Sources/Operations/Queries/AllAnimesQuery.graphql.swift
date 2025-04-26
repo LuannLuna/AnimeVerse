@@ -7,7 +7,7 @@ public class AllAnimesQuery: GraphQLQuery {
   public static let operationName: String = "AllAnimes"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
     definition: .init(
-      #"query AllAnimes($page: Int, $perPage: Int) { Page(page: $page, perPage: $perPage) { __typename media(type: ANIME, sort: START_DATE_DESC) { __typename id title { __typename romaji english native } startDate { __typename year month day } coverImage { __typename large } } } }"#
+      #"query AllAnimes($page: Int, $perPage: Int) { Page(page: $page, perPage: $perPage) { __typename pageInfo { __typename currentPage total hasNextPage } media(type: ANIME, sort: START_DATE_DESC) { __typename id title { __typename romaji english native } startDate { __typename year month day } coverImage { __typename large } } } }"#
     ))
 
   public var page: GraphQLNullable<Int>
@@ -50,13 +50,39 @@ public class AllAnimesQuery: GraphQLQuery {
       public static var __parentType: any ApolloAPI.ParentType { AnilistAPI.Objects.Page }
       public static var __selections: [ApolloAPI.Selection] { [
         .field("__typename", String.self),
+        .field("pageInfo", PageInfo?.self),
         .field("media", [Medium?]?.self, arguments: [
           "type": "ANIME",
           "sort": "START_DATE_DESC"
         ]),
       ] }
 
+      /// The pagination information
+      public var pageInfo: PageInfo? { __data["pageInfo"] }
       public var media: [Medium?]? { __data["media"] }
+
+      /// Page.PageInfo
+      ///
+      /// Parent Type: `PageInfo`
+      public struct PageInfo: AnilistAPI.SelectionSet {
+        public let __data: DataDict
+        public init(_dataDict: DataDict) { __data = _dataDict }
+
+        public static var __parentType: any ApolloAPI.ParentType { AnilistAPI.Objects.PageInfo }
+        public static var __selections: [ApolloAPI.Selection] { [
+          .field("__typename", String.self),
+          .field("currentPage", Int?.self),
+          .field("total", Int?.self),
+          .field("hasNextPage", Bool?.self),
+        ] }
+
+        /// The current page
+        public var currentPage: Int? { __data["currentPage"] }
+        /// The total number of items. Note: This value is not guaranteed to be accurate, do not rely on this for logic
+        public var total: Int? { __data["total"] }
+        /// If there is another page
+        public var hasNextPage: Bool? { __data["hasNextPage"] }
+      }
 
       /// Page.Medium
       ///
