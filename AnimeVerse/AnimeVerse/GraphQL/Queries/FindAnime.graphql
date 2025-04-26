@@ -1,3 +1,5 @@
+#import "../AnimeFragments.graphql"
+
 query FindAnime($search: String, $page: Int) {
   Page(page: $page) {
     pageInfo {
@@ -8,32 +10,21 @@ query FindAnime($search: String, $page: Int) {
     media(search: $search) {
       id
       type
-      title { romaji english native }
+      title { ...TitleFields }
       description(asHtml: false)
-      startDate { year month day }
-      endDate { year month day }
+      startDate { ...DateFields }
+      endDate { ...DateFields }
       episodes
       duration
       genres
       averageScore
       popularity
       status
-      coverImage { extraLarge large medium color }
+      coverImage { ...CoverImageFields }
       bannerImage
       characters {
         edges {
-          role
-          node {
-            id
-            name { full userPreferred }
-            image { medium large }
-          }
-          voiceActors {
-            id
-            name { full userPreferred }
-            languageV2
-            image { medium large }
-          }
+          ...CharacterEdgeFields
         }
       }
     }

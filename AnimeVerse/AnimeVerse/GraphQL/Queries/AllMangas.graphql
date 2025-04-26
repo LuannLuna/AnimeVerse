@@ -1,11 +1,11 @@
-query AllAnimes($page: Int, $perPage: Int) {
+query AllMangas($page: Int, $perPage: Int) {
     Page(page: $page, perPage: $perPage) {
         pageInfo {
             currentPage
             total
             hasNextPage
         }
-        media(type: ANIME, sort: START_DATE_DESC) {
+        media(type: MANGA, sort: START_DATE_DESC) {
             id
             title { romaji english native }
             startDate { year month day }
@@ -13,4 +13,3 @@ query AllAnimes($page: Int, $perPage: Int) {
         }
     }
 }
-

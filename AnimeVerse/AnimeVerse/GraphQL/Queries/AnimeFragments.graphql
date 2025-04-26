@@ -1,0 +1,49 @@
+fragment TitleFields on MediaTitle {
+  romaji
+  english
+  native
+}
+
+fragment CoverImageFields on MediaCoverImage {
+  extraLarge
+  large
+  medium
+  color
+}
+
+fragment DateFields on FuzzyDate {
+  year
+  month
+  day
+}
+
+fragment CharacterFields on Character {
+  id
+  name {
+    full
+    userPreferred
+  }
+  image {
+    medium
+    large
+  }
+}
+
+fragment CharacterEdgeFields on CharacterEdge {
+  role
+  node {
+    ...CharacterFields
+  }
+  voiceActors {
+    id
+    name {
+      full
+      userPreferred
+    }
+    languageV2
+    image {
+      medium
+      large
+    }
+  }
+}

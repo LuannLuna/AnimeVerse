@@ -79,7 +79,7 @@ extension SearchFullResult {
                 imageURL: node.image?.large?.asURL ?? node.image?.medium?.asURL,
                 role: role.rawValue,
                 voiceActors: edge.voiceActors?.compactMap { va in
-                    guard let va = va else { return nil }
+                    guard let va else { return nil }
                     return VoiceActor(
                         id: va.id,
                         name: va.name?.full ?? va.name?.userPreferred ?? "",

@@ -7,7 +7,8 @@ public class FindAnimeQuery: GraphQLQuery {
   public static let operationName: String = "FindAnime"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
     definition: .init(
-      #"query FindAnime($search: String, $page: Int) { Page(page: $page) { __typename pageInfo { __typename currentPage total hasNextPage } media(search: $search) { __typename id type title { __typename romaji english native } description(asHtml: false) startDate { __typename year month day } endDate { __typename year month day } episodes duration genres averageScore popularity status coverImage { __typename extraLarge large medium color } bannerImage characters { __typename edges { __typename role node { __typename id name { __typename full userPreferred } image { __typename medium large } } voiceActors { __typename id name { __typename full userPreferred } languageV2 image { __typename medium large } } } } } } }"#
+      #"query FindAnime($search: String, $page: Int) { Page(page: $page) { __typename pageInfo { __typename currentPage total hasNextPage } media(search: $search) { __typename id type title { __typename ...TitleFields } description(asHtml: false) startDate { __typename ...DateFields } endDate { __typename ...DateFields } episodes duration genres averageScore popularity status coverImage { __typename ...CoverImageFields } bannerImage characters { __typename edges { __typename ...CharacterEdgeFields } } } } }"#,
+      fragments: [CharacterEdgeFields.self, CharacterFields.self, CoverImageFields.self, DateFields.self, TitleFields.self]
     ))
 
   public var search: GraphQLNullable<String>
@@ -146,9 +147,7 @@ public class FindAnimeQuery: GraphQLQuery {
           public static var __parentType: any ApolloAPI.ParentType { AnilistAPI.Objects.MediaTitle }
           public static var __selections: [ApolloAPI.Selection] { [
             .field("__typename", String.self),
-            .field("romaji", String?.self),
-            .field("english", String?.self),
-            .field("native", String?.self),
+            .fragment(TitleFields.self),
           ] }
 
           /// The romanization of the native language title
@@ -157,6 +156,13 @@ public class FindAnimeQuery: GraphQLQuery {
           public var english: String? { __data["english"] }
           /// Official title in it's native language
           public var native: String? { __data["native"] }
+
+          public struct Fragments: FragmentContainer {
+            public let __data: DataDict
+            public init(_dataDict: DataDict) { __data = _dataDict }
+
+            public var titleFields: TitleFields { _toFragment() }
+          }
         }
 
         /// Page.Medium.StartDate
@@ -169,9 +175,7 @@ public class FindAnimeQuery: GraphQLQuery {
           public static var __parentType: any ApolloAPI.ParentType { AnilistAPI.Objects.FuzzyDate }
           public static var __selections: [ApolloAPI.Selection] { [
             .field("__typename", String.self),
-            .field("year", Int?.self),
-            .field("month", Int?.self),
-            .field("day", Int?.self),
+            .fragment(DateFields.self),
           ] }
 
           /// Numeric Year (2017)
@@ -180,6 +184,13 @@ public class FindAnimeQuery: GraphQLQuery {
           public var month: Int? { __data["month"] }
           /// Numeric Day (24)
           public var day: Int? { __data["day"] }
+
+          public struct Fragments: FragmentContainer {
+            public let __data: DataDict
+            public init(_dataDict: DataDict) { __data = _dataDict }
+
+            public var dateFields: DateFields { _toFragment() }
+          }
         }
 
         /// Page.Medium.EndDate
@@ -192,9 +203,7 @@ public class FindAnimeQuery: GraphQLQuery {
           public static var __parentType: any ApolloAPI.ParentType { AnilistAPI.Objects.FuzzyDate }
           public static var __selections: [ApolloAPI.Selection] { [
             .field("__typename", String.self),
-            .field("year", Int?.self),
-            .field("month", Int?.self),
-            .field("day", Int?.self),
+            .fragment(DateFields.self),
           ] }
 
           /// Numeric Year (2017)
@@ -203,6 +212,13 @@ public class FindAnimeQuery: GraphQLQuery {
           public var month: Int? { __data["month"] }
           /// Numeric Day (24)
           public var day: Int? { __data["day"] }
+
+          public struct Fragments: FragmentContainer {
+            public let __data: DataDict
+            public init(_dataDict: DataDict) { __data = _dataDict }
+
+            public var dateFields: DateFields { _toFragment() }
+          }
         }
 
         /// Page.Medium.CoverImage
@@ -215,10 +231,7 @@ public class FindAnimeQuery: GraphQLQuery {
           public static var __parentType: any ApolloAPI.ParentType { AnilistAPI.Objects.MediaCoverImage }
           public static var __selections: [ApolloAPI.Selection] { [
             .field("__typename", String.self),
-            .field("extraLarge", String?.self),
-            .field("large", String?.self),
-            .field("medium", String?.self),
-            .field("color", String?.self),
+            .fragment(CoverImageFields.self),
           ] }
 
           /// The cover image url of the media at its largest size. If this size isn't available, large will be provided instead.
@@ -229,6 +242,13 @@ public class FindAnimeQuery: GraphQLQuery {
           public var medium: String? { __data["medium"] }
           /// Average #hex color of cover image
           public var color: String? { __data["color"] }
+
+          public struct Fragments: FragmentContainer {
+            public let __data: DataDict
+            public init(_dataDict: DataDict) { __data = _dataDict }
+
+            public var coverImageFields: CoverImageFields { _toFragment() }
+          }
         }
 
         /// Page.Medium.Characters
@@ -256,9 +276,7 @@ public class FindAnimeQuery: GraphQLQuery {
             public static var __parentType: any ApolloAPI.ParentType { AnilistAPI.Objects.CharacterEdge }
             public static var __selections: [ApolloAPI.Selection] { [
               .field("__typename", String.self),
-              .field("role", GraphQLEnum<AnilistAPI.CharacterRole>?.self),
-              .field("node", Node?.self),
-              .field("voiceActors", [VoiceActor?]?.self),
+              .fragment(CharacterEdgeFields.self),
             ] }
 
             /// The characters role in the media
@@ -267,134 +285,16 @@ public class FindAnimeQuery: GraphQLQuery {
             /// The voice actors of the character
             public var voiceActors: [VoiceActor?]? { __data["voiceActors"] }
 
-            /// Page.Medium.Characters.Edge.Node
-            ///
-            /// Parent Type: `Character`
-            public struct Node: AnilistAPI.SelectionSet {
+            public struct Fragments: FragmentContainer {
               public let __data: DataDict
               public init(_dataDict: DataDict) { __data = _dataDict }
 
-              public static var __parentType: any ApolloAPI.ParentType { AnilistAPI.Objects.Character }
-              public static var __selections: [ApolloAPI.Selection] { [
-                .field("__typename", String.self),
-                .field("id", Int.self),
-                .field("name", Name?.self),
-                .field("image", Image?.self),
-              ] }
-
-              /// The id of the character
-              public var id: Int { __data["id"] }
-              /// The names of the character
-              public var name: Name? { __data["name"] }
-              /// Character images
-              public var image: Image? { __data["image"] }
-
-              /// Page.Medium.Characters.Edge.Node.Name
-              ///
-              /// Parent Type: `CharacterName`
-              public struct Name: AnilistAPI.SelectionSet {
-                public let __data: DataDict
-                public init(_dataDict: DataDict) { __data = _dataDict }
-
-                public static var __parentType: any ApolloAPI.ParentType { AnilistAPI.Objects.CharacterName }
-                public static var __selections: [ApolloAPI.Selection] { [
-                  .field("__typename", String.self),
-                  .field("full", String?.self),
-                  .field("userPreferred", String?.self),
-                ] }
-
-                /// The character's first and last name
-                public var full: String? { __data["full"] }
-                /// The currently authenticated users preferred name language. Default romaji for non-authenticated
-                public var userPreferred: String? { __data["userPreferred"] }
-              }
-
-              /// Page.Medium.Characters.Edge.Node.Image
-              ///
-              /// Parent Type: `CharacterImage`
-              public struct Image: AnilistAPI.SelectionSet {
-                public let __data: DataDict
-                public init(_dataDict: DataDict) { __data = _dataDict }
-
-                public static var __parentType: any ApolloAPI.ParentType { AnilistAPI.Objects.CharacterImage }
-                public static var __selections: [ApolloAPI.Selection] { [
-                  .field("__typename", String.self),
-                  .field("medium", String?.self),
-                  .field("large", String?.self),
-                ] }
-
-                /// The character's image of media at medium size
-                public var medium: String? { __data["medium"] }
-                /// The character's image of media at its largest size
-                public var large: String? { __data["large"] }
-              }
+              public var characterEdgeFields: CharacterEdgeFields { _toFragment() }
             }
 
-            /// Page.Medium.Characters.Edge.VoiceActor
-            ///
-            /// Parent Type: `Staff`
-            public struct VoiceActor: AnilistAPI.SelectionSet {
-              public let __data: DataDict
-              public init(_dataDict: DataDict) { __data = _dataDict }
+            public typealias Node = CharacterEdgeFields.Node
 
-              public static var __parentType: any ApolloAPI.ParentType { AnilistAPI.Objects.Staff }
-              public static var __selections: [ApolloAPI.Selection] { [
-                .field("__typename", String.self),
-                .field("id", Int.self),
-                .field("name", Name?.self),
-                .field("languageV2", String?.self),
-                .field("image", Image?.self),
-              ] }
-
-              /// The id of the staff member
-              public var id: Int { __data["id"] }
-              /// The names of the staff member
-              public var name: Name? { __data["name"] }
-              /// The primary language of the staff member. Current values: Japanese, English, Korean, Italian, Spanish, Portuguese, French, German, Hebrew, Hungarian, Chinese, Arabic, Filipino, Catalan, Finnish, Turkish, Dutch, Swedish, Thai, Tagalog, Malaysian, Indonesian, Vietnamese, Nepali, Hindi, Urdu
-              public var languageV2: String? { __data["languageV2"] }
-              /// The staff images
-              public var image: Image? { __data["image"] }
-
-              /// Page.Medium.Characters.Edge.VoiceActor.Name
-              ///
-              /// Parent Type: `StaffName`
-              public struct Name: AnilistAPI.SelectionSet {
-                public let __data: DataDict
-                public init(_dataDict: DataDict) { __data = _dataDict }
-
-                public static var __parentType: any ApolloAPI.ParentType { AnilistAPI.Objects.StaffName }
-                public static var __selections: [ApolloAPI.Selection] { [
-                  .field("__typename", String.self),
-                  .field("full", String?.self),
-                  .field("userPreferred", String?.self),
-                ] }
-
-                /// The person's first and last name
-                public var full: String? { __data["full"] }
-                /// The currently authenticated users preferred name language. Default romaji for non-authenticated
-                public var userPreferred: String? { __data["userPreferred"] }
-              }
-
-              /// Page.Medium.Characters.Edge.VoiceActor.Image
-              ///
-              /// Parent Type: `StaffImage`
-              public struct Image: AnilistAPI.SelectionSet {
-                public let __data: DataDict
-                public init(_dataDict: DataDict) { __data = _dataDict }
-
-                public static var __parentType: any ApolloAPI.ParentType { AnilistAPI.Objects.StaffImage }
-                public static var __selections: [ApolloAPI.Selection] { [
-                  .field("__typename", String.self),
-                  .field("medium", String?.self),
-                  .field("large", String?.self),
-                ] }
-
-                /// The person's image of media at medium size
-                public var medium: String? { __data["medium"] }
-                /// The person's image of media at its largest size
-                public var large: String? { __data["large"] }
-              }
-            }
+            public typealias VoiceActor = CharacterEdgeFields.VoiceActor
           }
         }
       }
