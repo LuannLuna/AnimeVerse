@@ -7,7 +7,7 @@ public class AllMangasQuery: GraphQLQuery {
   public static let operationName: String = "AllMangas"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
     definition: .init(
-      #"query AllMangas($page: Int, $perPage: Int) { Page(page: $page, perPage: $perPage) { __typename pageInfo { __typename currentPage total hasNextPage } media(type: MANGA, sort: START_DATE_DESC) { __typename id title { __typename romaji english native } description(asHtml: false) startDate { __typename year month day } coverImage { __typename large } } } }"#
+      #"query AllMangas($page: Int, $perPage: Int) { Page(page: $page, perPage: $perPage) { __typename pageInfo { __typename currentPage total hasNextPage } media(type: MANGA, sort: SCORE_DESC) { __typename id title { __typename romaji english native } description(asHtml: false) startDate { __typename year month day } coverImage { __typename large } } } }"#
     ))
 
   public var page: GraphQLNullable<Int>
@@ -53,7 +53,7 @@ public class AllMangasQuery: GraphQLQuery {
         .field("pageInfo", PageInfo?.self),
         .field("media", [Medium?]?.self, arguments: [
           "type": "MANGA",
-          "sort": "START_DATE_DESC"
+          "sort": "SCORE_DESC"
         ]),
       ] }
 

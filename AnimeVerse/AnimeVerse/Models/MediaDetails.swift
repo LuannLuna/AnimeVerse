@@ -121,7 +121,9 @@ extension MediaDetails {
                 titleRomaji: recommendation.title?.romaji ?? "",
                 titleEnglish: recommendation.title?.english,
                 titleNative: recommendation.title?.native ?? "",
-                coverImageURL: (recommendation.coverImage?.extraLarge ?? recommendation.coverImage?.large ?? recommendation.coverImage?.medium)?.asURL
+                coverImageURL: (
+                    recommendation.coverImage?.extraLarge ?? recommendation.coverImage?.large ?? recommendation.coverImage?.medium
+                )?.asURL
             )
             recommendations.append(media)
         }
@@ -170,6 +172,21 @@ extension MediaDetails {
                 } ?? []
             )
         } ?? []
-        self.recommendations = []
+        var recommendations: [Recommendations] = []
+        data.recommendations?.nodes?.forEach { node in
+            guard let recommendation = node?.mediaRecommendation else { return }
+            let media = Recommendations(
+                id: recommendation.id,
+                type: .init(rawValue: recommendation.type?.rawValue ?? "") ?? .unknown,
+                titleRomaji: recommendation.title?.romaji ?? "",
+                titleEnglish: recommendation.title?.english,
+                titleNative: recommendation.title?.native ?? "",
+                coverImageURL: (
+                    recommendation.coverImage?.extraLarge ?? recommendation.coverImage?.large ?? recommendation.coverImage?.medium
+                )?.asURL
+            )
+            recommendations.append(media)
+        }
+        self.recommendations = recommendations
     }
 }

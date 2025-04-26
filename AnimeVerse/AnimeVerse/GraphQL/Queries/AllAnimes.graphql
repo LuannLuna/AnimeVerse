@@ -5,7 +5,7 @@ query AllAnimes($page: Int, $perPage: Int) {
             total
             hasNextPage
         }
-        media(type: ANIME, sort: START_DATE_DESC) {
+        media(type: ANIME, sort: SCORE_DESC) {
             id
             title { romaji english native }
             startDate { year month day }

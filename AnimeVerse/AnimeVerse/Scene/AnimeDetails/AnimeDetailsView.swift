@@ -57,11 +57,12 @@ struct AnimeDetailsView: View {
                             .fade(duration: 0.25)
                             .cancelOnDisappear(true)
                             .resizable()
-                            .aspectRatio(contentMode: .fill)
+                            .scaledToFill()
                             .clipped()
                     }
                     .frame(height: 200)
                     .clipped()
+                    .ignoresSafeArea()
                 }
 
                 // Main Content
@@ -131,6 +132,11 @@ struct AnimeDetailsView: View {
                             }
                         }
                     }
+
+                    // Recommendation Section
+                    if !details.recommendations.isEmpty {
+                        RecommendationsSection(recommendations: details.recommendations)
+                    }
                 }
                 .padding()
             }
@@ -192,6 +198,8 @@ struct FlowLayout: Layout {
     }
 }
 
+#if DEBUG
 #Preview {
     AnimeDetailsView(animeId: 178680)
 }
+#endif

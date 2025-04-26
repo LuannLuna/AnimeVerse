@@ -7,22 +7,25 @@ struct FavoriteAnimeCard: View {
     var body: some View {
         VStack(alignment: .leading) {
             if let imageURL = anime.bannerImageURL ?? anime.coverImageURL {
-                KFImage(imageURL)
-                    .placeholder {
-                        Rectangle()
-                            .fill(Color.gray.opacity(0.3))
-                    }
-                    .fade(duration: 0.25)
-                    .cancelOnDisappear(true)
-                    .resizable()
-                    .aspectRatio(3, contentMode: .fit)
-                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                GeometryReader { _ in
+                    KFImage(imageURL)
+                        .placeholder {
+                            Rectangle()
+                                .fill(Color.gray.opacity(0.3))
+                        }
+                        .fade(duration: 0.25)
+                        .cancelOnDisappear(true)
+                        .resizable()
+                        .scaledToFill()
+                }
+                .frame(height: 150)
+                .clipShape(RoundedRectangle(cornerRadius: 8))
 
             }
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(anime.titleRomaji)
-                    .font(.caption)
+                    .font(.title3)
                     .bold()
                     .lineLimit(2)
                 
