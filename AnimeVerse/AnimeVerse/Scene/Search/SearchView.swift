@@ -3,10 +3,16 @@ import Kingfisher
 
 struct SearchView: View {
     @Bindable var router: Router
-    @State private var viewModel = SearchViewModel()
+    @State private var viewModel: SearchViewModel
     @State private var searchTask: Task<Void, Never>?
     @Binding var isPresented: Bool
-    
+
+    init(router: Router, mediaKind: MediaKind, isPresented: Binding<Bool>) {
+        self.router = router
+        _viewModel = State(initialValue: SearchViewModel(mediaKind: mediaKind))
+        _isPresented = isPresented
+    }
+
     var body: some View {
         NavigationView {
             Group {
@@ -116,5 +122,5 @@ private struct AnimeSearchCard: View {
 }
 
 #Preview("Search View") {
-    SearchView(router: Router(), isPresented: .constant(true))
+    SearchView(router: Router(), mediaKind: .anime, isPresented: .constant(true))
 }

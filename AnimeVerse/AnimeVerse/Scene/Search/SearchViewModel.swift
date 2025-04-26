@@ -2,7 +2,7 @@ import Foundation
 
 @Observable
 final class SearchViewModel {
-    private let service: MediaSearchServiceProtocol
+    private let service: SearchServiceProtocol
     private var currentPage = 1
     private var canLoadMore = true
     
@@ -10,9 +10,11 @@ final class SearchViewModel {
     var medias: [MediaDetails] = []
     var isLoading = false
     var error: Error?
-    
-    init(service: MediaSearchServiceProtocol = SearchService()) {
+    let mediaKind: MediaKind
+
+    init(service: SearchServiceProtocol = SearchService(), mediaKind: MediaKind) {
         self.service = service
+        self.mediaKind = mediaKind
     }
     
     func search() async {
@@ -27,7 +29,7 @@ final class SearchViewModel {
         canLoadMore = true
         
         do {
-            medias = try await service.searchMedia(term: searchText, page: currentPage, kind: .anime)
+            medias = try await service.searchMedia(term: searchText, page: currentPage, kind: mediaKind)
             canLoadMore = !medias.isEmpty
         } catch {
             self.error = error
@@ -43,7 +45,7 @@ final class SearchViewModel {
         currentPage += 1
         
         do {
-            let nextPage = try await service.searchMedia(term: searchText, page: currentPage, kind: .anime)
+            let nextPage = try await service.searchMedia(term: searchText, page: currentPage, kind: mediaKind)
             canLoadMore = !nextPage.isEmpty
             medias.append(contentsOf: nextPage)
         } catch {

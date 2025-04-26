@@ -1,9 +1,12 @@
 import SwiftUI
 import Kingfisher
 
+import SwiftUI
+
 struct MangaView: View {
     @Bindable var router: Router
     @State private var viewModel = MangaViewModel()
+    @State private var isSearchPresented = false
     
     var body: some View {
         NavigationView {
@@ -55,6 +58,18 @@ struct MangaView: View {
                 }
             }
             .navigationTitle("Mangas")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        isSearchPresented = true
+                    } label: {
+                        Image(systemName: "magnifyingglass")
+                    }
+                }
+            }
+        }
+        .sheet(isPresented: $isSearchPresented) {
+            SearchView(router: router, mediaKind: .manga, isPresented: $isSearchPresented)
         }
         .task {
             await viewModel.loadMangas()

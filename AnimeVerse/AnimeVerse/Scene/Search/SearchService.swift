@@ -1,11 +1,11 @@
 import AnilistAPI
 import Foundation
 
-protocol MediaSearchServiceProtocol {
+protocol SearchServiceProtocol {
     func searchMedia(term: String, page: Int, kind: MediaKind) async throws -> [MediaDetails]
 }
 
-final class SearchService: MediaSearchServiceProtocol {
+final class SearchService: SearchServiceProtocol {
     private let network: Network
     private let cache: CacheServiceProtocol
     

@@ -54,7 +54,7 @@ struct AnimesView: View {
             .sheet(
                 isPresented: $isSearchPresented,
                 content: {
-                    SearchView(router: router, isPresented: $isSearchPresented)
+                    SearchView(router: router, mediaKind: .anime, isPresented: $isSearchPresented)
                 }
             )
             .navigationTitle("Animes")
