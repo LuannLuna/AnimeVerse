@@ -2,7 +2,7 @@ import SwiftUI
 import Kingfisher
 
 struct CharacterCard: View {
-    let character: AnimeDetails.Character
+    let character: MediaDetails.Character
     
     var body: some View {
         VStack(alignment: .leading) {

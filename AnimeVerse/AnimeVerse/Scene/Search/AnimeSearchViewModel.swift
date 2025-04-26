@@ -7,7 +7,7 @@ final class AnimeSearchViewModel {
     private var canLoadMore = true
     
     var searchText = ""
-    var animes: [SearchFullResult] = []
+    var animes: [MediaDetails] = []
     var isLoading = false
     var error: Error?
     

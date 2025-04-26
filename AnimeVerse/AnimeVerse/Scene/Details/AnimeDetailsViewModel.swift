@@ -2,14 +2,14 @@ import Foundation
 
 @Observable
 final class AnimeDetailsViewModel {
-    var animeDetails: AnimeDetails?
+    var mediaDetails: MediaDetails?
     var isLoading: Bool = false
     var errorMessage: String?
     
-    private let service: AnimeDetailsServiceProtocol
+    private let service: MediaDetailsServiceProtocol
     private let animeId: Int
     
-    init(animeId: Int, service: AnimeDetailsServiceProtocol = AnimeDetailsService()) {
+    init(animeId: Int, service: MediaDetailsServiceProtocol = MediaDetailsService()) {
         self.animeId = animeId
         self.service = service
     }
@@ -20,10 +20,10 @@ final class AnimeDetailsViewModel {
         errorMessage = nil
         
         do {
-            if let animeResult = try await service.fetchAnimeDetails(id: animeId) {
-                animeDetails = animeResult
+            if let mediaResult = try await service.fetchMediaDetails(id: animeId, kind: .anime) {
+                mediaDetails = mediaResult
             }
-            if animeDetails == nil {
+            if mediaDetails == nil {
                 errorMessage = "Failed to load anime details"
             }
         } catch {

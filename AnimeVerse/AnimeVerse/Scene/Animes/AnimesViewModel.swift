@@ -2,16 +2,11 @@ import Foundation
 import Combine
 
 @Observable
-class HomeViewModel {
+class AnimesViewModel {
     var animes: [Anime] = []
     var isLoading: Bool = false
     var isFetchingNextPage: Bool = false
     var errorMessage: String? = nil
-    var searchText: String = "" {
-        didSet {
-//            filterAnimes()
-        }
-    }
     private var currentPage: Int = 1
     private var perPage: Int = 100
 

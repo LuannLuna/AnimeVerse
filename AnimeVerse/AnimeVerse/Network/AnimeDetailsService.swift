@@ -1,23 +1,35 @@
 import Foundation
 import AnilistAPI
 
-protocol AnimeDetailsServiceProtocol {
-    func fetchAnimeDetails(id: Int) async throws -> AnimeDetails?
+import Apollo
+
+enum MediaKind {
+    case anime
+    case manga
+
+    var anilistType: MediaType {
+        switch self {
+        case .anime: return .anime
+        case .manga: return .manga
+        }
+    }
 }
 
-final class AnimeDetailsService: AnimeDetailsServiceProtocol {
+protocol MediaDetailsServiceProtocol {
+    func fetchMediaDetails(id: Int, kind: MediaKind) async throws -> MediaDetails?
+}
+
+final class MediaDetailsService: MediaDetailsServiceProtocol {
     private let network: Network
     
     init(network: Network = Network()) {
         self.network = network
     }
     
-    func fetchAnimeDetails(id: Int) async throws -> AnimeDetails? {
-        let query = GetAnimeDetailsQuery(id: id)
-        
+    func fetchMediaDetails(id: Int, kind: MediaKind) async throws -> MediaDetails? {
+        let query = GetMediaDetailsQuery(id: id, type: .init(kind.anilistType))
         let result = try await network.fetch(query: query)
         guard let media = result.data?.media else { return nil }
-        
-        return AnimeDetails(from: media)
+        return MediaDetails(from: media)
     }
 }

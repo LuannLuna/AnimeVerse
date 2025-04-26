@@ -10,7 +10,7 @@ import SwiftUI
 /// Main router class that handles navigation
 @Observable
 class Router {
-    var currentTab: AppRoute = .home
+    var currentTab: AppRoute = .animes
     var homeNavigationPath = NavigationPath()
     var favoriteNavigationPath = NavigationPath()
     var mangaNavigationPath = NavigationPath()
@@ -21,13 +21,13 @@ class Router {
     func navigate(to route: AppRoute, using navigationType: NavigationType) {
         switch navigationType {
         case .tabBar:
-            if [.home, .favorites, .manga].contains(route) {
+            if [.animes, .favorites, .manga].contains(route) {
                 currentTab = route
             }
 
         case .push:
                 switch currentTab {
-                    case .home:
+                    case .animes:
                         homeNavigationPath.append(route)
 
                     case .favorites:
@@ -65,7 +65,7 @@ class Router {
     // Go back one step in the navigation hierarchy
     func goBack() {
         switch currentTab {
-            case .home:
+            case .animes:
                 if !homeNavigationPath.isEmpty {
                     homeNavigationPath.removeLast()
                 }
@@ -87,7 +87,7 @@ class Router {
 
     func popToRoot() {
         switch currentTab {
-            case .home:
+            case .animes:
                 homeNavigationPath = NavigationPath()
 
             case .favorites:

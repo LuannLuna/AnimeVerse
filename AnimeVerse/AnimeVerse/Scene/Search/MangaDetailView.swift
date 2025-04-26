@@ -2,7 +2,7 @@ import SwiftUI
 import Kingfisher
 
 struct MangaDetailView: View {
-    let anime: SearchFullResult
+    let anime: MediaDetails
     
     var body: some View {
         ScrollView {
@@ -98,7 +98,7 @@ struct MangaDetailView: View {
 
 #Preview {
     MangaDetailView(
-        anime: SearchFullResult(
+        anime: MediaDetails(
             id: 1,
             type: .manga,
             titleRomaji: "Boruto",

@@ -18,10 +18,10 @@ struct AnimeDetailsView: View {
                     await viewModel.loadAnimeDetails()
                 }
         }
-        .navigationTitle(viewModel.animeDetails?.titleEnglish ?? viewModel.animeDetails?.titleRomaji ?? "Anime Details")
+        .navigationTitle(viewModel.mediaDetails?.titleEnglish ?? viewModel.mediaDetails?.titleRomaji ?? "Anime Details")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            if let details = viewModel.animeDetails {
+            if let details = viewModel.mediaDetails {
                 let isFavorite = favorites.contains { $0.id == details.id }
                 Button {
                     toggleFavorite(details: details)
@@ -33,7 +33,7 @@ struct AnimeDetailsView: View {
         }
     }
     
-    private func toggleFavorite(details: AnimeDetails) {
+    private func toggleFavorite(details: MediaDetails) {
         if let existingFavorite = favorites.first(where: { $0.id == details.id }) {
             modelContext.delete(existingFavorite)
         } else {
@@ -44,7 +44,7 @@ struct AnimeDetailsView: View {
     
     @ViewBuilder
     private var content: some View {
-        if let details = viewModel.animeDetails {
+        if let details = viewModel.mediaDetails {
             VStack(alignment: .leading, spacing: 16) {
                 // Banner Image
                 if let bannerURL = details.bannerImageURL ?? details.coverImageURL {

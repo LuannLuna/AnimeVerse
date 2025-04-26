@@ -15,19 +15,19 @@ struct AnimeSearchView: View {
                 } else {
                     ScrollView {
                         LazyVStack(spacing: 16) {
-                            ForEach(viewModel.animes, id: \.id) { anime in
-                                AnimeSearchCard(anime: anime)
+                            ForEach(viewModel.animes, id: \.id) { media in
+                                AnimeSearchCard(anime: media)
                                     .onTapGesture {
                                         isPresented = false
-                                        switch anime.type {
+                                        switch media.type {
                                             case .manga:
-                                                router.navigate(to: .searchDetail(anime: anime), using: .push)
+                                                router.navigate(to: .searchDetail(media: media), using: .push)
                                             default:
-                                                router.navigate(to: .details(animeId: anime.id), using: .push)
+                                                router.navigate(to: .details(animeId: media.id), using: .push)
                                         }
                                     }
                                     .task {
-                                        if anime.id == viewModel.animes.last?.id {
+                                        if media.id == viewModel.animes.last?.id {
                                             await viewModel.loadMore()
                                         }
                                     }
@@ -57,7 +57,7 @@ struct AnimeSearchView: View {
 }
 
 private struct AnimeSearchCard: View {
-    let anime: SearchFullResult
+    let anime: MediaDetails
     
     var body: some View {
         HStack(spacing: 16) {

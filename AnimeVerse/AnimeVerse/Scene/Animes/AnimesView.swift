@@ -1,8 +1,8 @@
 import SwiftUI
 
-struct HomeView: View {
+struct AnimesView: View {
     @Bindable var router: Router
-    @State private var viewModel = HomeViewModel()
+    @State private var viewModel = AnimesViewModel()
     @State private var isSearchPresented = false
 
     var body: some View {
@@ -66,5 +66,5 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView(router: .init())
+    AnimesView(router: .init())
 }

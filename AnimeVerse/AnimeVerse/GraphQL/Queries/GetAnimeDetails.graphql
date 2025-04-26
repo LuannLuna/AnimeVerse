@@ -1,7 +1,7 @@
 #import "../AnimeFragments.graphql"
 
-query GetAnimeDetails($id: Int!) {
-  Media(id: $id, type: ANIME) {
+query GetMediaDetails($id: Int!, $type: MediaType!) {
+  Media(id: $id, type: $type) {
     id
     type
     title { ...TitleFields }

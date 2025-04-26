@@ -20,7 +20,7 @@ final class FavoriteAnime {
         self.addedDate = Date()
     }
     
-    convenience init(from details: AnimeDetails) {
+    convenience init(from details: MediaDetails) {
         self.init(
             id: details.id,
             titleRomaji: details.titleRomaji,

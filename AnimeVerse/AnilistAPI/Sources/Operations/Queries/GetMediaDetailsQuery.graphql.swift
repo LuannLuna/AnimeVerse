@@ -3,21 +3,29 @@
 
 @_exported import ApolloAPI
 
-public class GetAnimeDetailsQuery: GraphQLQuery {
-  public static let operationName: String = "GetAnimeDetails"
+public class GetMediaDetailsQuery: GraphQLQuery {
+  public static let operationName: String = "GetMediaDetails"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
     definition: .init(
-      #"query GetAnimeDetails($id: Int!) { Media(id: $id, type: ANIME) { __typename id type title { __typename ...TitleFields } description(asHtml: true) startDate { __typename ...DateFields } endDate { __typename ...DateFields } episodes duration genres averageScore popularity status coverImage { __typename ...CoverImageFields } bannerImage characters { __typename edges { __typename ...CharacterEdgeFields } } } }"#,
+      #"query GetMediaDetails($id: Int!, $type: MediaType!) { Media(id: $id, type: $type) { __typename id type title { __typename ...TitleFields } description(asHtml: true) startDate { __typename ...DateFields } endDate { __typename ...DateFields } episodes duration genres averageScore popularity status coverImage { __typename ...CoverImageFields } bannerImage characters { __typename edges { __typename ...CharacterEdgeFields } } } }"#,
       fragments: [CharacterEdgeFields.self, CharacterFields.self, CoverImageFields.self, DateFields.self, TitleFields.self]
     ))
 
   public var id: Int
+  public var type: GraphQLEnum<MediaType>
 
-  public init(id: Int) {
+  public init(
+    id: Int,
+    type: GraphQLEnum<MediaType>
+  ) {
     self.id = id
+    self.type = type
   }
 
-  public var __variables: Variables? { ["id": id] }
+  public var __variables: Variables? { [
+    "id": id,
+    "type": type
+  ] }
 
   public struct Data: AnilistAPI.SelectionSet {
     public let __data: DataDict
@@ -27,7 +35,7 @@ public class GetAnimeDetailsQuery: GraphQLQuery {
     public static var __selections: [ApolloAPI.Selection] { [
       .field("Media", Media?.self, arguments: [
         "id": .variable("id"),
-        "type": "ANIME"
+        "type": .variable("type")
       ]),
     ] }
 

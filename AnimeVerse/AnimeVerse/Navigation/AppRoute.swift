@@ -10,13 +10,13 @@ enum AppRoute: Hashable, Identifiable {
     }
 
     // Tab Bar Routes
-    case home
+    case animes
     case favorites
     case manga
 
     // Other Routes
     case details(animeId: Int)
-    case searchDetail(anime: SearchFullResult)
+    case searchDetail(media: MediaDetails)
 }
 
 // MARK: - Navigation Types
@@ -48,22 +48,13 @@ struct MainApp: View {
     var body: some View {
         TabView(selection: $router.currentTab) {
             NavigationStack(path: $router.homeNavigationPath) {
-                HomeView(router: router)
+                AnimesView(router: router)
                     .navigationDestination(for: AppRoute.self) { route in
                         destinationView(for: route)
                     }
             }
-            .tabItem { Label("Home", systemImage: "house") }
-            .tag(AppRoute.home)
-
-            NavigationStack(path: $router.favoriteNavigationPath) {
-                FavoritesView(router: router)
-                    .navigationDestination(for: AppRoute.self) { route in
-                        destinationView(for: route)
-                    }
-            }
-            .tabItem { Label("Favorites", systemImage: "heart") }
-            .tag(AppRoute.favorites)
+            .tabItem { Label("Animes", systemImage: "house") }
+            .tag(AppRoute.animes)
             
             NavigationStack(path: $router.mangaNavigationPath) {
                 MangaView(router: router)
@@ -73,6 +64,15 @@ struct MainApp: View {
             }
             .tabItem { Label("Manga", systemImage: "book") }
             .tag(AppRoute.manga)
+
+            NavigationStack(path: $router.favoriteNavigationPath) {
+                FavoritesView(router: router)
+                    .navigationDestination(for: AppRoute.self) { route in
+                        destinationView(for: route)
+                    }
+            }
+            .tabItem { Label("Favorites", systemImage: "heart") }
+            .tag(AppRoute.favorites)
         }
         .environment(router)
         .sheet(item: $router.presentedSheet) { route in
@@ -95,8 +95,8 @@ struct MainApp: View {
     @ViewBuilder
     private func navigationContent(for route: AppRoute) -> some View {
         switch route {
-            case .home:
-                HomeView(router: router)
+            case .animes:
+                AnimesView(router: router)
 
             case .favorites:
                 FavoritesView(router: router)

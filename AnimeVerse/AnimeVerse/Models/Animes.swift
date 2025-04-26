@@ -6,7 +6,7 @@ struct Anime: Identifiable, Equatable {
     let titleRomaji: String
     let titleEnglish: String?
     let titleNative: String
-    let startDate: DateComponents
+    let startDate: DateComponents?
     let coverImageURL: URL?
 }
 
@@ -34,7 +34,7 @@ extension Anime {
         self.coverImageURL = coverImageURL
     }
     
-    init(from details: AnimeDetails) {
+    init(from details: MediaDetails) {
         self.id = details.id
         self.titleRomaji = details.titleRomaji
         self.titleEnglish = details.titleEnglish
