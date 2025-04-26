@@ -4,6 +4,7 @@ struct AnimesView: View {
     @Bindable var router: Router
     @State private var viewModel = AnimesViewModel()
     @State private var isSearchPresented = false
+    @State private var selectedSort: AnimeSort = .scoreDesc
 
     var body: some View {
         NavigationView {
@@ -43,6 +44,15 @@ struct AnimesView: View {
                 }
             }
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Menu {
+                        Button("Trending Now") { selectedSort = .trendingDesc; Task { await viewModel.changeSort(selectedSort) } }
+                        Button("Most Popular") { selectedSort = .popularityDesc; Task { await viewModel.changeSort(selectedSort) } }
+                        Button("Top Rated") { selectedSort = .scoreDesc; Task { await viewModel.changeSort(selectedSort) } }
+                    } label: {
+                        Label(selectedSort.displayName, systemImage: "arrow.up.arrow.down")
+                    }
+                }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         isSearchPresented = true

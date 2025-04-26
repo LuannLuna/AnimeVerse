@@ -1,5 +1,20 @@
 import Foundation
 
+enum MangaSort: String, CaseIterable, Identifiable {
+    case trendingDesc = "TRENDING_DESC"
+    case popularityDesc = "POPULARITY_DESC"
+    case scoreDesc = "SCORE_DESC"
+
+    var id: String { rawValue }
+    var displayName: String {
+        switch self {
+        case .trendingDesc: return "Trending Now"
+        case .popularityDesc: return "Most Popular"
+        case .scoreDesc: return "Top Rated"
+        }
+    }
+}
+
 @Observable
 final class MangaViewModel {
     private let service: MangaServiceProtocol
@@ -9,18 +24,19 @@ final class MangaViewModel {
     private var currentPage = 1
     private let perPage = 20
     private var canLoadMore = true
+    private var sort: MangaSort = .scoreDesc
     
     init(service: MangaServiceProtocol = MangaService()) {
         self.service = service
     }
     
-    @MainActor
-    func loadMangas() async {
+    func loadMangas(sort: MangaSort? = nil) async {
         guard !isLoading, canLoadMore else { return }
         isLoading = true
         error = nil
+        if let sort = sort { self.sort = sort }
         do {
-            let newMangas = try await service.fetchMangas(page: currentPage, perPage: perPage)
+            let newMangas = try await service.fetchMangas(page: currentPage, perPage: perPage, sort: self.sort)
             if newMangas.isEmpty {
                 canLoadMore = false
             } else {
@@ -31,6 +47,13 @@ final class MangaViewModel {
             self.error = error
         }
         isLoading = false
+    }
+    
+    func changeSort(_ newSort: MangaSort) async {
+        currentPage = 1
+        canLoadMore = true
+        mangas = []
+        await loadMangas(sort: newSort)
     }
     
     func refresh() async {

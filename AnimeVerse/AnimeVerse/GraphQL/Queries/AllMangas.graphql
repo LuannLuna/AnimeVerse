@@ -1,11 +1,11 @@
-query AllMangas($page: Int, $perPage: Int) {
+query AllMangas($page: Int, $perPage: Int, $sort: [MediaSort]) {
     Page(page: $page, perPage: $perPage) {
         pageInfo {
             currentPage
             total
             hasNextPage
         }
-        media(type: MANGA, sort: SCORE_DESC) {
+        media(type: MANGA, sort: $sort) {
             id
             title { romaji english native }
             description(asHtml: false)
