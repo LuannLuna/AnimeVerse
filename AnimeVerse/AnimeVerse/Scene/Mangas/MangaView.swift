@@ -7,7 +7,7 @@ struct MangaView: View {
     @Bindable var router: Router
     @State private var viewModel = MangaViewModel()
     @State private var isSearchPresented = false
-    @State private var selectedSort: MangaSort = .scoreDesc
+    @State private var selectedSort: MediaSort = .scoreDesc
     
     var body: some View {
         NavigationView {

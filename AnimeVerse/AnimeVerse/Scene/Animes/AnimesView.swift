@@ -4,7 +4,7 @@ struct AnimesView: View {
     @Bindable var router: Router
     @State private var viewModel = AnimesViewModel()
     @State private var isSearchPresented = false
-    @State private var selectedSort: AnimeSort = .scoreDesc
+    @State private var selectedSort: MediaSort = .scoreDesc
 
     var body: some View {
         NavigationView {

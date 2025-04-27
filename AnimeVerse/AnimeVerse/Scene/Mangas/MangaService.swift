@@ -2,7 +2,7 @@ import Foundation
 import AnilistAPI
 
 protocol MangaServiceProtocol {
-    func fetchMangas(page: Int, perPage: Int, sort: MangaSort) async throws -> [Manga]
+    func fetchMangas(page: Int, perPage: Int, sort: MediaSort) async throws -> [Manga]
 }
 
 final class MangaService: MangaServiceProtocol {
@@ -12,7 +12,7 @@ final class MangaService: MangaServiceProtocol {
         self.network = network
     }
     
-    func fetchMangas(page: Int, perPage: Int, sort: MangaSort = .scoreDesc) async throws -> [Manga] {
+    func fetchMangas(page: Int, perPage: Int, sort: MediaSort = .scoreDesc) async throws -> [Manga] {
         let query = AllMangasQuery(
             page: .init(integerLiteral: page),
             perPage: .init(integerLiteral: perPage),

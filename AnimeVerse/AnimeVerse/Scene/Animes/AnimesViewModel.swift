@@ -1,21 +1,6 @@
 import Foundation
 import Combine
 
-enum AnimeSort: String, CaseIterable, Identifiable {
-    case trendingDesc = "TRENDING_DESC"
-    case popularityDesc = "POPULARITY_DESC"
-    case scoreDesc = "SCORE_DESC"
-
-    var id: String { rawValue }
-    var displayName: String {
-        switch self {
-        case .trendingDesc: return "Trending Now"
-        case .popularityDesc: return "Most Popular"
-        case .scoreDesc: return "Top Rated"
-        }
-    }
-}
-
 @Observable
 class AnimesViewModel {
     var animes: [Anime] = []
@@ -24,11 +9,11 @@ class AnimesViewModel {
     var errorMessage: String? = nil
     private var currentPage: Int = 1
     private var perPage: Int = 100
-    private var sort: AnimeSort = .scoreDesc
+    private var sort: MediaSort = .scoreDesc
 
     private let service = AnimeService()
 
-    func loadAnimes(sort: AnimeSort? = nil) async {
+    func loadAnimes(sort: MediaSort? = nil) async {
         defer { isLoading = false }
         isLoading = true
         errorMessage = nil
@@ -40,7 +25,7 @@ class AnimesViewModel {
         }
     }
 
-    func changeSort(_ newSort: AnimeSort) async {
+    func changeSort(_ newSort: MediaSort) async {
         currentPage = 1
         animes = []
         await loadAnimes(sort: newSort)

@@ -9,7 +9,7 @@ import AnilistAPI
 import Foundation
 
 protocol AnimeServiceProtocol {
-    func fetchAnimes(page: Int, perPage: Int, sort: AnimeSort) async throws -> [Anime]
+    func fetchAnimes(page: Int, perPage: Int, sort: MediaSort) async throws -> [Anime]
 }
 
 final class AnimeService: AnimeServiceProtocol {
@@ -19,7 +19,7 @@ final class AnimeService: AnimeServiceProtocol {
         self.network = network
     }
 
-    func fetchAnimes(page: Int, perPage: Int, sort: AnimeSort = .scoreDesc) async throws -> [Anime] {
+    func fetchAnimes(page: Int, perPage: Int, sort: MediaSort = .scoreDesc) async throws -> [Anime] {
         let query = AllAnimesQuery(
             page: .init(integerLiteral: page),
             perPage: .init(integerLiteral: perPage),
