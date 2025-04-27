@@ -72,11 +72,6 @@ extension URL {
         return components.url
     }
     
-    /// Returns a URL with the specified path component appended
-    func appendingPathComponent(_ path: String, isDirectory: Bool = false) -> URL {
-        appendingPathComponent(path, isDirectory: isDirectory)
-    }
-    
     /// Returns a URL with the last path component removed
     var deletingLastPathComponent: URL {
         deletingLastPathComponent()
