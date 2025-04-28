@@ -21,7 +21,8 @@ struct AnimeVerseApp: App {
 
     var body: some Scene {
         WindowGroup {
-            MainApp()
+//            MainApp()
+            LoginView()
         }
         .modelContainer(sharedModelContainer)
     }

@@ -11,6 +11,7 @@
 		A451BBF42DBAAF0500F80F34 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = A451BBF32DBAAF0500F80F34 /* Kingfisher */; };
 		A47916A62DAD9E490013098F /* AnilistAPI in Frameworks */ = {isa = PBXBuildFile; productRef = A47916A52DAD9E490013098F /* AnilistAPI */; };
 		A4C77BD22DBFB22500FC1994 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = A4C77BD12DBFB22500FC1994 /* FirebaseAnalytics */; };
+		A4C77BDE2DBFC2A100FC1994 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A4C77BDD2DBFC2A100FC1994 /* FirebaseAuth */; };
 		A4EFA2E52DA99ACB0018E4DE /* ApolloAPI in Frameworks */ = {isa = PBXBuildFile; productRef = A4EFA2E42DA99ACB0018E4DE /* ApolloAPI */; };
 /* End PBXBuildFile section */
 
@@ -97,6 +98,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A451BBF42DBAAF0500F80F34 /* Kingfisher in Frameworks */,
+				A4C77BDE2DBFC2A100FC1994 /* FirebaseAuth in Frameworks */,
 				A47916A62DAD9E490013098F /* AnilistAPI in Frameworks */,
 				A4EFA2E52DA99ACB0018E4DE /* ApolloAPI in Frameworks */,
 				A4C77BD22DBFB22500FC1994 /* FirebaseAnalytics in Frameworks */,
@@ -177,6 +179,7 @@
 				A47916A52DAD9E490013098F /* AnilistAPI */,
 				A451BBF32DBAAF0500F80F34 /* Kingfisher */,
 				A4C77BD12DBFB22500FC1994 /* FirebaseAnalytics */,
+				A4C77BDD2DBFC2A100FC1994 /* FirebaseAuth */,
 			);
 			productName = AnimeVerse;
 			productReference = A416E4962DA953E100558AEE /* AnimeVerse.app */;
@@ -724,6 +727,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A4C77BD02DBFB22500FC1994 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalytics;
+		};
+		A4C77BDD2DBFC2A100FC1994 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A4C77BD02DBFB22500FC1994 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
 		};
 		A4EFA2E42DA99ACB0018E4DE /* ApolloAPI */ = {
 			isa = XCSwiftPackageProductDependency;
