@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct LoginView: View {
+    @EnvironmentObject var userSession: UserSession
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var errorMessage: String?
@@ -88,8 +89,7 @@ struct LoginView: View {
                     isLoading = false
                     switch result {
                     case .success:
-                        // TODO: Navigate to main app or update user session
-                        break
+                        userSession.login()
                     case .failure(let error):
                         errorMessage = error.localizedDescription
                     }

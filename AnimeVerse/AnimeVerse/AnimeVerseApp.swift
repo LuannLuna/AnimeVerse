@@ -19,10 +19,12 @@ struct AnimeVerseApp: App {
         }
     }()
 
+    @StateObject private var userSession = UserSession()
+
     var body: some Scene {
         WindowGroup {
-//            MainApp()
-            LoginView()
+            RootView()
+                .environmentObject(userSession)
         }
         .modelContainer(sharedModelContainer)
     }

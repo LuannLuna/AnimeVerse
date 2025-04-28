@@ -14,18 +14,19 @@ class Router {
     var homeNavigationPath = NavigationPath()
     var favoriteNavigationPath = NavigationPath()
     var mangaNavigationPath = NavigationPath()
+    var profileNavigationPath = NavigationPath()
     var presentedSheet: AppRoute?
     var presentedFullScreenCover: AppRoute?
 
     // Navigate to a specified route with the given presentation type
     func navigate(to route: AppRoute, using navigationType: NavigationType) {
         switch navigationType {
-        case .tabBar:
-            if [.animes, .favorites, .manga].contains(route) {
-                currentTab = route
-            }
+            case .tabBar:
+                if [.animes, .favorites, .manga, .profile].contains(route) {
+                    currentTab = route
+                }
 
-        case .push:
+            case .push:
                 switch currentTab {
                     case .animes:
                         homeNavigationPath.append(route)
@@ -36,29 +37,32 @@ class Router {
                     case .manga:
                         mangaNavigationPath.append(route)
 
+                    case .profile:
+                        profileNavigationPath.append(route)
+
                     default:
                         break
                 }
 
-        case .present(let style):
-            presentSheet(route: route, style: style)
+            case .present(let style):
+                presentSheet(route: route, style: style)
 
-        case .sheet:
-            presentedSheet = route
+            case .sheet:
+                presentedSheet = route
 
-        case .fullScreenCover:
-            presentedFullScreenCover = route
+            case .fullScreenCover:
+                presentedFullScreenCover = route
         }
     }
 
     // Present a sheet with the specified style
     private func presentSheet(route: AppRoute, style: NavigationType.PresentationStyle) {
         switch style {
-        case .automatic, .pageSheet, .formSheet:
-            presentedSheet = route
+            case .automatic, .pageSheet, .formSheet:
+                presentedSheet = route
 
-        case .fullScreen, .overFullScreen:
-            presentedFullScreenCover = route
+            case .fullScreen, .overFullScreen:
+                presentedFullScreenCover = route
         }
     }
 
@@ -80,6 +84,11 @@ class Router {
                     mangaNavigationPath.removeLast()
                 }
 
+            case .profile:
+                if !profileNavigationPath.isEmpty {
+                    profileNavigationPath.removeLast()
+                }
+
             default:
                 break
         }
@@ -95,6 +104,10 @@ class Router {
 
             case .manga:
                 mangaNavigationPath = NavigationPath()
+
+            case .profile:
+                profileNavigationPath = NavigationPath()
+
             default:
                 break
         }
