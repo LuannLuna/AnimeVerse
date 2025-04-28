@@ -6,12 +6,14 @@ import Observation
 import SwiftData
 
 struct MangaDetailView: View {
+    @Bindable var router: Router
     @Environment(\.modelContext) private var modelContext
     @Query private var favorites: [FavoriteAnime]
     @State private var viewModel: MangaDetailViewModel
 
-    init(mangaId: Int) {
+    init(mangaId: Int, router: Router) {
         _viewModel = State(initialValue: MangaDetailViewModel(mangaId: mangaId))
+        self.router = router
     }
 
     var body: some View {
@@ -113,7 +115,9 @@ struct MangaDetailView: View {
                             }
 
                             if !manga.recommendations.isEmpty {
-                                RecommendationsSection(recommendations: manga.recommendations)
+                                RecommendationsSection(recommendations: manga.recommendations, onSelect: { rec in
+                                    router.navigate(to: .mangaDetail(mangaId: rec.id), using: .push)
+                                })
                             }
                         }
                         .padding()
@@ -156,5 +160,5 @@ struct MangaDetailView: View {
 }
 
 #Preview {
-    MangaDetailView(mangaId: 1)
+    MangaDetailView(mangaId: 1, router: Router())
 }

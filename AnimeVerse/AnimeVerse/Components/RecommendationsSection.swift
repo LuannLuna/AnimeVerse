@@ -3,6 +3,7 @@ import Kingfisher
 
 struct RecommendationsSection: View {
     let recommendations: [MediaDetails.Recommendations]
+    let onSelect: (MediaDetails.Recommendations) -> Void
 
     var body: some View {
         if !recommendations.isEmpty {
@@ -25,6 +26,9 @@ struct RecommendationsSection: View {
                                 Text(rec.titleEnglish ?? rec.titleRomaji)
                                     .font(.caption)
                                     .lineLimit(2)
+                            }
+                            .onTapGesture {
+                                onSelect(rec)
                             }
                             .frame(width: 100)
                         }
@@ -55,7 +59,7 @@ struct RecommendationsSection: View {
                 titleNative: "ワンピース",
                 coverImageURL: nil
             )
-        ]
+        ], onSelect: { _ in }
     )
     .padding()
 }

@@ -3,12 +3,14 @@ import SwiftData
 import SwiftUI
 
 struct AnimeDetailsView: View {
+    @Bindable var router: Router
     @Environment(\.modelContext) private var modelContext
     @Query private var favorites: [FavoriteAnime]
     @State private var viewModel: AnimeDetailsViewModel
 
-    init(animeId: Int) {
+    init(animeId: Int, router: Router) {
         _viewModel = State(initialValue: AnimeDetailsViewModel(animeId: animeId))
+        self.router = router
     }
 
     var body: some View {
@@ -135,7 +137,9 @@ struct AnimeDetailsView: View {
 
                     // Recommendation Section
                     if !details.recommendations.isEmpty {
-                        RecommendationsSection(recommendations: details.recommendations)
+                        RecommendationsSection(recommendations: details.recommendations, onSelect: { rec in
+                            router.navigate(to: .details(animeId: rec.id), using: .push)
+                        })
                     }
                 }
                 .padding()
@@ -200,6 +204,6 @@ struct FlowLayout: Layout {
 
 #if DEBUG
 #Preview {
-    AnimeDetailsView(animeId: 178680)
+    AnimeDetailsView(animeId: 178680, router: Router())
 }
 #endif

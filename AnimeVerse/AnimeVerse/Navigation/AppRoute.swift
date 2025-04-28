@@ -103,10 +103,10 @@ struct MainApp: View {
                 MangaView(router: router)
 
             case let .details(animeId):
-                AnimeDetailsView(animeId: animeId)
+                AnimeDetailsView(animeId: animeId, router: router)
 
             case let .mangaDetail(mangaId):
-                MangaDetailView(mangaId: mangaId)
+                MangaDetailView(mangaId: mangaId, router: router)
         }
     }
 }

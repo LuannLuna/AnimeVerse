@@ -50,9 +50,11 @@ struct MediaDetails: Identifiable, Equatable, Codable, Hashable {
         case manga = "MANGA"
         case unknown = "Unknown"
     }
+
 }
 
 extension MediaDetails {
+
     init?(from data: GetMediaDetailsQuery.Data.Media) {
         guard let title = data.title,
               let romaji = title.romaji,
