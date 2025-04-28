@@ -5,22 +5,11 @@ class FirebaseAuthService {
     static let shared = FirebaseAuthService()
     private init() {}
 
-    func signUp(email: String, password: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        Auth.auth().createUser(withEmail: email, password: password) { _, error in
-            if let error = error {
-                completion(.failure(error))
-            } else {
-                completion(.success(()))
-            }
-        }
+    func signUp(email: String, password: String) async throws {
+        _ = try await Auth.auth().createUser(withEmail: email, password: password)
     }
 
-    func signIn(email: String, password: String, completion: @escaping (Result<String, Error>) -> Void) async throws {
-        do {
-            let data = try await Auth.auth().signIn(withEmail: email, password: password)
-            completion(.success("Deu bom!"))
-        } catch {
-            completion(.failure(error))
-        }
+    func signIn(email: String, password: String) async throws {
+        _ = try await Auth.auth().signIn(withEmail: email, password: password)
     }
 }

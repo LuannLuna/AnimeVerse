@@ -43,7 +43,11 @@ struct SignUpView: View {
                         .multilineTextAlignment(.center)
                 }
 
-                Button(action: signUpWithEmail) {
+                Button {
+                    Task {
+                        await signUpWithEmail()
+                    }
+                } label: {
                     if isLoading {
                         ProgressView()
                     } else {
@@ -66,23 +70,20 @@ struct SignUpView: View {
         }
     }
 
-    private func signUpWithEmail() {
+    private func signUpWithEmail() async {
         guard password == confirmPassword else {
             errorMessage = "Passwords do not match."
             return
         }
         isLoading = true
         errorMessage = nil
-        FirebaseAuthService.shared.signUp(email: email, password: password) { result in
-            DispatchQueue.main.async {
-                isLoading = false
-                switch result {
-                case .success:
-                    dismiss()
-                case .failure(let error):
-                    errorMessage = error.localizedDescription
-                }
-            }
+        do {
+            try await FirebaseAuthService.shared.signUp(email: email, password: password)
+            isLoading = false
+            dismiss()
+        } catch {
+            isLoading = false
+            errorMessage = error.localizedDescription
         }
     }
 }

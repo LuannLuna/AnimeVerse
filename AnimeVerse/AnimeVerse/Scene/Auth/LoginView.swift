@@ -84,19 +84,12 @@ struct LoginView: View {
         isLoading = true
         errorMessage = nil
         do {
-            try await FirebaseAuthService.shared.signIn(email: email, password: password) { result in
-                DispatchQueue.main.async {
-                    isLoading = false
-                    switch result {
-                    case .success:
-                        userSession.login()
-                    case .failure(let error):
-                        errorMessage = error.localizedDescription
-                    }
-                }
-            }
+            try await FirebaseAuthService.shared.signIn(email: email, password: password)
+            isLoading = false
+            userSession.login()
         } catch {
-            print(error.localizedDescription)
+            isLoading = false
+            errorMessage = error.localizedDescription
         }
     }
 
