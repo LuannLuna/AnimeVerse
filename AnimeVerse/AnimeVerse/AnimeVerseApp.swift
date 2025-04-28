@@ -1,8 +1,11 @@
+import FirebaseCore
 import SwiftUI
 import SwiftData
 
 @main
 struct AnimeVerseApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             FavoriteAnime.self
@@ -22,4 +25,12 @@ struct AnimeVerseApp: App {
         }
         .modelContainer(sharedModelContainer)
     }
+}
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+  func application(_ application: UIApplication,
+                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+    FirebaseApp.configure()
+    return true
+  }
 }

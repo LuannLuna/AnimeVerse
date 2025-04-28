@@ -10,6 +10,7 @@
 		A416E4C42DA988DB00558AEE /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = A416E4C32DA988DB00558AEE /* Apollo */; };
 		A451BBF42DBAAF0500F80F34 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = A451BBF32DBAAF0500F80F34 /* Kingfisher */; };
 		A47916A62DAD9E490013098F /* AnilistAPI in Frameworks */ = {isa = PBXBuildFile; productRef = A47916A52DAD9E490013098F /* AnilistAPI */; };
+		A4C77BD22DBFB22500FC1994 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = A4C77BD12DBFB22500FC1994 /* FirebaseAnalytics */; };
 		A4EFA2E52DA99ACB0018E4DE /* ApolloAPI in Frameworks */ = {isa = PBXBuildFile; productRef = A4EFA2E42DA99ACB0018E4DE /* ApolloAPI */; };
 /* End PBXBuildFile section */
 
@@ -98,6 +99,7 @@
 				A451BBF42DBAAF0500F80F34 /* Kingfisher in Frameworks */,
 				A47916A62DAD9E490013098F /* AnilistAPI in Frameworks */,
 				A4EFA2E52DA99ACB0018E4DE /* ApolloAPI in Frameworks */,
+				A4C77BD22DBFB22500FC1994 /* FirebaseAnalytics in Frameworks */,
 				A416E4C42DA988DB00558AEE /* Apollo in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -174,6 +176,7 @@
 				A4EFA2E42DA99ACB0018E4DE /* ApolloAPI */,
 				A47916A52DAD9E490013098F /* AnilistAPI */,
 				A451BBF32DBAAF0500F80F34 /* Kingfisher */,
+				A4C77BD12DBFB22500FC1994 /* FirebaseAnalytics */,
 			);
 			productName = AnimeVerse;
 			productReference = A416E4962DA953E100558AEE /* AnimeVerse.app */;
@@ -261,6 +264,7 @@
 				A416E4C22DA988DB00558AEE /* XCRemoteSwiftPackageReference "apollo-ios" */,
 				A47916A42DAD9E490013098F /* XCLocalSwiftPackageReference "AnilistAPI" */,
 				A451BBF22DBAAF0500F80F34 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				A4C77BD02DBFB22500FC1994 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A416E4972DA953E100558AEE /* Products */;
@@ -691,6 +695,14 @@
 				minimumVersion = 8.3.2;
 			};
 		};
+		A4C77BD02DBFB22500FC1994 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.12.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -707,6 +719,11 @@
 		A47916A52DAD9E490013098F /* AnilistAPI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AnilistAPI;
+		};
+		A4C77BD12DBFB22500FC1994 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A4C77BD02DBFB22500FC1994 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
 		};
 		A4EFA2E42DA99ACB0018E4DE /* ApolloAPI */ = {
 			isa = XCSwiftPackageProductDependency;
