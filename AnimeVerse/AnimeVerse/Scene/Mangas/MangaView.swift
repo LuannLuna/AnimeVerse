@@ -2,7 +2,7 @@ import SwiftUI
 import Kingfisher
 
 struct MangaView: View {
-    @Bindable var router: Router
+    @Environment(Router.self) private var router: Router
     @State private var viewModel = MangaViewModel()
     @State private var isSearchPresented = false
     @State private var selectedSort: MediaSort = .scoreDesc
@@ -125,4 +125,9 @@ struct MangaCardView: View {
         .background(Color(.secondarySystemBackground))
         .clipShape(RoundedRectangle(cornerRadius: 12))
     }
+}
+
+#Preview {
+    MangaView()
+        .environment(Router())
 }

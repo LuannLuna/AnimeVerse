@@ -3,14 +3,13 @@ import SwiftData
 import SwiftUI
 
 struct AnimeDetailsView: View {
-    @Bindable var router: Router
+    @Environment(Router.self) private var router: Router
     @Environment(\.modelContext) private var modelContext
     @Query private var favorites: [FavoriteAnime]
     @State private var viewModel: AnimeDetailsViewModel
 
-    init(animeId: Int, router: Router) {
+    init(animeId: Int) {
         _viewModel = State(initialValue: AnimeDetailsViewModel(animeId: animeId))
-        self.router = router
     }
 
     var body: some View {
@@ -204,6 +203,7 @@ struct FlowLayout: Layout {
 
 #if DEBUG
 #Preview {
-    AnimeDetailsView(animeId: 178680, router: Router())
+    AnimeDetailsView(animeId: 178680)
+        .environment(Router())
 }
 #endif

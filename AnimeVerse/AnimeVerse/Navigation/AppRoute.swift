@@ -46,7 +46,7 @@ struct MainApp: View {
     var body: some View {
         TabView(selection: $router.currentTab) {
             NavigationStack(path: $router.homeNavigationPath) {
-                AnimesView(router: router)
+                AnimesView()
                     .navigationDestination(for: AppRoute.self) { route in
                         destinationView(for: route)
                     }
@@ -55,7 +55,7 @@ struct MainApp: View {
             .tag(AppRoute.animes)
 
             NavigationStack(path: $router.mangaNavigationPath) {
-                MangaView(router: router)
+                MangaView()
                     .navigationDestination(for: AppRoute.self) { route in
                         destinationView(for: route)
                     }
@@ -64,7 +64,7 @@ struct MainApp: View {
             .tag(AppRoute.manga)
 
             NavigationStack(path: $router.favoriteNavigationPath) {
-                FavoritesView(router: router)
+                FavoritesView()
                     .navigationDestination(for: AppRoute.self) { route in
                         destinationView(for: route)
                     }
@@ -94,19 +94,19 @@ struct MainApp: View {
     private func navigationContent(for route: AppRoute) -> some View {
         switch route {
             case .animes:
-                AnimesView(router: router)
+                AnimesView()
 
             case .favorites:
-                FavoritesView(router: router)
+                FavoritesView()
 
             case .manga:
-                MangaView(router: router)
+                MangaView()
 
             case let .details(animeId):
-                AnimeDetailsView(animeId: animeId, router: router)
+                AnimeDetailsView(animeId: animeId)
 
             case let .mangaDetail(mangaId):
-                MangaDetailView(mangaId: mangaId, router: router)
+                MangaDetailView(mangaId: mangaId)
         }
     }
 }

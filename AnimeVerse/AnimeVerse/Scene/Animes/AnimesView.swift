@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct AnimesView: View {
-    @Bindable var router: Router
+    @Environment(Router.self) private var router: Router
     @State private var viewModel = AnimesViewModel()
     @State private var isSearchPresented = false
     @State private var selectedSort: MediaSort = .scoreDesc
@@ -76,5 +76,6 @@ struct AnimesView: View {
 }
 
 #Preview {
-    AnimesView(router: .init())
+    AnimesView()
+        .environment(Router())
 }

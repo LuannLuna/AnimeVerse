@@ -3,7 +3,7 @@ import SwiftData
 import Kingfisher
 
 struct FavoritesView: View {
-    @Bindable var router: Router
+    @Environment(Router.self) private var router: Router
     @Query(sort: \FavoriteAnime.addedDate, order: .reverse) private var favorites: [FavoriteAnime]
     @Environment(\.modelContext) private var modelContext
 

@@ -6,14 +6,13 @@ import Observation
 import SwiftData
 
 struct MangaDetailView: View {
-    @Bindable var router: Router
+    @Environment(Router.self) private var router: Router
     @Environment(\.modelContext) private var modelContext
     @Query private var favorites: [FavoriteAnime]
     @State private var viewModel: MangaDetailViewModel
 
-    init(mangaId: Int, router: Router) {
+    init(mangaId: Int) {
         _viewModel = State(initialValue: MangaDetailViewModel(mangaId: mangaId))
-        self.router = router
     }
 
     var body: some View {
@@ -160,5 +159,6 @@ struct MangaDetailView: View {
 }
 
 #Preview {
-    MangaDetailView(mangaId: 1, router: Router())
+    MangaDetailView(mangaId: 1)
+        .environment(Router())
 }
