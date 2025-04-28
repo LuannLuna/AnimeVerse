@@ -8,21 +8,21 @@ let package = Package(
     .iOS(.v12),
     .macOS(.v10_14),
     .tvOS(.v12),
-    .watchOS(.v5),
+    .watchOS(.v5)
   ],
   products: [
-    .library(name: "AnilistAPI", targets: ["AnilistAPI"]),
+    .library(name: "AnilistAPI", targets: ["AnilistAPI"])
   ],
   dependencies: [
-    .package(url: "https://github.com/apollographql/apollo-ios", exact: "1.19.0"),
+    .package(url: "https://github.com/apollographql/apollo-ios", exact: "1.19.0")
   ],
   targets: [
     .target(
       name: "AnilistAPI",
       dependencies: [
-        .product(name: "ApolloAPI", package: "apollo-ios"),
+        .product(name: "ApolloAPI", package: "apollo-ios")
       ],
       path: "./Sources"
-    ),
+    )
   ]
 )

@@ -30,6 +30,18 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		A4C77BCE2DBFA23E00FC1994 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		A416E4962DA953E100558AEE /* AnimeVerse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnimeVerse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A416E4A52DA953E300558AEE /* AnimeVerseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AnimeVerseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,8 +156,10 @@
 			buildPhases = (
 				A451BBF82DBABF7500F80F34 /* Codegen */,
 				A416E4922DA953E100558AEE /* Sources */,
+				A4C77BCF2DBFA24400FC1994 /* SwiftLint */,
 				A416E4932DA953E100558AEE /* Frameworks */,
 				A416E4942DA953E100558AEE /* Resources */,
+				A4C77BCE2DBFA23E00FC1994 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -302,6 +316,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "#!/bin/bash\n\n# Caminho para o diretório do projeto\nPROJECT_DIR=\"${SRCROOT}\"\n\n# Caminho para o executável do Apollo CLI\nAPOLLO_CLI=\"${PROJECT_DIR}/apollo-ios-cli\"\n\n# Verifica se o Apollo CLI existe\nif [ ! -f \"$APOLLO_CLI\" ]; then\n  echo \"Apollo CLI não encontrado em $APOLLO_CLI\"\n  exit 1\nfi\n\n# Gera o código usando o Apollo CLI\necho \"Gerando código GraphQL com Apollo CLI...\"\n\"$APOLLO_CLI\" generate\n\n# Limpa os caches do Swift Package Manager\necho \"Limpando caches do Swift Package Manager...\"\nrm -rf ~/Library/org.swift.swiftpm\nrm -rf ~/Library/Caches/org.swift.swiftpm\n\necho \"Script de pré-compilação concluído com sucesso.\"\n";
+		};
+		A4C77BCF2DBFA24400FC1994 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint > /dev/null; then\n  swiftlint --fix --strict\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

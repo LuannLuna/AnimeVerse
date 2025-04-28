@@ -56,7 +56,7 @@ class Router {
         switch style {
         case .automatic, .pageSheet, .formSheet:
             presentedSheet = route
-                
+
         case .fullScreen, .overFullScreen:
             presentedFullScreenCover = route
         }
@@ -69,7 +69,7 @@ class Router {
                 if !homeNavigationPath.isEmpty {
                     homeNavigationPath.removeLast()
                 }
-                
+
             case .favorites:
                 if !favoriteNavigationPath.isEmpty {
                     favoriteNavigationPath.removeLast()
@@ -79,7 +79,7 @@ class Router {
                 if !mangaNavigationPath.isEmpty {
                     mangaNavigationPath.removeLast()
                 }
-                
+
             default:
                 break
         }
@@ -99,7 +99,6 @@ class Router {
                 break
         }
     }
-
 
     // Dismiss presented content
     func dismiss() {

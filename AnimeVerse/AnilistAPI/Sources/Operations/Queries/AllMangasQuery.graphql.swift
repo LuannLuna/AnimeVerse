@@ -39,7 +39,7 @@ public class AllMangasQuery: GraphQLQuery {
       .field("Page", Page?.self, arguments: [
         "page": .variable("page"),
         "perPage": .variable("perPage")
-      ]),
+      ])
     ] }
 
     public var page: Page? { __data["Page"] }
@@ -58,7 +58,7 @@ public class AllMangasQuery: GraphQLQuery {
         .field("media", [Medium?]?.self, arguments: [
           "type": "MANGA",
           "sort": .variable("sort")
-        ]),
+        ])
       ] }
 
       /// The pagination information
@@ -77,7 +77,7 @@ public class AllMangasQuery: GraphQLQuery {
           .field("__typename", String.self),
           .field("currentPage", Int?.self),
           .field("total", Int?.self),
-          .field("hasNextPage", Bool?.self),
+          .field("hasNextPage", Bool?.self)
         ] }
 
         /// The current page
@@ -102,7 +102,7 @@ public class AllMangasQuery: GraphQLQuery {
           .field("title", Title?.self),
           .field("description", String?.self, arguments: ["asHtml": false]),
           .field("startDate", StartDate?.self),
-          .field("coverImage", CoverImage?.self),
+          .field("coverImage", CoverImage?.self)
         ] }
 
         /// The id of the media
@@ -128,7 +128,7 @@ public class AllMangasQuery: GraphQLQuery {
             .field("__typename", String.self),
             .field("romaji", String?.self),
             .field("english", String?.self),
-            .field("native", String?.self),
+            .field("native", String?.self)
           ] }
 
           /// The romanization of the native language title
@@ -151,7 +151,7 @@ public class AllMangasQuery: GraphQLQuery {
             .field("__typename", String.self),
             .field("year", Int?.self),
             .field("month", Int?.self),
-            .field("day", Int?.self),
+            .field("day", Int?.self)
           ] }
 
           /// Numeric Year (2017)
@@ -172,7 +172,7 @@ public class AllMangasQuery: GraphQLQuery {
           public static var __parentType: any ApolloAPI.ParentType { AnilistAPI.Objects.MediaCoverImage }
           public static var __selections: [ApolloAPI.Selection] { [
             .field("__typename", String.self),
-            .field("large", String?.self),
+            .field("large", String?.self)
           ] }
 
           /// The cover image url of the media at a large size

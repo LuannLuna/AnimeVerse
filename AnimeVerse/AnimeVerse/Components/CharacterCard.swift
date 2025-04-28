@@ -3,7 +3,7 @@ import Kingfisher
 
 struct CharacterCard: View {
     let character: MediaDetails.Character
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             if let imageURL = character.imageURL {
@@ -19,13 +19,13 @@ struct CharacterCard: View {
                     .frame(width: 120, height: 180)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
             }
-            
+
             VStack(alignment: .leading, spacing: 4) {
                 Text(character.name)
                     .font(.caption)
                     .bold()
                     .lineLimit(2)
-                
+
                 Text(character.role)
                     .font(.caption2)
                     .foregroundColor(.secondary)
@@ -46,7 +46,7 @@ struct CharacterCard: View {
                 role: "Main",
                 voiceActors: []
             ))
-            
+
             CharacterCard(character: .init(
                 id: 2,
                 name: "Tentacle Trap Master",
@@ -54,7 +54,7 @@ struct CharacterCard: View {
                 role: "Supporting",
                 voiceActors: []
             ))
-            
+
             CharacterCard(character: .init(
                 id: 3,
                 name: "A Character with a Very Long Name That Should be Truncated",

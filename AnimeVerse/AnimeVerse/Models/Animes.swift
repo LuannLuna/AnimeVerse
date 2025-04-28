@@ -21,7 +21,7 @@ extension Anime {
               let coverImageURL = URL(string: coverImageURLString) else {
             return nil
         }
-        
+
         self.id = data.id
         self.titleRomaji = romaji
         self.titleEnglish = title.english
@@ -33,7 +33,7 @@ extension Anime {
         )
         self.coverImageURL = coverImageURL
     }
-    
+
     init(from details: MediaDetails) {
         self.id = details.id
         self.titleRomaji = details.titleRomaji

@@ -38,8 +38,6 @@ enum NavigationType {
     }
 }
 
-
-
 // MARK: - Main App Structure
 
 struct MainApp: View {
@@ -55,7 +53,7 @@ struct MainApp: View {
             }
             .tabItem { Label("Animes", systemImage: "house") }
             .tag(AppRoute.animes)
-            
+
             NavigationStack(path: $router.mangaNavigationPath) {
                 MangaView(router: router)
                     .navigationDestination(for: AppRoute.self) { route in
@@ -91,7 +89,7 @@ struct MainApp: View {
                 removal: .move(edge: .leading).combined(with: .opacity)
             ))
     }
-    
+
     @ViewBuilder
     private func navigationContent(for route: AppRoute) -> some View {
         switch route {

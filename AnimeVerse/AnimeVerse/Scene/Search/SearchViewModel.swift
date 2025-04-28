@@ -5,7 +5,7 @@ final class SearchViewModel {
     private let service: SearchServiceProtocol
     private var currentPage = 1
     private var canLoadMore = true
-    
+
     var searchText = ""
     var medias: [MediaDetails] = []
     var isLoading = false
@@ -16,34 +16,34 @@ final class SearchViewModel {
         self.service = service
         self.mediaKind = mediaKind
     }
-    
+
     func search() async {
         guard !searchText.isEmpty else {
             medias = []
             return
         }
-        
+
         isLoading = true
         error = nil
         currentPage = 1
         canLoadMore = true
-        
+
         do {
             medias = try await service.searchMedia(term: searchText, page: currentPage, kind: mediaKind)
             canLoadMore = !medias.isEmpty
         } catch {
             self.error = error
         }
-        
+
         isLoading = false
     }
-    
+
     func loadMore() async {
         guard !isLoading, canLoadMore else { return }
-        
+
         isLoading = true
         currentPage += 1
-        
+
         do {
             let nextPage = try await service.searchMedia(term: searchText, page: currentPage, kind: mediaKind)
             canLoadMore = !nextPage.isEmpty
@@ -52,7 +52,7 @@ final class SearchViewModel {
             self.error = error
             currentPage -= 1
         }
-        
+
         isLoading = false
     }
 }

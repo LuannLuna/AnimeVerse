@@ -16,7 +16,7 @@ public struct CharacterEdgeFields: AnilistAPI.SelectionSet, Fragment {
     .field("__typename", String.self),
     .field("role", GraphQLEnum<AnilistAPI.CharacterRole>?.self),
     .field("node", Node?.self),
-    .field("voiceActors", [VoiceActor?]?.self),
+    .field("voiceActors", [VoiceActor?]?.self)
   ] }
 
   /// The characters role in the media
@@ -35,7 +35,7 @@ public struct CharacterEdgeFields: AnilistAPI.SelectionSet, Fragment {
     public static var __parentType: any ApolloAPI.ParentType { AnilistAPI.Objects.Character }
     public static var __selections: [ApolloAPI.Selection] { [
       .field("__typename", String.self),
-      .fragment(CharacterFields.self),
+      .fragment(CharacterFields.self)
     ] }
 
     /// The id of the character
@@ -70,7 +70,7 @@ public struct CharacterEdgeFields: AnilistAPI.SelectionSet, Fragment {
       .field("id", Int.self),
       .field("name", Name?.self),
       .field("languageV2", String?.self),
-      .field("image", Image?.self),
+      .field("image", Image?.self)
     ] }
 
     /// The id of the staff member
@@ -93,7 +93,7 @@ public struct CharacterEdgeFields: AnilistAPI.SelectionSet, Fragment {
       public static var __selections: [ApolloAPI.Selection] { [
         .field("__typename", String.self),
         .field("full", String?.self),
-        .field("userPreferred", String?.self),
+        .field("userPreferred", String?.self)
       ] }
 
       /// The person's first and last name
@@ -113,7 +113,7 @@ public struct CharacterEdgeFields: AnilistAPI.SelectionSet, Fragment {
       public static var __selections: [ApolloAPI.Selection] { [
         .field("__typename", String.self),
         .field("medium", String?.self),
-        .field("large", String?.self),
+        .field("large", String?.self)
       ] }
 
       /// The person's image of media at medium size

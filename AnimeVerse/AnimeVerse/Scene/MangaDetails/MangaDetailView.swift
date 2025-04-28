@@ -9,11 +9,11 @@ struct MangaDetailView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var favorites: [FavoriteAnime]
     @State private var viewModel: MangaDetailViewModel
-    
+
     init(mangaId: Int) {
         _viewModel = State(initialValue: MangaDetailViewModel(mangaId: mangaId))
     }
-    
+
     var body: some View {
         Group {
             if viewModel.isLoading {
@@ -144,7 +144,7 @@ struct MangaDetailView: View {
             }
         }
     }
-    
+
     private func toggleFavorite(details: MediaDetails) {
         if let existingFavorite = favorites.first(where: { $0.id == details.id }) {
             modelContext.delete(existingFavorite)

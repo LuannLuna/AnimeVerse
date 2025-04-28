@@ -7,11 +7,11 @@ protocol MangaServiceProtocol {
 
 final class MangaService: MangaServiceProtocol {
     private let network: Network
-    
+
     init(network: Network = Network()) {
         self.network = network
     }
-    
+
     func fetchMangas(page: Int, perPage: Int, sort: MediaSort = .scoreDesc) async throws -> [Manga] {
         let query = AllMangasQuery(
             page: .init(integerLiteral: page),

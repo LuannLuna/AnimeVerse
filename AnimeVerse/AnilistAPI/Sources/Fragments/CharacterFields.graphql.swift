@@ -16,7 +16,7 @@ public struct CharacterFields: AnilistAPI.SelectionSet, Fragment {
     .field("__typename", String.self),
     .field("id", Int.self),
     .field("name", Name?.self),
-    .field("image", Image?.self),
+    .field("image", Image?.self)
   ] }
 
   /// The id of the character
@@ -37,7 +37,7 @@ public struct CharacterFields: AnilistAPI.SelectionSet, Fragment {
     public static var __selections: [ApolloAPI.Selection] { [
       .field("__typename", String.self),
       .field("full", String?.self),
-      .field("userPreferred", String?.self),
+      .field("userPreferred", String?.self)
     ] }
 
     /// The character's first and last name
@@ -57,7 +57,7 @@ public struct CharacterFields: AnilistAPI.SelectionSet, Fragment {
     public static var __selections: [ApolloAPI.Selection] { [
       .field("__typename", String.self),
       .field("medium", String?.self),
-      .field("large", String?.self),
+      .field("large", String?.self)
     ] }
 
     /// The character's image of media at medium size

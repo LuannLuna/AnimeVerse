@@ -26,7 +26,7 @@ final class FavoriteAnime {
         self.addedDate = Date()
         self.mediaType = mediaType
     }
-    
+
     convenience init(from details: MediaDetails) {
         self.init(
             id: details.id,

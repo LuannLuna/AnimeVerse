@@ -162,4 +162,4 @@ extension ApolloClient {
 }
 
 extension ApolloClient: @unchecked @retroactive Sendable {}
-extension GraphQLResult: @unchecked @retroactive Sendable{}
+extension GraphQLResult: @unchecked @retroactive Sendable {}

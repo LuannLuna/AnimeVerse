@@ -38,7 +38,7 @@ struct SearchView: View {
                                         }
                                     }
                             }
-                            
+
                             if viewModel.isLoading {
                                 ProgressView()
                                     .frame(maxWidth: .infinity)
@@ -51,7 +51,7 @@ struct SearchView: View {
             }
             .navigationTitle("Search")
             .searchable(text: $viewModel.searchText)
-            .onChange(of: viewModel.searchText) { _, newValue in
+            .onChange(of: viewModel.searchText) { _, _ in
                 searchTask?.cancel()
                 searchTask = Task {
                     try? await Task.sleep(for: .milliseconds(300))
@@ -64,7 +64,7 @@ struct SearchView: View {
 
 private struct AnimeSearchCard: View {
     let anime: MediaDetails
-    
+
     var body: some View {
         HStack(spacing: 16) {
                 KFImage(anime.coverImageURL)
@@ -76,7 +76,7 @@ private struct AnimeSearchCard: View {
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 80, height: 120)
                 .clipShape(RoundedRectangle(cornerRadius: 8))
-            
+
             VStack(alignment: .leading, spacing: 8) {
                 HStack(spacing: 8) {
                     Text(anime.type == .anime ? "Anime" : (anime.type == .manga ? "Manga" : "Other"))
@@ -92,14 +92,14 @@ private struct AnimeSearchCard: View {
                 Text(anime.titleEnglish ?? anime.titleRomaji)
                     .font(.headline)
                     .lineLimit(2)
-                
+
                 if let description = anime.description {
                     Text(description)
                         .font(.caption)
                         .foregroundStyle(.secondary)
                         .lineLimit(3)
                 }
-                
+
                 if !anime.genres.isEmpty {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {

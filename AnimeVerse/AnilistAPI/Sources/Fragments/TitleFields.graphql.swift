@@ -16,7 +16,7 @@ public struct TitleFields: AnilistAPI.SelectionSet, Fragment {
     .field("__typename", String.self),
     .field("romaji", String?.self),
     .field("english", String?.self),
-    .field("native", String?.self),
+    .field("native", String?.self)
   ] }
 
   /// The romanization of the native language title

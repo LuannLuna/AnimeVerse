@@ -1,14 +1,12 @@
 import SwiftUI
 import Kingfisher
 
-import SwiftUI
-
 struct MangaView: View {
     @Bindable var router: Router
     @State private var viewModel = MangaViewModel()
     @State private var isSearchPresented = false
     @State private var selectedSort: MediaSort = .scoreDesc
-    
+
     var body: some View {
         NavigationView {
             Group {
@@ -114,7 +112,7 @@ struct MangaCardView: View {
                         .lineLimit(3)
                         .font(.footnote)
                 }
-                
+
                 if let date = manga.startDate.date {
                     Text(date, format: Date.FormatStyle(date: .numeric, time: .omitted))
                         .font(.caption)

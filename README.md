@@ -56,19 +56,28 @@ AnimeVerse is a modern SwiftUI app for discovering, searching, and managing your
 
 ```
 AnimeVerse/
-├── AnimeVerse/            # Main app target
-│   ├── Components/        # Reusable SwiftUI views (AnimeCard, CharacterCard, etc)
-│   ├── Models/            # Data models (Anime, AnimeDetails, etc)
-│   ├── Network/           # Networking & GraphQL services
-│   ├── Scene/             # Main app screens (Home, Search, Details, Favorites)
-│   ├── Navigation/        # Routing and navigation logic
-│   ├── Extensions/        # Swift extensions
-│   ├── GraphQL/           # GraphQL queries & schema
+├── AnimeVerse/                  # Main app target
+│   ├── Components/              # Reusable SwiftUI views (AnimeCard, CharacterCard, etc)
+│   ├── Models/                  # Data models (Anime, Manga, AnimeDetails, MangaDetails, MediaSort, etc)
+│   │   ├── Animes.swift
+│   │   ├── Manga.swift
+│   │   ├── MediaDetails.swift
+│   │   ├── FavoriteAnime.swift
+│   │   └── MediaSort.swift
+│   ├── Network/                 # Networking & GraphQL services
+│   ├── Scene/                   # Main app screens (Home, Search, Details, Favorites)
+│   ├── Navigation/              # Routing and navigation logic
+│   ├── Extensions/              # Swift extensions
+│   ├── GraphQL/                 # GraphQL queries & schema
 │   └── ...
-├── AnilistAPI/            # Generated GraphQL API code
-├── AnimeVerseTests/       # Unit tests
-├── AnimeVerseUITests/     # UI tests
-├── apollo-codegen-config.json # Apollo config
+├── AnilistAPI/                  # Generated GraphQL API code (excluded from SwiftLint)
+├── AnimeVerseTests/             # Unit tests
+├── AnimeVerseUITests/           # UI tests
+├── SwiftLintBuildPhase.sh       # SwiftLint build phase script
+├── .swiftlint.yml               # SwiftLint configuration
+├── apollo-codegen-config.json   # Apollo config
+├── schema.graphqls              # GraphQL schema
+├── schema.json                  # GraphQL introspection schema
 └── README.md
 ```
 

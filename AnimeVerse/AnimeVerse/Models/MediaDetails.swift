@@ -28,7 +28,7 @@ struct MediaDetails: Identifiable, Equatable, Codable, Hashable {
         let role: String
         let voiceActors: [VoiceActor]
     }
-    
+
     struct VoiceActor: Identifiable, Equatable, Codable, Hashable {
         let id: Int
         let name: String

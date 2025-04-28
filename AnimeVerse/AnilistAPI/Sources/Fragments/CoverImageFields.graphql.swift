@@ -17,7 +17,7 @@ public struct CoverImageFields: AnilistAPI.SelectionSet, Fragment {
     .field("extraLarge", String?.self),
     .field("large", String?.self),
     .field("medium", String?.self),
-    .field("color", String?.self),
+    .field("color", String?.self)
   ] }
 
   /// The cover image url of the media at its largest size. If this size isn't available, large will be provided instead.

@@ -16,7 +16,7 @@ public struct DateFields: AnilistAPI.SelectionSet, Fragment {
     .field("__typename", String.self),
     .field("year", Int?.self),
     .field("month", Int?.self),
-    .field("day", Int?.self),
+    .field("day", Int?.self)
   ] }
 
   /// Numeric Year (2017)

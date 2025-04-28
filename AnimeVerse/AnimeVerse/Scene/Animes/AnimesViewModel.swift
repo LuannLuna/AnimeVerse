@@ -6,7 +6,7 @@ class AnimesViewModel {
     var animes: [Anime] = []
     var isLoading: Bool = false
     var isFetchingNextPage: Bool = false
-    var errorMessage: String? = nil
+    var errorMessage: String?
     private var currentPage: Int = 1
     private var perPage: Int = 100
     private var sort: MediaSort = .scoreDesc

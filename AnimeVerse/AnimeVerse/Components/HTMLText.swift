@@ -5,11 +5,11 @@ struct HTMLText: View {
         static let defaultFont: Font = .body
     }
     let html: String
-    
+
     init(_ html: String) {
         self.html = html
     }
-    
+
     var attributedString: AttributedString {
         do {
             let data = Data(html.utf8)
@@ -28,7 +28,7 @@ struct HTMLText: View {
         }
         return AttributedString(html)
     }
-    
+
     var body: some View {
         Text(attributedString)
             .font(Constants.defaultFont)
@@ -38,11 +38,11 @@ struct HTMLText: View {
 #Preview("HTML Text Examples") {
     VStack(alignment: .leading, spacing: 20) {
         HTMLText("Regular text without HTML")
-        
+
         HTMLText("<b>Bold text</b> and <i>italic text</i>")
-        
+
         HTMLText("Text with <a href=\"https://example.com\">hyperlink</a>")
-        
+
         HTMLText("""
             <p>Paragraph with <b>mixed</b> <i>formatting</i></p>
             <p>Second paragraph with a <br>line break</p>
@@ -51,7 +51,7 @@ struct HTMLText: View {
                 <li>List item 2</li>
             </ul>
         """)
-        
+
         HTMLText("""
             <div style="color: blue;">Styled text</div>
             <p style="font-size: 18px;">Different size text</p>

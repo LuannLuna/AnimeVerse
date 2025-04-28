@@ -10,11 +10,11 @@ final class MangaViewModel {
     private let perPage = 20
     private var canLoadMore = true
     private var sort: MediaSort = .scoreDesc
-    
+
     init(service: MangaServiceProtocol = MangaService()) {
         self.service = service
     }
-    
+
     func loadMangas(sort: MediaSort? = nil) async {
         guard !isLoading, canLoadMore else { return }
         isLoading = true
@@ -33,14 +33,14 @@ final class MangaViewModel {
         }
         isLoading = false
     }
-    
+
     func changeSort(_ newSort: MediaSort) async {
         currentPage = 1
         canLoadMore = true
         mangas = []
         await loadMangas(sort: newSort)
     }
-    
+
     func refresh() async {
         currentPage = 1
         canLoadMore = true

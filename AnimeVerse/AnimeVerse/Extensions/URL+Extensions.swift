@@ -5,12 +5,12 @@ extension Optional where Wrapped == String {
         guard let self = self else { return nil }
         return URL(string: self)
     }
-    
+
     var asFileURL: URL? {
         guard let self = self else { return nil }
         return URL(fileURLWithPath: self)
     }
-    
+
     func asURL(withScheme scheme: String = "https") -> URL? {
         guard let self = self else { return nil }
         if self.contains("://") {
@@ -24,11 +24,11 @@ extension String {
     var asURL: URL? {
         URL(string: self)
     }
-    
+
     var asFileURL: URL? {
         URL(fileURLWithPath: self)
     }
-    
+
     func asURL(withScheme scheme: String = "https") -> URL? {
         if contains("://") {
             return URL(string: self)
@@ -46,7 +46,7 @@ extension URL {
         components?.queryItems = componentsQueryItems + queryItems
         return components?.url
     }
-    
+
     /// Returns query parameters as a dictionary
     var queryParameters: [String: String] {
         guard let components = URLComponents(url: self, resolvingAgainstBaseURL: true),
@@ -55,12 +55,12 @@ extension URL {
         }
         return Dictionary(uniqueKeysWithValues: queryItems.map { ($0.name, $0.value ?? "") })
     }
-    
+
     /// Checks if the URL uses HTTPS
     var isSecure: Bool {
         scheme == "https"
     }
-    
+
     /// Returns the base URL (scheme + host + port)
     var baseURL: URL? {
         guard let scheme = scheme,
@@ -71,7 +71,7 @@ extension URL {
         components.port = port
         return components.url
     }
-    
+
     /// Returns a URL with the last path component removed
     var deletingLastPathComponent: URL {
         deletingLastPathComponent()

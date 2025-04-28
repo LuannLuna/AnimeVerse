@@ -3,7 +3,7 @@ import Kingfisher
 
 struct FavoriteAnimeCard: View {
     let anime: FavoriteAnime
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             if let imageURL = anime.bannerImageURL ?? anime.coverImageURL {
@@ -28,7 +28,7 @@ struct FavoriteAnimeCard: View {
                     .font(.title3)
                     .bold()
                     .lineLimit(2)
-                
+
                 if let englishTitle = anime.titleEnglish {
                     Text(englishTitle)
                         .font(.caption2)
@@ -55,7 +55,7 @@ struct FavoriteAnimeCard: View {
                     mediaType: .anime
                 )
             )
-            
+
             // Without English title
             FavoriteAnimeCard(
                 anime: .init(
@@ -68,7 +68,7 @@ struct FavoriteAnimeCard: View {
                     mediaType: .anime
                 )
             )
-            
+
             // With long titles
             FavoriteAnimeCard(
                 anime: .init(

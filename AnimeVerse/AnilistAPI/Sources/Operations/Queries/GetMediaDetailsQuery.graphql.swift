@@ -36,7 +36,7 @@ public class GetMediaDetailsQuery: GraphQLQuery {
       .field("Media", Media?.self, arguments: [
         "id": .variable("id"),
         "type": .variable("type")
-      ]),
+      ])
     ] }
 
     /// Media query
@@ -67,7 +67,7 @@ public class GetMediaDetailsQuery: GraphQLQuery {
         .field("coverImage", CoverImage?.self),
         .field("bannerImage", String?.self),
         .field("characters", Characters?.self),
-        .field("recommendations", Recommendations?.self),
+        .field("recommendations", Recommendations?.self)
       ] }
 
       /// The id of the media
@@ -113,7 +113,7 @@ public class GetMediaDetailsQuery: GraphQLQuery {
         public static var __parentType: any ApolloAPI.ParentType { AnilistAPI.Objects.MediaTitle }
         public static var __selections: [ApolloAPI.Selection] { [
           .field("__typename", String.self),
-          .fragment(TitleFields.self),
+          .fragment(TitleFields.self)
         ] }
 
         /// The romanization of the native language title
@@ -141,7 +141,7 @@ public class GetMediaDetailsQuery: GraphQLQuery {
         public static var __parentType: any ApolloAPI.ParentType { AnilistAPI.Objects.FuzzyDate }
         public static var __selections: [ApolloAPI.Selection] { [
           .field("__typename", String.self),
-          .fragment(DateFields.self),
+          .fragment(DateFields.self)
         ] }
 
         /// Numeric Year (2017)
@@ -169,7 +169,7 @@ public class GetMediaDetailsQuery: GraphQLQuery {
         public static var __parentType: any ApolloAPI.ParentType { AnilistAPI.Objects.FuzzyDate }
         public static var __selections: [ApolloAPI.Selection] { [
           .field("__typename", String.self),
-          .fragment(DateFields.self),
+          .fragment(DateFields.self)
         ] }
 
         /// Numeric Year (2017)
@@ -197,7 +197,7 @@ public class GetMediaDetailsQuery: GraphQLQuery {
         public static var __parentType: any ApolloAPI.ParentType { AnilistAPI.Objects.MediaCoverImage }
         public static var __selections: [ApolloAPI.Selection] { [
           .field("__typename", String.self),
-          .fragment(CoverImageFields.self),
+          .fragment(CoverImageFields.self)
         ] }
 
         /// The cover image url of the media at its largest size. If this size isn't available, large will be provided instead.
@@ -227,7 +227,7 @@ public class GetMediaDetailsQuery: GraphQLQuery {
         public static var __parentType: any ApolloAPI.ParentType { AnilistAPI.Objects.CharacterConnection }
         public static var __selections: [ApolloAPI.Selection] { [
           .field("__typename", String.self),
-          .field("edges", [Edge?]?.self),
+          .field("edges", [Edge?]?.self)
         ] }
 
         public var edges: [Edge?]? { __data["edges"] }
@@ -242,7 +242,7 @@ public class GetMediaDetailsQuery: GraphQLQuery {
           public static var __parentType: any ApolloAPI.ParentType { AnilistAPI.Objects.CharacterEdge }
           public static var __selections: [ApolloAPI.Selection] { [
             .field("__typename", String.self),
-            .fragment(CharacterEdgeFields.self),
+            .fragment(CharacterEdgeFields.self)
           ] }
 
           /// The characters role in the media
@@ -274,7 +274,7 @@ public class GetMediaDetailsQuery: GraphQLQuery {
         public static var __parentType: any ApolloAPI.ParentType { AnilistAPI.Objects.RecommendationConnection }
         public static var __selections: [ApolloAPI.Selection] { [
           .field("__typename", String.self),
-          .field("nodes", [Node?]?.self),
+          .field("nodes", [Node?]?.self)
         ] }
 
         public var nodes: [Node?]? { __data["nodes"] }
@@ -289,7 +289,7 @@ public class GetMediaDetailsQuery: GraphQLQuery {
           public static var __parentType: any ApolloAPI.ParentType { AnilistAPI.Objects.Recommendation }
           public static var __selections: [ApolloAPI.Selection] { [
             .field("__typename", String.self),
-            .field("mediaRecommendation", MediaRecommendation?.self),
+            .field("mediaRecommendation", MediaRecommendation?.self)
           ] }
 
           /// The recommended media
@@ -308,7 +308,7 @@ public class GetMediaDetailsQuery: GraphQLQuery {
               .field("id", Int.self),
               .field("type", GraphQLEnum<AnilistAPI.MediaType>?.self),
               .field("title", Title?.self),
-              .field("coverImage", CoverImage?.self),
+              .field("coverImage", CoverImage?.self)
             ] }
 
             /// The id of the media
@@ -330,7 +330,7 @@ public class GetMediaDetailsQuery: GraphQLQuery {
               public static var __parentType: any ApolloAPI.ParentType { AnilistAPI.Objects.MediaTitle }
               public static var __selections: [ApolloAPI.Selection] { [
                 .field("__typename", String.self),
-                .fragment(TitleFields.self),
+                .fragment(TitleFields.self)
               ] }
 
               /// The romanization of the native language title
@@ -358,7 +358,7 @@ public class GetMediaDetailsQuery: GraphQLQuery {
               public static var __parentType: any ApolloAPI.ParentType { AnilistAPI.Objects.MediaCoverImage }
               public static var __selections: [ApolloAPI.Selection] { [
                 .field("__typename", String.self),
-                .fragment(CoverImageFields.self),
+                .fragment(CoverImageFields.self)
               ] }
 
               /// The cover image url of the media at its largest size. If this size isn't available, large will be provided instead.
