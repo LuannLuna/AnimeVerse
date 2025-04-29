@@ -7,7 +7,13 @@ struct FirestoreUser: Codable, Identifiable {
     var watching: [FavoriteAnimeDTO]
     var planning: [FavoriteAnimeDTO]
 
-    init(id: String, nickname: String, photoURL: String? = nil, watching: [FavoriteAnimeDTO] = [], planning: [FavoriteAnimeDTO] = []) {
+    init(
+        id: String,
+        nickname: String,
+        photoURL: String? = nil,
+        watching: [FavoriteAnimeDTO] = [],
+        planning: [FavoriteAnimeDTO] = []
+    ) {
         self.id = id
         self.nickname = nickname
         self.photoURL = photoURL

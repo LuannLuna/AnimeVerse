@@ -16,7 +16,7 @@ extension Anime {
         self.titleRomaji = favorite.titleRomaji
         self.titleEnglish = favorite.titleEnglish
         self.titleNative = favorite.titleNative ?? favorite.titleRomaji
-        self.startDate = nil // FavoriteAnime does not have startDate
+        self.startDate = favorite.startDate
         self.coverImageURL = favorite.coverImageURL
     }
 

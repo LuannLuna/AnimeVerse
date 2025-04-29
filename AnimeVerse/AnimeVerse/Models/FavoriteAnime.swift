@@ -14,9 +14,19 @@ final class FavoriteAnime {
     private(set) var coverImageURL: URL?
     private(set) var bannerImageURL: URL?
     private(set) var addedDate: Date
+    private(set) var startDate: DateComponents?
     private(set) var mediaType: MediaKind
 
-    init(id: Int, titleRomaji: String, titleEnglish: String?, titleNative: String?, coverImageURL: URL?, bannerImageURL: URL?, mediaType: MediaKind) {
+    init(
+        id: Int,
+        titleRomaji: String,
+        titleEnglish: String?,
+        titleNative: String?,
+        coverImageURL: URL?,
+        bannerImageURL: URL?,
+        mediaType: MediaKind,
+        startDate: DateComponents? = nil
+    ) {
         self.id = id
         self.titleRomaji = titleRomaji
         self.titleEnglish = titleEnglish
@@ -25,6 +35,7 @@ final class FavoriteAnime {
         self.bannerImageURL = bannerImageURL
         self.addedDate = Date()
         self.mediaType = mediaType
+        self.startDate = startDate
     }
 
     convenience init(from details: MediaDetails) {
@@ -35,7 +46,8 @@ final class FavoriteAnime {
             titleNative: details.titleNative,
             coverImageURL: details.coverImageURL,
             bannerImageURL: details.bannerImageURL,
-            mediaType: details.type == .manga ? .manga : .anime
+            mediaType: details.type == .manga ? .manga : .anime,
+            startDate: details.startDate
         )
     }
 }

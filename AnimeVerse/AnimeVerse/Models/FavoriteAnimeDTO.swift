@@ -8,6 +8,7 @@ struct FavoriteAnimeDTO: Codable, Identifiable, Equatable {
     let coverImageURL: String?
     let bannerImageURL: String?
     let addedDate: Date
+    let startDate: DateComponents?
     let mediaType: String // "anime" or "manga"
 
     init(from model: FavoriteAnime) {
@@ -19,6 +20,7 @@ struct FavoriteAnimeDTO: Codable, Identifiable, Equatable {
         bannerImageURL = model.bannerImageURL?.absoluteString
         addedDate = model.addedDate
         mediaType = model.mediaType.rawValue
+        startDate = model.startDate
     }
 
     func toFavoriteAnime() -> FavoriteAnime {
@@ -29,7 +31,8 @@ struct FavoriteAnimeDTO: Codable, Identifiable, Equatable {
             titleNative: titleNative,
             coverImageURL: coverImageURL.flatMap { URL(string: $0) },
             bannerImageURL: bannerImageURL.flatMap { URL(string: $0) },
-            mediaType: FavoriteAnime.MediaKind(rawValue: mediaType) ?? .anime
+            mediaType: FavoriteAnime.MediaKind(rawValue: mediaType) ?? .anime,
+            startDate: startDate
         )
     }
 }
