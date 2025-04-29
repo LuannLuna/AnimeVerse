@@ -1,19 +1,26 @@
 import SwiftUI
+import FirebaseAuth
+import FirebaseStorage
+import FirebaseFirestore
 
 struct ProfileView: View {
     @EnvironmentObject var userSession: UserSession
-    @State private var profileImage: UIImage?
+    @State private var viewModel = ProfileViewModel()
     @State private var showImagePicker = false
-    @State private var nickname: String = ""
 
     var body: some View {
         NavigationView {
             VStack(spacing: 24) {
+                if let error = viewModel.errorMessage {
+                    Text(error)
+                        .foregroundColor(.red)
+                        .multilineTextAlignment(.center)
+                }
                 // Profile Image & Change Button
                 VStack(spacing: 8) {
                     ZStack(alignment: .bottomTrailing) {
                         Group {
-                            if let image = profileImage {
+                            if let image = viewModel.profileImage {
                                 Image(uiImage: image)
                                     .resizable()
                             } else {
@@ -38,7 +45,7 @@ struct ProfileView: View {
                         .offset(x: 5, y: 5)
                     }
                     .padding(.top, 16)
-                    TextField("Nickname", text: $nickname)
+                    TextField("Nickname", text: $viewModel.nickname, onCommit: viewModel.saveProfile)
                         .font(.title2)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 16)
@@ -46,34 +53,35 @@ struct ProfileView: View {
                         .background(Color(.secondarySystemBackground))
                         .cornerRadius(8)
                         .frame(maxWidth: 240)
+                        .disabled(viewModel.isSaving)
                 }
 
                 // List Buttons
-                HStack(spacing: 16) {
-                    Button(action: {
-                        // Navigate to Watching List
-                    }) {
-                        Text("Watching List")
-                            .fontWeight(.semibold)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.accentColor.opacity(0.15))
-                            .foregroundColor(Color.accentColor)
-                            .cornerRadius(10)
-                    }
-                    Button(action: {
-                        // Navigate to Planning List
-                    }) {
-                        Text("Planning List")
-                            .fontWeight(.semibold)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.accentColor.opacity(0.15))
-                            .foregroundColor(Color.accentColor)
-                            .cornerRadius(10)
-                    }
-                }
-                .frame(maxWidth: 400)
+//                HStack(spacing: 16) {
+//                    Button(action: {
+//                        // TODO: Present watching list view
+//                    }) {
+//                        Text("Watching List (") + Text("\(viewModel.watchingList.count)") + Text(")")
+//                            .fontWeight(.semibold)
+//                            .frame(maxWidth: .infinity)
+//                            .padding()
+//                            .background(Color.accentColor.opacity(0.15))
+//                            .foregroundColor(Color.accentColor)
+//                            .cornerRadius(10)
+//                    }
+//                    Button(action: {
+//                        // TODO: Present planning list view
+//                    }) {
+//                        Text("Planning List (") + Text("\(viewModel.planningList.count)") + Text(")")
+//                            .fontWeight(.semibold)
+//                            .frame(maxWidth: .infinity)
+//                            .padding()
+//                            .background(Color.accentColor.opacity(0.15))
+//                            .foregroundColor(Color.accentColor)
+//                            .cornerRadius(10)
+//                    }
+//                }
+//                .frame(maxWidth: 400)
 
                 Spacer()
 
@@ -91,18 +99,14 @@ struct ProfileView: View {
             }
             .padding()
             .navigationTitle("Profile")
-            .sheet(isPresented: $showImagePicker) {
-                ImagePicker(image: $profileImage)
+            .sheet(isPresented: $showImagePicker, onDismiss: viewModel.saveProfile) {
+                ImagePicker(image: $viewModel.profileImage)
             }
+            .onAppear(perform: viewModel.syncProfile)
         }
     }
-}
 
-#Preview {
-    ProfileView()
-        .environmentObject(UserSession())
 }
-
 #Preview {
     ProfileView()
         .environmentObject(UserSession())
