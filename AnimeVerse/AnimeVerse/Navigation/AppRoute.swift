@@ -18,6 +18,7 @@ enum AppRoute: Hashable, Identifiable {
     // Other Routes
     case details(animeId: Int)
     case mangaDetail(mangaId: Int)
+    case watchingList
 }
 
 // MARK: - Navigation Types
@@ -48,36 +49,28 @@ struct MainApp: View {
         TabView(selection: $router.currentTab) {
             NavigationStack(path: $router.homeNavigationPath) {
                 AnimesView()
-                    .navigationDestination(for: AppRoute.self) { route in
-                        destinationView(for: route)
-                    }
+                    .navigationDestination(for: AppRoute.self) { destinationView(for: $0) }
             }
             .tabItem { Label("Animes", systemImage: "house") }
             .tag(AppRoute.animes)
 
             NavigationStack(path: $router.mangaNavigationPath) {
                 MangaView()
-                    .navigationDestination(for: AppRoute.self) { route in
-                        destinationView(for: route)
-                    }
+                    .navigationDestination(for: AppRoute.self) { destinationView(for: $0) }
             }
             .tabItem { Label("Manga", systemImage: "book") }
             .tag(AppRoute.manga)
 
             NavigationStack(path: $router.favoriteNavigationPath) {
                 FavoritesView()
-                    .navigationDestination(for: AppRoute.self) { route in
-                        destinationView(for: route)
-                    }
+                    .navigationDestination(for: AppRoute.self) { destinationView(for: $0) }
             }
             .tabItem { Label("Favorites", systemImage: "heart") }
             .tag(AppRoute.favorites)
 
             NavigationStack(path: $router.profileNavigationPath) {
                 ProfileView()
-                    .navigationDestination(for: AppRoute.self) { route in
-                        destinationView(for: route)
-                    }
+                    .navigationDestination(for: AppRoute.self) { destinationView(for: $0) }
             }
             .tabItem { Label("Profile", systemImage: "person") }
             .tag(AppRoute.profile)
@@ -117,6 +110,9 @@ struct MainApp: View {
 
             case let .mangaDetail(mangaId):
                 MangaDetailView(mangaId: mangaId)
+
+            case .watchingList:
+                WatchingListView()
 
             case .profile:
                 ProfileView()

@@ -19,7 +19,7 @@ class Router {
     var presentedFullScreenCover: AppRoute?
 
     // Navigate to a specified route with the given presentation type
-    func navigate(to route: AppRoute, using navigationType: NavigationType) {
+    func navigate(to route: AppRoute, using navigationType: NavigationType = .push) {
         switch navigationType {
             case .tabBar:
                 if [.animes, .favorites, .manga, .profile].contains(route) {

@@ -11,6 +11,15 @@ struct Anime: Identifiable, Equatable {
 }
 
 extension Anime {
+    init(from favorite: FavoriteAnime) {
+        self.id = favorite.id
+        self.titleRomaji = favorite.titleRomaji
+        self.titleEnglish = favorite.titleEnglish
+        self.titleNative = favorite.titleNative ?? favorite.titleRomaji
+        self.startDate = nil // FavoriteAnime does not have startDate
+        self.coverImageURL = favorite.coverImageURL
+    }
+
     init?(from data: AllAnimesQuery.Data.Page.Medium) {
         guard let title = data.title,
               let romaji = title.romaji,

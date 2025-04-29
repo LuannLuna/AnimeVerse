@@ -12,23 +12,24 @@ class UserService {
 
     // MARK: - Save/Update User
     func saveUser(_ user: FirestoreUser, profileImage: UIImage?, completion: @escaping (Error?) -> Void) {
-        if let image = profileImage, let imageData = image.jpegData(compressionQuality: 0.8) {
-            let ref = storage.reference().child("profileImages/\(user.id).jpg")
-            ref.putData(imageData, metadata: nil) { _, error in
-                if let error = error { completion(error); return }
-                ref.downloadURL { url, error in
-                    if let url = url {
-                        var userWithPhoto = user
-                        userWithPhoto.photoURL = url.absoluteString
-                        self.saveUserDocument(userWithPhoto, completion: completion)
-                    } else {
-                        completion(error)
-                    }
-                }
-            }
-        } else {
+        // TODO: Fix logic of upload imagem and save url
+//        if let image = profileImage, let imageData = image.jpegData(compressionQuality: 0.8) {
+//            let ref = storage.reference().child("profileImages/\(user.id).jpg")
+//            ref.putData(imageData, metadata: nil) { _, error in
+//                if let error = error { completion(error); return }
+//                ref.downloadURL { url, error in
+//                    if let url = url {
+//                        var userWithPhoto = user
+//                        userWithPhoto.photoURL = url.absoluteString
+//                        self.saveUserDocument(userWithPhoto, completion: completion)
+//                    } else {
+//                        completion(error)
+//                    }
+//                }
+//            }
+//        } else {
             saveUserDocument(user, completion: completion)
-        }
+//        }
     }
 
     private func saveUserDocument(_ user: FirestoreUser, completion: @escaping (Error?) -> Void) {
