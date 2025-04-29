@@ -2,6 +2,7 @@ import SwiftUI
 
 struct WatchingListView: View {
     @State private var viewModel = WatchingListViewModel()
+    let columns = Array(repeating: GridItem(.flexible()), count: 1)
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -22,16 +23,16 @@ struct WatchingListView: View {
                     .padding()
             } else {
                 ScrollView {
-                    LazyVStack(spacing: 16) {
+                    LazyVStack(alignment: .center, spacing: 4) {
                         ForEach(viewModel.watchingList, id: \.id) { anime in
-                            AnimeCardView(anime: .init(from: anime))
+                            WatchListItemCard(item: anime)
                         }
                     }
-                    .padding()
                 }
             }
             Spacer()
         }
+        .padding(.horizontal)
         .navigationTitle("Watching List")
     }
 }

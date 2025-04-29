@@ -12,26 +12,24 @@ class WatchingListViewModel {
 
     init(watchingListService: WatchingListServiceProtocol = WatchingListService()) {
         self.watchingListService = watchingListService
-        loadWatchingList()
+        Task {
+            await loadWatchingList()
+        }
     }
 
-    func loadWatchingList() {
+    func loadWatchingList() async {
+        defer { isLoading = false }
         guard let uid = Auth.auth().currentUser?.uid else {
             self.errorMessage = "User not logged in."
             return
         }
         isLoading = true
         errorMessage = nil
-        watchingListService.fetchWatchingList(for: uid) { [weak self] result in
-            DispatchQueue.main.async {
-                self?.isLoading = false
-                switch result {
-                case .success(let dtos):
-                    self?.watchingList = dtos.map { $0.toFavoriteAnime() }
-                case .failure(let error):
-                    self?.errorMessage = error.localizedDescription
-                }
-            }
+        do {
+            let dtos = try await watchingListService.fetchWatchingList(for: uid)
+            watchingList = dtos.map { $0.toFavoriteAnime() }
+        } catch {
+            errorMessage = error.localizedDescription
         }
     }
 
