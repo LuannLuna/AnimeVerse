@@ -7,8 +7,8 @@ struct FavoriteAnimeDTO: Codable, Identifiable, Equatable {
     let titleNative: String?
     let coverImageURL: String?
     let bannerImageURL: String?
-    let addedDate: Date
-    let startDate: DateComponents?
+    let addedDate: Date?
+    let startDate: Date?
     let mediaType: String // "anime" or "manga"
 
     init(from model: FavoriteAnime) {

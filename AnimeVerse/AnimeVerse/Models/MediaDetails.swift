@@ -8,7 +8,7 @@ struct MediaDetails: Identifiable, Equatable, Codable, Hashable {
     let titleEnglish: String?
     let titleNative: String
     let description: String?
-    let startDate: DateComponents?
+    let startDate: Date?
     let endDate: DateComponents?
     let episodes: Int?
     let duration: Int?
@@ -50,7 +50,6 @@ struct MediaDetails: Identifiable, Equatable, Codable, Hashable {
         case manga = "MANGA"
         case unknown = "Unknown"
     }
-
 }
 
 extension MediaDetails {
@@ -74,7 +73,7 @@ extension MediaDetails {
             year: startDate.year,
             month: startDate.month,
             day: startDate.day
-        )
+        ).date
         if let endDate = data.endDate {
             self.endDate = DateComponents(
                 year: endDate.year,
@@ -142,7 +141,7 @@ extension MediaDetails {
         self.description = data.description
         self.startDate = {
             guard let s = data.startDate else { return nil }
-            return DateComponents(year: s.year, month: s.month, day: s.day)
+            return DateComponents(year: s.year, month: s.month, day: s.day).date
         }()
         self.endDate = {
             guard let e = data.endDate else { return nil }

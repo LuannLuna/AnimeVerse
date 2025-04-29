@@ -14,7 +14,7 @@ final class FavoriteAnime {
     private(set) var coverImageURL: URL?
     private(set) var bannerImageURL: URL?
     private(set) var addedDate: Date
-    private(set) var startDate: DateComponents?
+    private(set) var startDate: Date?
     private(set) var mediaType: MediaKind
 
     init(
@@ -25,7 +25,7 @@ final class FavoriteAnime {
         coverImageURL: URL?,
         bannerImageURL: URL?,
         mediaType: MediaKind,
-        startDate: DateComponents? = nil
+        startDate: Date? = nil
     ) {
         self.id = id
         self.titleRomaji = titleRomaji
