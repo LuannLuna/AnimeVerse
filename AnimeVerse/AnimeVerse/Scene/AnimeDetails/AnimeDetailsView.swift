@@ -7,6 +7,8 @@ struct AnimeDetailsView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var favorites: [FavoriteAnime]
     @State private var viewModel: AnimeDetailsViewModel
+    @State private var showAddToListModal = false
+    @State private var selectedListType: AnimeListType?
 
     init(animeId: Int) {
         _viewModel = State(initialValue: AnimeDetailsViewModel(animeId: animeId))
@@ -29,6 +31,14 @@ struct AnimeDetailsView: View {
                 } label: {
                     Image(systemName: isFavorite ? "heart.fill" : "heart")
                         .foregroundStyle(isFavorite ? .red : .primary)
+                }
+            }
+        }
+        .sheet(isPresented: $showAddToListModal) {
+            AddToListModal(isPresented: $showAddToListModal) { [weak viewModel] type in
+                self.selectedListType = type
+                if let mediaDetails = viewModel?.mediaDetails {
+                    AddToListButton.addToList(type: type, mediaDetails: mediaDetails)
                 }
             }
         }
@@ -84,6 +94,8 @@ struct AnimeDetailsView: View {
                             .font(.title3)
                             .foregroundColor(.secondary)
                     }
+
+                    AddToListButton(isPresentingModal: $showAddToListModal, mediaDetails: details)
 
                     // Info Section
                     VStack(alignment: .leading, spacing: 8) {

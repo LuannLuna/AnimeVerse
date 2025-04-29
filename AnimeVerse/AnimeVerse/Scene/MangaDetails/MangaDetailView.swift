@@ -10,6 +10,8 @@ struct MangaDetailView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var favorites: [FavoriteAnime]
     @State private var viewModel: MangaDetailViewModel
+    @State private var showAddToListModal = false
+    @State private var selectedListType: AnimeListType?
 
     init(mangaId: Int) {
         _viewModel = State(initialValue: MangaDetailViewModel(mangaId: mangaId))
@@ -47,6 +49,9 @@ struct MangaDetailView: View {
                             Text(manga.titleEnglish ?? manga.titleRomaji)
                                 .font(.title)
                                 .bold()
+
+                            AddToListButton(isPresentingModal: $showAddToListModal, mediaDetails: manga)
+
                             // Genres
                             if !manga.genres.isEmpty {
                                 ScrollView(.horizontal, showsIndicators: false) {
@@ -125,6 +130,12 @@ struct MangaDetailView: View {
                 }
                 .navigationTitle(viewModel.mediaDetails?.titleRomaji ?? "Manga Details")
                 .navigationBarTitleDisplayMode(.inline)
+                .sheet(isPresented: $showAddToListModal) {
+                    AddToListModal(isPresented: $showAddToListModal) { type in
+                        self.selectedListType = type
+                        // TODO: Handle add-to-list logic here
+                    }
+                }
             } else {
                 Text("No manga details available.")
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
