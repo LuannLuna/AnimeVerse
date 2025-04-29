@@ -41,21 +41,24 @@ class UserService {
     }
 
     // MARK: - Fetch User
-    func fetchUser(uid: String, completion: @escaping (FirestoreUser?) -> Void) {
-        db.collection("users").document(uid).getDocument { snapshot, _ in
-            guard let data = snapshot?.data(),
-                  let jsonData = try? JSONSerialization.data(withJSONObject: data),
-                  let user = try? JSONDecoder().decode(FirestoreUser.self, from: jsonData)
-            else { completion(nil); return }
-            completion(user)
+    func fetchUser(uid: String) async throws -> FirestoreUser {
+        let document = try await db.collection("users").document(uid).getDocument()
+
+        do {
+            let user = try document.data(as: FirestoreUser.self)
+            return user
+        } catch {
+            throw NSError(domain: "FirestoreUserError", code: -1, userInfo: [NSLocalizedDescriptionKey: "User document is empty or malformed"])
         }
     }
 
     // MARK: - Sync (Download and Update Local)
-    func syncFromFirestore(uid: String, updateLocal: @escaping ([FavoriteAnimeDTO], [FavoriteAnimeDTO], String?, String?) -> Void) {
-        fetchUser(uid: uid) { user in
-            guard let user = user else { updateLocal([], [], nil, nil); return }
+    func syncFromFirestore(uid: String, updateLocal: @escaping ([FavoriteAnimeDTO], [FavoriteAnimeDTO], String?, String?) -> Void) async {
+        do {
+            let user = try await fetchUser(uid: uid)
             updateLocal(user.watching, user.planning, user.nickname, user.photoURL)
+        } catch {
+            updateLocal([], [], nil, nil)
         }
     }
 

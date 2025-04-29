@@ -14,9 +14,9 @@ class ProfileViewModel {
 
     var uid: String? { Auth.auth().currentUser?.uid }
 
-    func syncProfile() {
+    func syncProfile() async {
         guard let uid else { return }
-        UserService.shared.syncFromFirestore(uid: uid) { [weak self] watching, planning, nickname, photoURL in
+        await UserService.shared.syncFromFirestore(uid: uid) { [weak self] watching, planning, nickname, photoURL in
             guard let self else { return }
             self.nickname = nickname ?? ""
             self.photoURL = photoURL

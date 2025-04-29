@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct WatchingListView: View {
-    @StateObject private var viewModel = WatchingListViewModel()
+    @State private var viewModel = WatchingListViewModel()
 
     var body: some View {
         VStack(alignment: .leading) {

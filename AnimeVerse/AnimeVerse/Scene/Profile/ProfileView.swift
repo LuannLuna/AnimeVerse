@@ -82,8 +82,11 @@ struct ProfileView: View {
                 }
                 .padding()
                 .navigationTitle("Profile")
-
-                .onAppear(perform: viewModel.syncProfile)
+                .onAppear {
+                    Task {
+                        await viewModel.syncProfile()
+                    }
+                }
                 if viewModel.isSaving {
                     Color.black.opacity(0.35)
                         .edgesIgnoringSafeArea(.all)

@@ -109,7 +109,9 @@ struct PreviewWrapper: View {
         }
         .sheet(isPresented: $showModal) {
             AddToListModal(isPresented: $showModal) { type in
-                AddToListButton.addToList(type: type, mediaDetails: MediaDetails.mock)
+                Task {
+                    await WatchingListViewModel().addToList(type: type, mediaDetails: MediaDetails.mock)
+                }
                 self.selected = type
             }
         }
@@ -120,44 +122,6 @@ struct PreviewWrapper: View {
     PreviewWrapper()
         .padding()
         .background(Color(.systemGroupedBackground))
-}
-
-// MARK: - Firestore Integration Helper
-extension AddToListButton {
-    static func addToList(type: AnimeListType, mediaDetails: MediaDetails) {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        let dto = FavoriteAnimeDTO(from: FavoriteAnime(from: mediaDetails))
-        var isLoading = false
-        var errorMessage: String?
-        UserService.shared.fetchUser(uid: uid) { user in
-            guard var user = user else {
-                isLoading = false
-                errorMessage = "User not found."
-                return
-            }
-            var watching = user.watching
-            var planning = user.planning
-            if type == .watch {
-                if !watching.contains(where: { $0.id == dto.id }) {
-                    watching.append(dto)
-                }
-            } else {
-                if !planning.contains(where: { $0.id == dto.id }) {
-                    planning.append(dto)
-                }
-            }
-            UserService.shared.updateLists(uid: uid, watching: watching, planning: planning) { err in
-                DispatchQueue.main.async {
-                    isLoading = false
-                    if let err = err {
-                        errorMessage = err.localizedDescription
-                    } else {
-                        // showSuccess = true
-                    }
-                }
-            }
-        }
-    }
 }
 
 // MARK: - Mock for Preview

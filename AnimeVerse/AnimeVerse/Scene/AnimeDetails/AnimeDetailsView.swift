@@ -35,10 +35,13 @@ struct AnimeDetailsView: View {
             }
         }
         .sheet(isPresented: $showAddToListModal) {
-            AddToListModal(isPresented: $showAddToListModal) { [weak viewModel] type in
+            AddToListModal(isPresented: $showAddToListModal) { type in
                 self.selectedListType = type
-                if let mediaDetails = viewModel?.mediaDetails {
-                    AddToListButton.addToList(type: type, mediaDetails: mediaDetails)
+                if let mediaDetails = viewModel.mediaDetails {
+                    let watchingListVM = WatchingListViewModel()
+                    Task {
+                        await watchingListVM.addToList(type: type, mediaDetails: mediaDetails)
+                    }
                 }
             }
         }

@@ -14,14 +14,19 @@ final class WatchingListService: WatchingListServiceProtocol {
                 completion(.failure(error))
                 return
             }
-            guard let data = snapshot?.data(),
-                  let jsonData = try? JSONSerialization.data(withJSONObject: data),
-                  let user = try? JSONDecoder().decode(FirestoreUser.self, from: jsonData)
-            else {
+
+            guard let snapshot = snapshot else {
                 completion(.success([]))
                 return
             }
-            completion(.success(user.watching))
+
+            do {
+                let user = try snapshot.data(as: FirestoreUser.self)
+                completion(.success(user.watching))
+            } catch {
+                completion(.failure(error))
+            }
         }
     }
+
 }
