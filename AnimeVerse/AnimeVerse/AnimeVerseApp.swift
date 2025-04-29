@@ -1,4 +1,5 @@
 import FirebaseCore
+import GoogleSignIn
 import SwiftUI
 import SwiftData
 
@@ -25,15 +26,39 @@ struct AnimeVerseApp: App {
         WindowGroup {
             RootView()
                 .environmentObject(userSession)
+                .onOpenURL { url in
+                    GIDSignIn.sharedInstance.handle(url)
+                }
         }
         .modelContainer(sharedModelContainer)
     }
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-    FirebaseApp.configure()
-    return true
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        FirebaseApp.configure()
+        GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
+            if error != nil || user == nil {
+                // Show the app's signed-out state.
+            } else {
+                // Show the app's signed-in state.
+            }
+        }
+        return true
+    }
+
+  func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+      var handled: Bool
+
+      handled = GIDSignIn.sharedInstance.handle(url)
+      if handled {
+          return true
+      }
+
+      // Handle other custom URL types.
+
+      // If not handled by this app, return false.
+      return false
   }
 }

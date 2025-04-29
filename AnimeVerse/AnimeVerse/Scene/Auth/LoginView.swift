@@ -1,4 +1,5 @@
 import SwiftUI
+import GoogleSignInSwift
 
 struct LoginView: View {
     @EnvironmentObject var userSession: UserSession
@@ -55,16 +56,24 @@ struct LoginView: View {
                 }
                 .disabled(isLoading)
 
-                Button(action: signInWithGoogle) {
-                    HStack {
-                        Image(systemName: "globe")
-                        Text("Sign in with Google")
+                GoogleSignInButton {
+                    signInWithGoogle()
+
+                    guard let rootVC = UIApplication.shared.topMostViewController else {
+                        errorMessage = "Unable to get root view controller."
+                        isLoading = false
+                        return
                     }
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color(.systemGray5))
-                    .foregroundColor(.primary)
-                    .cornerRadius(8)
+                    Task {
+                        do {
+                            try await FirebaseAuthService.shared.signInWithGoogle(presentingViewController: rootVC)
+                            isLoading = false
+                            userSession.login()
+                        } catch {
+                            isLoading = false
+                            errorMessage = error.localizedDescription
+                        }
+                    }
                 }
                 .disabled(isLoading)
 
@@ -94,13 +103,21 @@ struct LoginView: View {
     }
 
     private func signInWithGoogle() {
-        // TODO: Integrate Firebase Google sign-in
         isLoading = true
         errorMessage = nil
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        guard let topVC = UIApplication.shared.topMostViewController else {
+            errorMessage = "Unable to access top view controller."
             isLoading = false
-            // Simulate error for now
-            // errorMessage = "Google sign-in failed."
+            return
+        }
+        Task {
+            do {
+                try await FirebaseAuthService.shared.signInWithGoogle(presentingViewController: topVC)
+                userSession.login()
+            } catch {
+                errorMessage = error.localizedDescription
+            }
+            isLoading = false
         }
     }
 }
