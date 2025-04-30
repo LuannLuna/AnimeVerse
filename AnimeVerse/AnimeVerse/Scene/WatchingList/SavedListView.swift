@@ -10,18 +10,7 @@ struct SavedListView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            if viewModel.isLoading {
-                ProgressView()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-            } else if let error = viewModel.errorMessage {
-                Text(error)
-                    .foregroundColor(.red)
-                    .multilineTextAlignment(.center)
-            } else if viewModel.watchingList.isEmpty {
-                Text("You are not watching any anime yet.")
-                    .foregroundColor(.secondary)
-                    .padding()
-            } else {
+            ZStack {
                 ScrollView {
                     LazyVStack(alignment: .center, spacing: 4) {
                         ForEach(type == .watch ? viewModel.watchingList : viewModel.planningList, id: \.id) { anime in
@@ -29,8 +18,27 @@ struct SavedListView: View {
                         }
                     }
                 }
+
+                if viewModel.isLoading {
+                    ProgressView()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
+
+                switch type {
+                    case .watch:
+                        if viewModel.watchingList.isEmpty {
+                           Text("You are not watching any anime yet.")
+                               .foregroundColor(.secondary)
+                               .padding()
+                       }
+                    case .planning:
+                        if viewModel.planningList.isEmpty {
+                           Text("You are not planning any anime yet.")
+                               .foregroundColor(.secondary)
+                               .padding()
+                       }
+                }
             }
-            Spacer()
         }
         .padding(.horizontal)
         .navigationTitle(type == .watch ? "Watching List" : "Planning List")

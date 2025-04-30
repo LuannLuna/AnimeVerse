@@ -23,14 +23,14 @@ class ProfileViewModel {
 
     func syncProfile() async {
         guard let uid else { return }
-        if let localUser = LocalUserStore.shared.load() {
+        if let localUser = await LocalUserStore.shared.load() {
             updateUserData(from: localUser)
         }
 
         do {
             let user = try await UserService.shared.syncFromFirestore(uid: uid)
             updateUserData(from: user)
-            LocalUserStore.shared.save(LocalUser(from: user))
+            await LocalUserStore.shared.save(LocalUser(from: user))
         } catch {
             print(error.localizedDescription)
         }

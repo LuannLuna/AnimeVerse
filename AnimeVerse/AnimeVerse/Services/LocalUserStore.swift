@@ -1,6 +1,7 @@
 import Foundation
 
-struct LocalUserStore {
+@globalActor
+actor LocalUserStore {
     static let shared = LocalUserStore()
     private let userDefaultsKey = "localUserProfile"
     private init() {}

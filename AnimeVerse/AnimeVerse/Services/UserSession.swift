@@ -22,5 +22,8 @@ class UserSession: ObservableObject {
 
     func logout() {
         isLoggedIn = false
+        Task {
+            await LocalUserStore.shared.clear()
+        }
     }
 }
