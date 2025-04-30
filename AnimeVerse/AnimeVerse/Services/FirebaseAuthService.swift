@@ -4,7 +4,7 @@ import FirebaseAuth
 import GoogleSignIn
 import GoogleSignInSwift
 
-class FirebaseAuthService {
+struct FirebaseAuthService {
     static let shared = FirebaseAuthService()
     private init() {}
 

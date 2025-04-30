@@ -4,7 +4,7 @@ import FirebaseFirestore
 import FirebaseStorage
 import UIKit
 
-class UserService {
+struct UserService {
     static let shared = UserService()
     private let db = Firestore.firestore()
     private let storage = Storage.storage()

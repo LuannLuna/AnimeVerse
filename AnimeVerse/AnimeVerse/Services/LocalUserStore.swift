@@ -11,7 +11,7 @@ struct LocalUser: Codable {
     var lastUpdated: Date
 }
 
-class LocalUserStore {
+struct LocalUserStore {
     static let shared = LocalUserStore()
     private let userDefaultsKey = "localUserProfile"
     private init() {}
