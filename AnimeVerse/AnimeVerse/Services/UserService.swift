@@ -41,24 +41,27 @@ struct UserService {
     }
 
     // MARK: - Fetch User
+    private
     func fetchUser(uid: String) async throws -> FirestoreUser {
         let document = try await db.collection("users").document(uid).getDocument()
 
         do {
-            let user = try document.data(as: FirestoreUser.self)
-            return user
+            return try document.data(as: FirestoreUser.self)
         } catch {
-            throw NSError(domain: "FirestoreUserError", code: -1, userInfo: [NSLocalizedDescriptionKey: "User document is empty or malformed"])
+            throw NSError(
+                domain: "FirestoreUserError",
+                code: -1,
+                userInfo: [NSLocalizedDescriptionKey: "User document is empty or malformed"]
+            )
         }
     }
 
     // MARK: - Sync (Download and Update Local)
-    func syncFromFirestore(uid: String, updateLocal: @escaping ([FavoriteAnimeDTO], [FavoriteAnimeDTO], String?, String?) -> Void) async {
+    func syncFromFirestore(uid: String) async throws -> FirestoreUser {
         do {
-            let user = try await fetchUser(uid: uid)
-            updateLocal(user.watching, user.planning, user.nickname, user.photoURL)
+            return try await fetchUser(uid: uid)
         } catch {
-            updateLocal([], [], nil, nil)
+            throw error
         }
     }
 

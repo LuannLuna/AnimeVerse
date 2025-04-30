@@ -16,12 +16,22 @@ class ProfileViewModel {
 
     func syncProfile() async {
         guard let uid else { return }
-        await UserService.shared.syncFromFirestore(uid: uid) { [weak self] watching, planning, nickname, photoURL in
-            guard let self else { return }
-            self.nickname = nickname ?? ""
-            self.photoURL = photoURL
-            self.watchingList = watching
-            self.planningList = planning
+        if let localUser = LocalUserStore.shared.load() {
+            nickname = localUser.nickname
+            photoURL = localUser.photoURL
+            watchingList = localUser.watching
+            planningList = localUser.planning
+        }
+
+        do {
+            let user = try await UserService.shared.syncFromFirestore(uid: uid)
+            nickname = user.nickname
+            photoURL = user.photoURL
+            watchingList = user.watching
+            planningList = user.planning
+            LocalUserStore.shared.save(LocalUser(from: user))
+        } catch {
+            print(error.localizedDescription)
         }
     }
 

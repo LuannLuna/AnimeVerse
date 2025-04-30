@@ -11,6 +11,18 @@ struct LocalUser: Codable {
     var lastUpdated: Date
 }
 
+extension LocalUser {
+    init(from firestoreUser: FirestoreUser) {
+        self.uid = firestoreUser.id
+        self.nickname = firestoreUser.nickname
+        self.photoURL = firestoreUser.photoURL
+        self.watching = firestoreUser.watching
+        self.planning = firestoreUser.planning
+        self.lastUpdated = Date()
+        self.photoData = nil // Photo data will be handled separately
+    }
+}
+
 struct LocalUserStore {
     static let shared = LocalUserStore()
     private let userDefaultsKey = "localUserProfile"

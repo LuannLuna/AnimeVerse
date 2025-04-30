@@ -95,7 +95,10 @@ struct AnimeDetailsView: View {
                             .foregroundColor(.secondary)
                     }
 
-                    AddToListButton(isPresentingModal: $showAddToListModal, mediaDetails: details)
+                    HStack {
+                        Spacer()
+                        AddToListButton(isPresentingModal: $showAddToListModal, mediaDetails: details)
+                    }
 
                     // Info Section
                     VStack(alignment: .leading, spacing: 8) {

@@ -21,3 +21,13 @@ struct FirestoreUser: Codable, Identifiable {
         self.planning = planning
     }
 }
+
+extension FirestoreUser {
+    init(from localUser: LocalUser) {
+        self.id = localUser.uid
+        self.nickname = localUser.nickname
+        self.photoURL = localUser.photoURL
+        self.watching = localUser.watching
+        self.planning = localUser.planning
+    }
+}

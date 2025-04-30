@@ -44,7 +44,7 @@ class ListViewModel {
         isLoading = true
         errorMessage = nil
         do {
-            let user = try await UserService.shared.fetchUser(uid: uid)
+            let user = try await UserService.shared.syncFromFirestore(uid: uid)
             var watching = user.watching
             var planning = user.planning
             if type == .watch {
