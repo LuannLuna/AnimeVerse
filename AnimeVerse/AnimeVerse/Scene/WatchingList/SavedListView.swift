@@ -10,10 +10,6 @@ struct SavedListView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Watching List")
-                .font(.largeTitle)
-                .bold()
-                .padding(.top)
             if viewModel.isLoading {
                 ProgressView()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -38,6 +34,7 @@ struct SavedListView: View {
         }
         .padding(.horizontal)
         .navigationTitle(type == .watch ? "Watching List" : "Planning List")
+        .navigationBarTitleDisplayMode(.large)
     }
 }
 

@@ -19,7 +19,6 @@ struct ListItemCard: View {
                 .font(.system(size: 14, weight: .semibold))
         }
         .frame(height: 160)
-        .padding(.bottom)
     }
 }
 

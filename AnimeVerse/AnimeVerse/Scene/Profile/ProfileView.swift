@@ -51,17 +51,19 @@ struct ProfileView: View {
                                 .background(Color.accentColor.opacity(0.15))
                                 .foregroundColor(Color.accentColor)
                                 .cornerRadius(10)
+                                .minimumScaleFactor(0.2)
                         }
                         Button(action: {
                             router.navigate(to: .planningList)
                         }) {
-                            Text("Planning List (\(viewModel.planningList.count)")
+                            Text("Planning List (\(viewModel.planningList.count))")
                                 .fontWeight(.semibold)
                                 .frame(maxWidth: .infinity)
                                 .padding()
                                 .background(Color.accentColor.opacity(0.15))
                                 .foregroundColor(Color.accentColor)
                                 .cornerRadius(10)
+                                .minimumScaleFactor(0.2)
                         }
                     }
                     .frame(maxWidth: 400)
