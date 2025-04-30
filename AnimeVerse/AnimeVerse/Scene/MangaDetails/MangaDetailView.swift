@@ -11,7 +11,6 @@ struct MangaDetailView: View {
     @Query private var favorites: [FavoriteAnime]
     @State private var viewModel: MangaDetailViewModel
     @State private var showAddToListModal = false
-    @State private var selectedListType: AnimeListType?
 
     init(mangaId: Int) {
         _viewModel = State(initialValue: MangaDetailViewModel(mangaId: mangaId))
@@ -125,15 +124,17 @@ struct MangaDetailView: View {
                             }
                         }
                         .padding()
-
                     }
                 }
                 .navigationTitle(viewModel.mediaDetails?.titleRomaji ?? "Manga Details")
                 .navigationBarTitleDisplayMode(.inline)
                 .sheet(isPresented: $showAddToListModal) {
-                    AddToListModal(isPresented: $showAddToListModal) { type in
-                        self.selectedListType = type
-                        // TODO: Handle add-to-list logic here
+                    AddToListModal(isPresented: $showAddToListModal) { [weak viewModel] type in
+                        if let mediaDetails = viewModel?.mediaDetails {
+                            Task {
+                                await ListViewModel().addToList(type: type, mediaDetails: mediaDetails)
+                            }
+                        }
                     }
                 }
             } else {

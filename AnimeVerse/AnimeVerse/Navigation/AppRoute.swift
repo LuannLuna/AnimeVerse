@@ -19,6 +19,7 @@ enum AppRoute: Hashable, Identifiable {
     case details(animeId: Int)
     case mangaDetail(mangaId: Int)
     case watchingList
+    case planningList
 }
 
 // MARK: - Navigation Types
@@ -112,7 +113,10 @@ struct MainApp: View {
                 MangaDetailView(mangaId: mangaId)
 
             case .watchingList:
-                WatchingListView()
+                SavedListView(type: .watch)
+
+            case .planningList:
+                SavedListView(type: .planning)
 
             case .profile:
                 ProfileView()

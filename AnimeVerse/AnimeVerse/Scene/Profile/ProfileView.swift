@@ -42,7 +42,7 @@ struct ProfileView: View {
                     // List Buttons
                     HStack(spacing: 16) {
                         Button(action: {
-                            router.navigate(to: .watchingList, using: .push)
+                            router.navigate(to: .watchingList)
                         }) {
                             Text("Watching List (\(viewModel.watchingList.count))")
                                 .fontWeight(.semibold)
@@ -53,7 +53,7 @@ struct ProfileView: View {
                                 .cornerRadius(10)
                         }
                         Button(action: {
-                            // TODO: Present planning list view
+                            router.navigate(to: .planningList)
                         }) {
                             Text("Planning List (\(viewModel.planningList.count)")
                                 .fontWeight(.semibold)

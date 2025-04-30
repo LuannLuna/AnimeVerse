@@ -90,12 +90,6 @@ struct AddToListModal: View {
     }
 }
 
-/// Enum for list type selection
-enum AnimeListType {
-    case watch
-    case planning
-}
-
 // MARK: - Previews
 struct PreviewWrapper: View {
     @State private var showModal = false
@@ -110,7 +104,7 @@ struct PreviewWrapper: View {
         .sheet(isPresented: $showModal) {
             AddToListModal(isPresented: $showModal) { type in
                 Task {
-                    await WatchingListViewModel().addToList(type: type, mediaDetails: MediaDetails.mock)
+                    await ListViewModel().addToList(type: type, mediaDetails: MediaDetails.mock)
                 }
                 self.selected = type
             }

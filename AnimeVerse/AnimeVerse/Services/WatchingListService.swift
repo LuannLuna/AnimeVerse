@@ -1,18 +1,20 @@
 import Foundation
 import FirebaseFirestore
 
-protocol WatchingListServiceProtocol {
-    func fetchWatchingList(for uid: String) async throws -> [FavoriteAnimeDTO]
+protocol FetchListServiceProtocol {
+    func fetchList(for uid: String, listType type: AnimeListType) async throws -> ([FavoriteAnimeDTO], [FavoriteAnimeDTO])
 }
 
-final class WatchingListService: WatchingListServiceProtocol {
+struct FetchListService: FetchListServiceProtocol {
     private let db = Firestore.firestore()
 
-    func fetchWatchingList(for uid: String) async throws -> [FavoriteAnimeDTO] {
+    func fetchList(for uid: String, listType type: AnimeListType) async throws -> ([FavoriteAnimeDTO], [FavoriteAnimeDTO]) {
         do {
-            let snapshot = try await db.collection("users").document(uid).getDocument()
+            let snapshot = try await db.collection("users")
+                .document(uid)
+                .getDocument()
             let user = try snapshot.data(as: FirestoreUser.self)
-            return user.watching
+            return (user.watching, user.planning)
         } catch {
             throw error
         }

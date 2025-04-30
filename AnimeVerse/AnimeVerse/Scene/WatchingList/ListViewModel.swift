@@ -3,15 +3,16 @@ import SwiftUI
 import FirebaseAuth
 
 @Observable
-class WatchingListViewModel {
+class ListViewModel {
     var watchingList: [FavoriteAnime] = []
+    var planningList: [FavoriteAnime] = []
     var isLoading: Bool = false
     var errorMessage: String?
+    var type: AnimeListType
+    let service = FetchListService()
 
-    private let watchingListService: WatchingListServiceProtocol
-
-    init(watchingListService: WatchingListServiceProtocol = WatchingListService()) {
-        self.watchingListService = watchingListService
+    init(type: AnimeListType = .watch) {
+        self.type = type
         Task {
             await loadWatchingList()
         }
@@ -26,8 +27,9 @@ class WatchingListViewModel {
         isLoading = true
         errorMessage = nil
         do {
-            let dtos = try await watchingListService.fetchWatchingList(for: uid)
-            watchingList = dtos.map { $0.toFavoriteAnime() }
+            let dtos = try await service.fetchList(for: uid, listType: type)
+            watchingList = dtos.0.map { $0.toFavoriteAnime() }
+            planningList = dtos.1.map { $0.toFavoriteAnime() }
         } catch {
             errorMessage = error.localizedDescription
         }

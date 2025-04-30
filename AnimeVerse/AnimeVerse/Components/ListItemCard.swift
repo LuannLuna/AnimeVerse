@@ -1,7 +1,7 @@
 import SwiftUI
 import Kingfisher
 
-struct WatchListItemCard: View {
+struct ListItemCard: View {
     let item: FavoriteAnime
 
     var body: some View {
@@ -24,5 +24,5 @@ struct WatchListItemCard: View {
 }
 
 #Preview {
-    WatchListItemCard(item: .init(from: .mock))
+    ListItemCard(item: .init(from: .mock))
 }

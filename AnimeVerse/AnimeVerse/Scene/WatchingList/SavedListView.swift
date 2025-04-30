@@ -1,8 +1,12 @@
 import SwiftUI
 
-struct WatchingListView: View {
-    @State private var viewModel = WatchingListViewModel()
-    let columns = Array(repeating: GridItem(.flexible()), count: 1)
+struct SavedListView: View {
+    @State private var viewModel: ListViewModel
+    let type: AnimeListType
+    init(type: AnimeListType) {
+        self.type = type
+        self._viewModel = State(initialValue: ListViewModel(type: type))
+    }
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -24,8 +28,8 @@ struct WatchingListView: View {
             } else {
                 ScrollView {
                     LazyVStack(alignment: .center, spacing: 4) {
-                        ForEach(viewModel.watchingList, id: \.id) { anime in
-                            WatchListItemCard(item: anime)
+                        ForEach(type == .watch ? viewModel.watchingList : viewModel.planningList, id: \.id) { anime in
+                            ListItemCard(item: anime)
                         }
                     }
                 }
@@ -33,10 +37,10 @@ struct WatchingListView: View {
             Spacer()
         }
         .padding(.horizontal)
-        .navigationTitle("Watching List")
+        .navigationTitle(type == .watch ? "Watching List" : "Planning List")
     }
 }
 
 #Preview {
-    WatchingListView()
+    SavedListView(type: .watch)
 }

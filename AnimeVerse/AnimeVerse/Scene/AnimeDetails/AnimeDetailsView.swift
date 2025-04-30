@@ -8,7 +8,6 @@ struct AnimeDetailsView: View {
     @Query private var favorites: [FavoriteAnime]
     @State private var viewModel: AnimeDetailsViewModel
     @State private var showAddToListModal = false
-    @State private var selectedListType: AnimeListType?
 
     init(animeId: Int) {
         _viewModel = State(initialValue: AnimeDetailsViewModel(animeId: animeId))
@@ -35,12 +34,10 @@ struct AnimeDetailsView: View {
             }
         }
         .sheet(isPresented: $showAddToListModal) {
-            AddToListModal(isPresented: $showAddToListModal) { type in
-                self.selectedListType = type
-                if let mediaDetails = viewModel.mediaDetails {
-                    let watchingListVM = WatchingListViewModel()
+            AddToListModal(isPresented: $showAddToListModal) { [weak viewModel] type in
+                if let mediaDetails = viewModel?.mediaDetails {
                     Task {
-                        await watchingListVM.addToList(type: type, mediaDetails: mediaDetails)
+                        await ListViewModel().addToList(type: type, mediaDetails: mediaDetails)
                     }
                 }
             }
