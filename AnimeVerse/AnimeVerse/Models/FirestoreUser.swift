@@ -1,6 +1,6 @@
 import Foundation
 
-struct FirestoreUser: Codable, Identifiable {
+struct FirestoreUser: Codable, Identifiable, ProfileUserProtocol {
     let id: String // uid
     var nickname: String
     var photoURL: String?
@@ -24,7 +24,7 @@ struct FirestoreUser: Codable, Identifiable {
 
 extension FirestoreUser {
     init(from localUser: LocalUser) {
-        self.id = localUser.uid
+        self.id = localUser.id
         self.nickname = localUser.nickname
         self.photoURL = localUser.photoURL
         self.watching = localUser.watching

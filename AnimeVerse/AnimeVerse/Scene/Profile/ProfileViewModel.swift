@@ -14,21 +14,22 @@ class ProfileViewModel {
 
     var uid: String? { Auth.auth().currentUser?.uid }
 
+    private func updateUserData(from user: ProfileUserProtocol) {
+        nickname = user.nickname
+        photoURL = user.photoURL
+        watchingList = user.watching
+        planningList = user.planning
+    }
+
     func syncProfile() async {
         guard let uid else { return }
         if let localUser = LocalUserStore.shared.load() {
-            nickname = localUser.nickname
-            photoURL = localUser.photoURL
-            watchingList = localUser.watching
-            planningList = localUser.planning
+            updateUserData(from: localUser)
         }
 
         do {
             let user = try await UserService.shared.syncFromFirestore(uid: uid)
-            nickname = user.nickname
-            photoURL = user.photoURL
-            watchingList = user.watching
-            planningList = user.planning
+            updateUserData(from: user)
             LocalUserStore.shared.save(LocalUser(from: user))
         } catch {
             print(error.localizedDescription)
@@ -39,7 +40,13 @@ class ProfileViewModel {
         guard let uid else { errorMessage = "User not logged in"; return }
         isSaving = true
         errorMessage = nil
-        let user = FirestoreUser(id: uid, nickname: nickname, photoURL: photoURL, watching: watchingList, planning: planningList)
+        let user = FirestoreUser(
+            id: uid,
+            nickname: nickname,
+            photoURL: photoURL,
+            watching: watchingList,
+            planning: planningList
+        )
         UserService.shared.saveUser(user, profileImage: profileImage) { [weak self] error in
             Task { @MainActor in
                 self?.isSaving = false
