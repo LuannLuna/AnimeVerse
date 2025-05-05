@@ -1,5 +1,5 @@
 {
-  "originHash" : "4b496363dfa497d6bf2787806ab75a39f067f63cbfd15cfce1a9dad191c78143",
+  "originHash" : "12c572f6b351e764252f7b288aacfdca4723ca8517907eb02cfbcf61244dda0a",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -143,6 +143,15 @@
       "state" : {
         "revision" : "b7e1104502eca3a213b46303391ca4d3bc8ddec1",
         "version" : "2.30910.0"
+      }
+    },
+    {
+      "identity" : "parse-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/parse-community/Parse-Swift",
+      "state" : {
+        "revision" : "dc7666f774755be333f48f25c4d8bead0a1a6877",
+        "version" : "4.14.2"
       }
     },
     {

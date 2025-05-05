@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A4136FE52DC96F210094D70B /* ParseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A4136FE42DC96F210094D70B /* ParseSwift */; };
 		A416E4C42DA988DB00558AEE /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = A416E4C32DA988DB00558AEE /* Apollo */; };
 		A451BBF42DBAAF0500F80F34 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = A451BBF32DBAAF0500F80F34 /* Kingfisher */; };
 		A4709CED2DC12C03008315EA /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A4709CEC2DC12C03008315EA /* FirebaseStorage */; };
@@ -112,6 +113,7 @@
 				A4C77BD22DBFB22500FC1994 /* FirebaseAnalytics in Frameworks */,
 				A416E4C42DA988DB00558AEE /* Apollo in Frameworks */,
 				A4C77BE82DBFE3EB00FC1994 /* GoogleSignIn in Frameworks */,
+				A4136FE52DC96F210094D70B /* ParseSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,6 +195,7 @@
 				A4C77BE92DBFE3EB00FC1994 /* GoogleSignInSwift */,
 				A4709CEC2DC12C03008315EA /* FirebaseStorage */,
 				A4709CEE2DC12CC2008315EA /* FirebaseFirestore */,
+				A4136FE42DC96F210094D70B /* ParseSwift */,
 			);
 			productName = AnimeVerse;
 			productReference = A416E4962DA953E100558AEE /* AnimeVerse.app */;
@@ -282,6 +285,7 @@
 				A451BBF22DBAAF0500F80F34 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				A4C77BD02DBFB22500FC1994 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				A4C77BE62DBFE3EB00FC1994 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				A4136FE32DC96F210094D70B /* XCRemoteSwiftPackageReference "Parse-Swift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A416E4972DA953E100558AEE /* Products */;
@@ -698,6 +702,14 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		A4136FE32DC96F210094D70B /* XCRemoteSwiftPackageReference "Parse-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/parse-community/Parse-Swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.14.2;
+			};
+		};
 		A416E4C22DA988DB00558AEE /* XCRemoteSwiftPackageReference "apollo-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apollographql/apollo-ios.git";
@@ -733,6 +745,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		A4136FE42DC96F210094D70B /* ParseSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A4136FE32DC96F210094D70B /* XCRemoteSwiftPackageReference "Parse-Swift" */;
+			productName = ParseSwift;
+		};
 		A416E4C32DA988DB00558AEE /* Apollo */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A416E4C22DA988DB00558AEE /* XCRemoteSwiftPackageReference "apollo-ios" */;
