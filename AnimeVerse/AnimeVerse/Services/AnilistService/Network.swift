@@ -9,7 +9,7 @@ import AnilistAPI
 import Apollo
 import Foundation
 
-final class Network {
+struct Network {
     private let apollo: ApolloClient
 
     init(apollo: ApolloClient? = nil) {

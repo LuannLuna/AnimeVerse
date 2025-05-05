@@ -3,7 +3,7 @@ import SwiftUI
 import FirebaseAuth
 
 @Observable
-class ListViewModel {
+class SavedListViewModel {
     var watchingList: [FavoriteAnime] = []
     var planningList: [FavoriteAnime] = []
     var isLoading: Bool = false

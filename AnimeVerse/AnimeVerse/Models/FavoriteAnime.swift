@@ -3,10 +3,6 @@ import SwiftData
 
 @Model
 final class FavoriteAnime {
-    enum MediaKind: String, Codable {
-        case anime
-        case manga
-    }
     private(set) var id: Int
     private(set) var titleRomaji: String
     private(set) var titleEnglish: String?
@@ -48,6 +44,22 @@ final class FavoriteAnime {
             bannerImageURL: details.bannerImageURL,
             mediaType: details.type == .manga ? .manga : .anime,
             startDate: details.startDate
+        )
+    }
+}
+
+extension FavoriteAnime {
+    func toDTO() -> FavoriteAnimeDTO {
+        FavoriteAnimeDTO(
+            id: id,
+            titleRomaji: titleRomaji,
+            titleEnglish: titleEnglish,
+            titleNative: titleNative,
+            coverImageURL: coverImageURL?.absoluteString,
+            bannerImageURL: bannerImageURL?.absoluteString,
+            addedDate: addedDate,
+            startDate: startDate,
+            mediaType: mediaType.rawValue
         )
     }
 }

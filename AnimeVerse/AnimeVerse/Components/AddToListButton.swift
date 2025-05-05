@@ -90,6 +90,7 @@ struct AddToListModal: View {
     }
 }
 
+#if DEBUG
 // MARK: - Previews
 struct PreviewWrapper: View {
     @State private var showModal = false
@@ -104,7 +105,7 @@ struct PreviewWrapper: View {
         .sheet(isPresented: $showModal) {
             AddToListModal(isPresented: $showModal) { type in
                 Task {
-                    await ListViewModel().addToList(type: type, mediaDetails: MediaDetails.mock)
+                    await SavedListViewModel().addToList(type: type, mediaDetails: MediaDetails.mock)
                 }
                 self.selected = type
             }
@@ -141,3 +142,5 @@ extension MediaDetails {
         recommendations: []
     )
 }
+
+#endif

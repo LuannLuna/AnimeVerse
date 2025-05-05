@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct SavedListView: View {
-    @State private var viewModel: ListViewModel
+    @State private var viewModel: SavedListViewModel
     let type: AnimeListType
     init(type: AnimeListType) {
         self.type = type
-        self._viewModel = State(initialValue: ListViewModel(type: type))
+        self._viewModel = State(initialValue: SavedListViewModel(type: type))
     }
 
     var body: some View {

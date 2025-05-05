@@ -7,7 +7,7 @@ protocol CacheServiceProtocol {
     func removeAll()
 }
 
-final class CacheService: CacheServiceProtocol {
+struct CacheService: CacheServiceProtocol {
     private let storage: UserDefaults
     private let encoder: JSONEncoder
     private let decoder: JSONDecoder

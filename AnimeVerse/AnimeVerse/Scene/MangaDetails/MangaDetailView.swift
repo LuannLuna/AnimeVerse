@@ -132,7 +132,7 @@ struct MangaDetailView: View {
                     AddToListModal(isPresented: $showAddToListModal) { [weak viewModel] type in
                         if let mediaDetails = viewModel?.mediaDetails {
                             Task {
-                                await ListViewModel().addToList(type: type, mediaDetails: mediaDetails)
+                                await SavedListViewModel().addToList(type: type, mediaDetails: mediaDetails)
                             }
                         }
                     }

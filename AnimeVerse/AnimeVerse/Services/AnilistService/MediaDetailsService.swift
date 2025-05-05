@@ -3,7 +3,7 @@ import AnilistAPI
 
 import Apollo
 
-enum MediaKind {
+enum MediaKind: String, Codable {
     case anime
     case manga
 
@@ -19,7 +19,7 @@ protocol MediaDetailsServiceProtocol {
     func fetchMediaDetails(id: Int, kind: MediaKind) async throws -> MediaDetails?
 }
 
-final class MediaDetailsService: MediaDetailsServiceProtocol {
+struct MediaDetailsService: MediaDetailsServiceProtocol {
     private let network: Network
 
     init(network: Network = Network()) {

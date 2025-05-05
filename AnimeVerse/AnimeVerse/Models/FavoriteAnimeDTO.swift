@@ -10,7 +10,9 @@ struct FavoriteAnimeDTO: Codable, Identifiable, Equatable {
     let addedDate: Date?
     let startDate: Date?
     let mediaType: String // "anime" or "manga"
+}
 
+extension FavoriteAnimeDTO {
     init(from model: FavoriteAnime) {
         id = model.id
         titleRomaji = model.titleRomaji
@@ -31,7 +33,7 @@ struct FavoriteAnimeDTO: Codable, Identifiable, Equatable {
             titleNative: titleNative,
             coverImageURL: coverImageURL.flatMap { URL(string: $0) },
             bannerImageURL: bannerImageURL.flatMap { URL(string: $0) },
-            mediaType: FavoriteAnime.MediaKind(rawValue: mediaType) ?? .anime,
+            mediaType: MediaKind(rawValue: mediaType) ?? .anime,
             startDate: startDate
         )
     }
