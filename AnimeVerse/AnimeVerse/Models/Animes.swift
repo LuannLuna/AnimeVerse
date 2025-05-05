@@ -6,6 +6,7 @@ struct Anime: Identifiable, Equatable {
     let titleRomaji: String
     let titleEnglish: String?
     let titleNative: String
+    let description: String?
     let startDate: Date?
     let coverImageURL: URL?
 }
@@ -18,6 +19,7 @@ extension Anime {
         self.titleNative = favorite.titleNative ?? favorite.titleRomaji
         self.startDate = favorite.startDate
         self.coverImageURL = favorite.coverImageURL
+        self.description = favorite.descriptionText
     }
 
     init?(from data: AllAnimesQuery.Data.Page.Medium) {
@@ -27,7 +29,7 @@ extension Anime {
               let startDate = data.startDate,
               let coverImage = data.coverImage,
               let coverImageURLString = coverImage.large,
-              let coverImageURL = URL(string: coverImageURLString) else {
+              let coverImageURL = coverImageURLString.asURL else {
             return nil
         }
 
@@ -35,6 +37,7 @@ extension Anime {
         self.titleRomaji = romaji
         self.titleEnglish = title.english
         self.titleNative = native
+        self.description = data.description
         self.startDate = DateComponents(
             year: startDate.year,
             month: startDate.month,
@@ -48,6 +51,7 @@ extension Anime {
         self.titleRomaji = details.titleRomaji
         self.titleEnglish = details.titleEnglish
         self.titleNative = details.titleNative
+        self.description = details.description
         self.startDate = details.startDate
         self.coverImageURL = details.coverImageURL
     }

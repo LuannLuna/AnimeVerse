@@ -5,6 +5,7 @@ struct FavoriteAnimeDTO: Codable, Identifiable, Equatable {
     let titleRomaji: String
     let titleEnglish: String?
     let titleNative: String?
+    let description: String?
     let coverImageURL: String?
     let bannerImageURL: String?
     let addedDate: Date?
@@ -18,6 +19,7 @@ extension FavoriteAnimeDTO {
         titleRomaji = model.titleRomaji
         titleEnglish = model.titleEnglish
         titleNative = model.titleNative
+        description = model.descriptionText
         coverImageURL = model.coverImageURL?.absoluteString
         bannerImageURL = model.bannerImageURL?.absoluteString
         addedDate = model.addedDate
@@ -31,8 +33,9 @@ extension FavoriteAnimeDTO {
             titleRomaji: titleRomaji,
             titleEnglish: titleEnglish,
             titleNative: titleNative,
-            coverImageURL: coverImageURL.flatMap { URL(string: $0) },
-            bannerImageURL: bannerImageURL.flatMap { URL(string: $0) },
+            description: description,
+            coverImageURL: coverImageURL?.asURL,
+            bannerImageURL: bannerImageURL?.asURL,
             mediaType: MediaKind(rawValue: mediaType) ?? .anime,
             startDate: startDate
         )

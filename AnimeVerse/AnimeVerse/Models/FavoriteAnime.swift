@@ -7,6 +7,7 @@ final class FavoriteAnime {
     private(set) var titleRomaji: String
     private(set) var titleEnglish: String?
     private(set) var titleNative: String?
+    private(set) var descriptionText: String?
     private(set) var coverImageURL: URL?
     private(set) var bannerImageURL: URL?
     private(set) var addedDate: Date
@@ -18,6 +19,7 @@ final class FavoriteAnime {
         titleRomaji: String,
         titleEnglish: String?,
         titleNative: String?,
+        description: String?,
         coverImageURL: URL?,
         bannerImageURL: URL?,
         mediaType: MediaKind,
@@ -27,6 +29,7 @@ final class FavoriteAnime {
         self.titleRomaji = titleRomaji
         self.titleEnglish = titleEnglish
         self.titleNative = titleNative
+        self.descriptionText = description
         self.coverImageURL = coverImageURL
         self.bannerImageURL = bannerImageURL
         self.addedDate = Date()
@@ -40,6 +43,7 @@ final class FavoriteAnime {
             titleRomaji: details.titleRomaji,
             titleEnglish: details.titleEnglish,
             titleNative: details.titleNative,
+            description: details.description,
             coverImageURL: details.coverImageURL,
             bannerImageURL: details.bannerImageURL,
             mediaType: details.type == .manga ? .manga : .anime,
@@ -55,6 +59,7 @@ extension FavoriteAnime {
             titleRomaji: titleRomaji,
             titleEnglish: titleEnglish,
             titleNative: titleNative,
+            description: descriptionText,
             coverImageURL: coverImageURL?.absoluteString,
             bannerImageURL: bannerImageURL?.absoluteString,
             addedDate: addedDate,

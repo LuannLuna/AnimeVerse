@@ -50,6 +50,7 @@ struct FavoriteAnimeCard: View {
                     titleRomaji: "Demon Slayer",
                     titleEnglish: "Demon Slayer: Kimetsu no Yaiba",
                     titleNative: "鬼滅の刃",
+                    description: "Description",
                     coverImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx188889-9mNMLHCXJmUw.png"),
                     bannerImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/banner/178680-9HupCDo647QU.jpg"),
                     mediaType: .anime
@@ -63,6 +64,7 @@ struct FavoriteAnimeCard: View {
                     titleRomaji: "進撃の巨人",
                     titleEnglish: nil,
                     titleNative: "進撃の巨人",
+                    description: "Description",
                     coverImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx188889-9mNMLHCXJmUw.png"),
                     bannerImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/banner/178680-9HupCDo647QU.jpg"),
                     mediaType: .anime
@@ -76,6 +78,7 @@ struct FavoriteAnimeCard: View {
                     titleRomaji: "A Very Long Anime Title That Should Be Truncated Because It's Too Long",
                     titleEnglish: "An Even Longer English Title That Should Also Be Truncated",
                     titleNative: "超長いタイトル",
+                    description: "Description",
                     coverImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx188889-9mNMLHCXJmUw.png"),
                     bannerImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/banner/178680-9HupCDo647QU.jpg"),
                     mediaType: .anime
