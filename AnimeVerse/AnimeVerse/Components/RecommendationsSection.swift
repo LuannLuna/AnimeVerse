@@ -50,14 +50,6 @@ struct RecommendationsSection: View {
                 titleEnglish: "Naruto",
                 titleNative: "ナルト",
                 coverImageURL: nil
-            ),
-            .init(
-                id: 2,
-                type: .manga,
-                titleRomaji: "One Piece",
-                titleEnglish: "One Piece",
-                titleNative: "ワンピース",
-                coverImageURL: nil
             )
         ], onSelect: { _ in }
     )

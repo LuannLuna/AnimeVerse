@@ -128,7 +128,7 @@ extension MediaDetails {
         titleEnglish: "Mock Anime English",
         titleNative: "モックアニメ",
         description: "A mock description.",
-        startDate: Date(),
+        startDate: DateComponents(),
         endDate: nil,
         episodes: 12,
         duration: 24,

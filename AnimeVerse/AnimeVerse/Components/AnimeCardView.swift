@@ -2,7 +2,7 @@ import SwiftUI
 import Kingfisher
 
 struct AnimeCardView: View {
-    let anime: Anime
+    let anime: Media
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -31,12 +31,14 @@ struct AnimeCardView: View {
     AnimeCardView(
         anime: .init(
             id: 191205,
+            mediaType: .anime,
             titleRomaji: "Okiraku Ryoushu no Tanoshii Ryouchi Bouei",
             titleEnglish: nil,
             titleNative: "お気楽領主の楽しい領地防衛",
             description: "A story about a young man who dreams of becoming a great general.",
             startDate: .init(),
-            coverImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx191205-FIaAdNs3izsR.jpg")!
+            coverImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx191205-FIaAdNs3izsR.jpg"),
+            bannerImageURL: nil
         )
     )
 }

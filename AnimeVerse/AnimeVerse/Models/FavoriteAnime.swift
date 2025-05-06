@@ -47,7 +47,7 @@ final class FavoriteAnime {
             coverImageURL: details.coverImageURL,
             bannerImageURL: details.bannerImageURL,
             mediaType: details.type == .manga ? .manga : .anime,
-            startDate: details.startDate
+            startDate: details.startDate?.date
         )
     }
 }

@@ -86,7 +86,7 @@ struct MangaView: View {
 }
 
 struct MangaCardView: View {
-    let manga: Manga
+    let manga: Media
     var body: some View {
         HStack(spacing: 16) {
             if let url = manga.coverImageURL {
@@ -113,7 +113,7 @@ struct MangaCardView: View {
                         .font(.footnote)
                 }
 
-                if let date = manga.startDate.date {
+                if let date = manga.startDate?.date {
                     Text(date, format: Date.FormatStyle(date: .numeric, time: .omitted))
                         .font(.caption)
                         .foregroundColor(.secondary)

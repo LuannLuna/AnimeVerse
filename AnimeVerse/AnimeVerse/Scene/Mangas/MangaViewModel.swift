@@ -3,7 +3,7 @@ import Foundation
 @Observable
 final class MangaViewModel {
     private let service: MangaServiceProtocol
-    private(set) var mangas: [Manga] = []
+    private(set) var mangas: [Media] = []
     private(set) var isLoading = false
     private(set) var error: Error?
     private var currentPage = 1

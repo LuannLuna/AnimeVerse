@@ -53,7 +53,8 @@ struct FavoriteAnimeCard: View {
                     description: "Description",
                     coverImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx188889-9mNMLHCXJmUw.png"),
                     bannerImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/banner/178680-9HupCDo647QU.jpg"),
-                    mediaType: .anime
+                    mediaType: .anime,
+                    startDate: Date()
                 )
             )
 
@@ -67,7 +68,8 @@ struct FavoriteAnimeCard: View {
                     description: "Description",
                     coverImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx188889-9mNMLHCXJmUw.png"),
                     bannerImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/banner/178680-9HupCDo647QU.jpg"),
-                    mediaType: .anime
+                    mediaType: .anime,
+                    startDate: Date()
                 )
             )
 
@@ -81,7 +83,8 @@ struct FavoriteAnimeCard: View {
                     description: "Description",
                     coverImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx188889-9mNMLHCXJmUw.png"),
                     bannerImageURL: URL(string: "https://s4.anilist.co/file/anilistcdn/media/anime/banner/178680-9HupCDo647QU.jpg"),
-                    mediaType: .anime
+                    mediaType: .anime,
+                    startDate: Date()
                 )
             )
         }

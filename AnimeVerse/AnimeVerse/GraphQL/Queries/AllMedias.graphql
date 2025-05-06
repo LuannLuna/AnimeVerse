@@ -1,11 +1,11 @@
-query AllAnimes($page: Int, $perPage: Int, $sort: [MediaSort]) {
+query AllMedias($page: Int, $perPage: Int, $sort: [MediaSort], $type: MediaType) {
     Page(page: $page, perPage: $perPage) {
         pageInfo {
             currentPage
             total
             hasNextPage
         }
-        media(type: ANIME, sort: $sort) {
+        media(type: $type, sort: $sort) {
             id
             title { romaji english native }
             description(asHtml: false)
@@ -14,4 +14,3 @@ query AllAnimes($page: Int, $perPage: Int, $sort: [MediaSort]) {
         }
     }
 }
-

@@ -3,31 +3,35 @@
 
 @_exported import ApolloAPI
 
-public class AllMangasQuery: GraphQLQuery {
-  public static let operationName: String = "AllMangas"
+public class AllMediasQuery: GraphQLQuery {
+  public static let operationName: String = "AllMedias"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
     definition: .init(
-      #"query AllMangas($page: Int, $perPage: Int, $sort: [MediaSort]) { Page(page: $page, perPage: $perPage) { __typename pageInfo { __typename currentPage total hasNextPage } media(type: MANGA, sort: $sort) { __typename id title { __typename romaji english native } description(asHtml: false) startDate { __typename year month day } coverImage { __typename large } } } }"#
+      #"query AllMedias($page: Int, $perPage: Int, $sort: [MediaSort], $type: MediaType) { Page(page: $page, perPage: $perPage) { __typename pageInfo { __typename currentPage total hasNextPage } media(type: $type, sort: $sort) { __typename id title { __typename romaji english native } description(asHtml: false) startDate { __typename year month day } coverImage { __typename large } } } }"#
     ))
 
   public var page: GraphQLNullable<Int>
   public var perPage: GraphQLNullable<Int>
   public var sort: GraphQLNullable<[GraphQLEnum<MediaSort>?]>
+  public var type: GraphQLNullable<GraphQLEnum<MediaType>>
 
   public init(
     page: GraphQLNullable<Int>,
     perPage: GraphQLNullable<Int>,
-    sort: GraphQLNullable<[GraphQLEnum<MediaSort>?]>
+    sort: GraphQLNullable<[GraphQLEnum<MediaSort>?]>,
+    type: GraphQLNullable<GraphQLEnum<MediaType>>
   ) {
     self.page = page
     self.perPage = perPage
     self.sort = sort
+    self.type = type
   }
 
   public var __variables: Variables? { [
     "page": page,
     "perPage": perPage,
-    "sort": sort
+    "sort": sort,
+    "type": type
   ] }
 
   public struct Data: AnilistAPI.SelectionSet {
@@ -56,7 +60,7 @@ public class AllMangasQuery: GraphQLQuery {
         .field("__typename", String.self),
         .field("pageInfo", PageInfo?.self),
         .field("media", [Medium?]?.self, arguments: [
-          "type": "MANGA",
+          "type": .variable("type"),
           "sort": .variable("sort")
         ])
       ] }

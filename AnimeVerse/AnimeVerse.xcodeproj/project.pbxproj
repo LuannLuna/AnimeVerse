@@ -59,7 +59,7 @@
 		A416E4CB2DA98BE100558AEE /* Exceptions for "AnimeVerse" folder in "AnimeVerse" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				GraphQL/Queries/AllAnimes.graphql,
+				GraphQL/Queries/AllMedias.graphql,
 				Info.plist,
 			);
 			target = A416E4952DA953E100558AEE /* AnimeVerse */;
@@ -71,7 +71,7 @@
 			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
 			buildPhase = A416E4922DA953E100558AEE /* Sources */;
 			membershipExceptions = (
-				GraphQL/Queries/AllAnimes.graphql,
+				GraphQL/Queries/AllMedias.graphql,
 			);
 		};
 /* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */

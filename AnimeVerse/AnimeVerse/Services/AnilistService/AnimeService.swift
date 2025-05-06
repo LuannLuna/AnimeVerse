@@ -2,7 +2,7 @@ import AnilistAPI
 import Foundation
 
 protocol AnimeServiceProtocol {
-    func fetchAnimes(page: Int, perPage: Int, sort: MediaSort) async throws -> [Anime]
+    func fetchAnimes(page: Int, perPage: Int, sort: MediaSort) async throws -> [Media]
 }
 
 struct AnimeService: AnimeServiceProtocol {
@@ -12,11 +12,12 @@ struct AnimeService: AnimeServiceProtocol {
         self.network = network
     }
 
-    func fetchAnimes(page: Int, perPage: Int, sort: MediaSort = .scoreDesc) async throws -> [Anime] {
-        let query = AllAnimesQuery(
+    func fetchAnimes(page: Int, perPage: Int, sort: MediaSort = .scoreDesc) async throws -> [Media] {
+        let query = AllMediasQuery(
             page: .init(integerLiteral: page),
             perPage: .init(integerLiteral: perPage),
-            sort: .init(arrayLiteral: .init(rawValue: sort.rawValue))
+            sort: .init(arrayLiteral: .init(rawValue: sort.rawValue)),
+            type: .init(.anime)
         )
 
         let result = try await network.fetch(query: query)
@@ -24,7 +25,7 @@ struct AnimeService: AnimeServiceProtocol {
 
         return media.compactMap { mediaItem in
             guard let mediaItem else { return nil }
-            return Anime(from: mediaItem)
+            return Media(from: mediaItem)
         }
     }
 }

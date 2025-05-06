@@ -8,7 +8,7 @@ struct MediaDetails: Identifiable, Equatable, Codable, Hashable {
     let titleEnglish: String?
     let titleNative: String
     let description: String?
-    let startDate: Date?
+    let startDate: DateComponents?
     let endDate: DateComponents?
     let episodes: Int?
     let duration: Int?
@@ -73,7 +73,7 @@ extension MediaDetails {
             year: startDate.year,
             month: startDate.month,
             day: startDate.day
-        ).date
+        )
         if let endDate = data.endDate {
             self.endDate = DateComponents(
                 year: endDate.year,
@@ -132,6 +132,10 @@ extension MediaDetails {
     }
 
     init?(from data: FindMediaQuery.Data.Page.Medium) {
+        func createDateComponents(date: FindMediaQuery.Data.Page.Medium.StartDate?) -> DateComponents? {
+            guard let date else { return nil }
+            return DateComponents(year: date.year, month: date.month, day: date.day)
+        }
         guard let title = data.title, let romaji = title.romaji else { return nil }
         self.id = data.id
         self.type =  MediaType(rawValue: data.type?.rawValue ?? "") ?? .unknown
@@ -139,10 +143,7 @@ extension MediaDetails {
         self.titleEnglish = title.english
         self.titleNative = title.native ?? ""
         self.description = data.description
-        self.startDate = {
-            guard let s = data.startDate else { return nil }
-            return DateComponents(year: s.year, month: s.month, day: s.day).date
-        }()
+        self.startDate = createDateComponents(date: data.startDate)
         self.endDate = {
             guard let e = data.endDate else { return nil }
             return DateComponents(year: e.year, month: e.month, day: e.day)

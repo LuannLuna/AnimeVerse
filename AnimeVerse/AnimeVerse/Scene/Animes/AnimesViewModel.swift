@@ -2,7 +2,7 @@ import Foundation
 
 @Observable
 class AnimesViewModel {
-    var animes: [Anime] = []
+    var animes: [Media] = []
     var isLoading: Bool = false
     var isFetchingNextPage: Bool = false
     var errorMessage: String?
@@ -30,7 +30,7 @@ class AnimesViewModel {
         await loadAnimes(sort: newSort)
     }
 
-    func loadNextPageIfNeeded(item: Anime) async {
+    func loadNextPageIfNeeded(item: Media) async {
         guard !isFetchingNextPage else { return }
         guard let index = animes.firstIndex(where: { $0 == item }) else { return }
         let thresholdIndex = animes.index(animes.endIndex, offsetBy: -10, limitedBy: animes.startIndex) ?? 0
