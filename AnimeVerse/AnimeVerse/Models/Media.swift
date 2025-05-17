@@ -1,7 +1,7 @@
 import Foundation
 import AnilistAPI
 
-struct Media: Identifiable, Equatable {
+struct Media: Identifiable, Equatable, Codable {
     enum MediaType: String, Codable {
         case anime
         case manga
