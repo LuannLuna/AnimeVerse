@@ -33,6 +33,9 @@ struct AnimesView: View {
                             .padding()
                             .animation(.easeInOut, value: viewModel.animes)
                         }
+                        .refreshable {
+                            await viewModel.refresh()
+                        }
                     }
                 }
 

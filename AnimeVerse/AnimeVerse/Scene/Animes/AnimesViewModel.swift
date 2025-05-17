@@ -30,6 +30,12 @@ class AnimesViewModel {
         await loadAnimes(sort: newSort)
     }
 
+    func refresh() async {
+        currentPage = 1
+        animes = []
+        await loadAnimes(sort: sort)
+    }
+
     func loadNextPageIfNeeded(item: Media) async {
         guard !isFetchingNextPage else { return }
         guard let index = animes.firstIndex(where: { $0 == item }) else { return }
